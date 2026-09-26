@@ -1,0 +1,3072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treasurery</title>
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#fff;
+  --sidebar:#0d1220;
+  --sidebar2:#1a2333;
+  --text:#162033;
+  --muted:#718096;
+  --border:#e4e9f0;
+  --blue:#4f7df3;
+  --blue-soft:#edf3ff;
+  --green:#2fa36b;
+  --green-soft:#eaf8f0;
+  --red:#df5a63;
+  --red-soft:#fff0f1;
+  --shadow:0 8px 28px rgba(20,30,50,.06);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{min-height:100vh;display:flex}
+.sidebar{
+  width:230px;
+  background:var(--sidebar);
+  color:#fff;
+  min-height:100vh;
+  position:fixed;
+  left:0;top:0;bottom:0;
+  padding:20px 14px;
+  overflow:auto;
+  z-index:30;
+}
+.brand{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:2px 8px 20px;
+}
+.logo{
+  width:38px;height:38px;
+  display:grid;place-items:center;
+  border-radius:12px;
+  background:var(--blue);
+  font-weight:900;
+  font-size:18px;
+}
+.brand h1{margin:0;font-size:17px}
+.brand p{margin:3px 0 0;color:#8b95a8;font-size:10px}
+.nav-label{
+  margin:18px 10px 7px;
+  font-size:9px;
+  letter-spacing:1.3px;
+  font-weight:800;
+  color:#6e7b91;
+  text-transform:uppercase;
+}
+.nav-btn{
+  width:100%;
+  border:0;
+  border-radius:9px;
+  background:transparent;
+  color:#b8c1d2;
+  padding:11px 12px;
+  margin:3px 0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-align:left;
+  font-size:13px;
+  font-weight:700;
+}
+.nav-btn:hover{background:#151c29;color:#fff}
+.nav-btn.active{background:var(--sidebar2);color:#fff}
+.nav-icon{width:20px;text-align:center}
+.main{
+  margin-left:230px;
+  width:calc(100% - 230px);
+  min-height:100vh;
+}
+.topbar{
+  height:66px;
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 26px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(10px);
+}
+.menu-btn{
+  display:none;
+  border:0;
+  background:var(--sidebar);
+  color:#fff;
+  border-radius:8px;
+  padding:8px 10px;
+}
+.page-name{font-size:13px;color:var(--muted)}
+.local-pill{
+  background:var(--green-soft);
+  color:var(--green);
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:10px;
+  font-weight:800;
+}
+.content{max-width:1400px;margin:0 auto;padding:28px}
+.page{display:none}
+.page.active{display:block}
+.page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:20px;
+}
+.page-head h2{margin:0 0 5px;font-size:25px}
+.page-head p{margin:0;color:var(--muted);font-size:13px}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+}
+.primary,.secondary,.danger,.ghost{
+  border:0;
+  border-radius:9px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:800;
+}
+.primary{background:var(--blue);color:#fff}
+.secondary{background:#eef1f5;color:var(--text)}
+.danger{background:var(--red-soft);color:var(--red)}
+.ghost{background:#fff;border:1px solid var(--border);color:var(--text)}
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:16px;
+}
+.metric{padding:18px}
+.metric-top{display:flex;justify-content:space-between;gap:10px}
+.metric-label{
+  font-size:10px;
+  font-weight:850;
+  color:var(--muted);
+  letter-spacing:.7px;
+  text-transform:uppercase;
+}
+.metric-value{font-size:25px;font-weight:900;margin:9px 0 3px}
+.metric-sub{font-size:10px;color:var(--muted)}
+.icon{
+  width:35px;height:35px;
+  border-radius:10px;
+  display:grid;place-items:center;
+  font-weight:900;
+}
+.icon.blue{background:var(--blue-soft);color:var(--blue)}
+.icon.green{background:var(--green-soft);color:var(--green)}
+.icon.red{background:var(--red-soft);color:var(--red)}
+.grid-2{
+  display:grid;
+  grid-template-columns:1.7fr 1fr;
+  gap:16px;
+  margin-bottom:16px;
+}
+.grid-equal{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:16px;
+}
+.card-head{
+  padding:17px 18px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.card-head h3{margin:0;font-size:14px}
+.card-body{padding:18px}
+.goal-list{display:flex;flex-direction:column;gap:17px}
+.goal-row{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.goal-title{font-size:12px;font-weight:800}
+.goal-small{font-size:10px;color:var(--muted);margin-top:3px}
+.progress{
+  height:9px;
+  border-radius:999px;
+  overflow:hidden;
+  background:#edf0f4;
+  margin-top:8px;
+}
+.progress>div{height:100%;border-radius:inherit}
+.fill-blue{background:var(--blue)}
+.fill-green{background:var(--green)}
+.fill-red{background:var(--red)}
+.status{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:800;
+}
+.status.good{background:var(--green-soft);color:var(--green)}
+.status.warn{background:var(--blue-soft);color:var(--blue)}
+.status.bad{background:var(--red-soft);color:var(--red)}
+.status.neutral{background:#eff2f6;color:#677386}
+.chart{
+  height:250px;
+  display:flex;
+  align-items:flex-end;
+  gap:18px;
+  padding:14px 8px 4px;
+  border-bottom:1px solid var(--border);
+}
+.chart-group{
+  flex:1;
+  min-width:58px;
+  height:100%;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:7px;
+  position:relative;
+}
+.bar{
+  width:27%;
+  min-width:12px;
+  max-width:28px;
+  border-radius:7px 7px 2px 2px;
+  min-height:2px;
+}
+.bar.rev{background:var(--blue)}
+.bar.cost{background:var(--red)}
+.bar.profit{background:var(--green)}
+.chart-label{
+  position:absolute;
+  left:0;right:0;bottom:-24px;
+  font-size:10px;
+  color:var(--muted);
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.legend{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.legend span{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.dot{width:8px;height:8px;border-radius:50%}
+.dot.rev{background:var(--blue)}
+.dot.cost{background:var(--red)}
+.dot.profit{background:var(--green)}
+.mini-list{display:flex;flex-direction:column;gap:11px}
+.mini-row{border-bottom:1px solid var(--border);padding-bottom:11px}
+.mini-row:last-child{border-bottom:0;padding-bottom:0}
+.mini-top{display:flex;justify-content:space-between;gap:12px}
+.mini-name{font-size:12px;font-weight:800}
+.mini-money{font-size:12px;font-weight:850}
+.mini-meta{font-size:10px;color:var(--muted);margin-top:4px}
+.summary-list{display:flex;flex-direction:column}
+.summary-item{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid var(--border);
+  font-size:12px;
+}
+.summary-item:last-child{border-bottom:0}
+.summary-item span{color:var(--muted)}
+.summary-item strong{text-align:right}
+.budget-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 360px;
+  gap:16px;
+}
+.form-card{padding:22px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field label{display:block;margin-bottom:7px;font-size:11px;font-weight:800}
+.field input,.field select{
+  width:100%;
+  border:1px solid #dfe4eb;
+  border-radius:9px;
+  background:#fff;
+  padding:11px 12px;
+  outline:none;
+  color:var(--text);
+}
+.field input:focus,.field select:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(79,125,243,.08);
+}
+.field-help{font-size:10px;color:var(--muted);margin-top:5px}
+.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+.toolbar-left{display:flex;gap:8px;flex-wrap:wrap}
+.toolbar input,.toolbar select{
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:9px;
+  padding:9px 11px;
+  font-size:12px;
+}
+.fundraiser-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.fund-card{padding:18px}
+.fund-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.fund-card h3{margin:0 0 4px;font-size:14px}
+.fund-date{font-size:10px;color:var(--muted)}
+.fund-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:16px 0 13px;
+}
+.fund-stat{background:#f8fafc;border-radius:9px;padding:10px}
+.fund-stat span{display:block;font-size:9px;color:var(--muted);margin-bottom:3px}
+.fund-stat strong{font-size:12px}
+.fund-actions{display:flex;gap:7px;margin-top:14px}
+.empty{text-align:center;padding:38px 18px;color:var(--muted)}
+.empty-icon{font-size:30px;margin-bottom:8px}
+.empty h3{margin:0 0 6px;color:var(--text);font-size:15px}
+.empty p{margin:0 0 14px;font-size:12px}
+.analytics-bars{display:flex;flex-direction:column;gap:14px}
+.analytics-row{
+  display:grid;
+  grid-template-columns:150px minmax(0,1fr) 90px;
+  gap:10px;
+  align-items:center;
+  font-size:11px;
+}
+.a-name{font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.a-track{height:22px;background:#eef1f5;border-radius:7px;overflow:hidden}
+.a-fill{height:100%;border-radius:7px}
+.a-value{text-align:right;font-weight:850}
+.report-card{padding:22px}
+.report-top{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:16px;
+}
+.report-top h3{margin:0 0 4px;font-size:17px}
+.report-top p{margin:0;color:var(--muted);font-size:11px}
+.report-balance{text-align:right;font-size:24px;font-weight:900}
+.report-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.report-box{background:#f8fafc;border-radius:10px;padding:14px}
+.report-box span{
+  display:block;
+  font-size:9px;
+  color:var(--muted);
+  text-transform:uppercase;
+  font-weight:850;
+}
+.report-box strong{display:block;margin-top:5px;font-size:15px}
+.settings-stack{display:grid;gap:16px;max-width:800px}
+.settings-card{padding:20px}
+.settings-card h3{margin:0 0 6px;font-size:14px}
+.settings-card p{margin:0 0 14px;color:var(--muted);font-size:11px;line-height:1.55}
+.settings-actions{display:flex;gap:8px;flex-wrap:wrap}
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(7,10,16,.6);
+  z-index:100;
+}
+.modal-backdrop.show{display:flex}
+.modal{
+  width:min(590px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:16px;
+  padding:22px;
+  box-shadow:0 24px 70px rgba(0,0,0,.22);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+.modal-head h3{margin:0;font-size:17px}
+.close-btn{
+  border:0;
+  background:#f1f3f6;
+  width:32px;height:32px;
+  border-radius:8px;
+  font-size:18px;
+}
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#111827;
+  color:#fff;
+  border-radius:10px;
+  padding:11px 14px;
+  font-size:12px;
+  z-index:200;
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:.2s;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+.hidden{display:none!important}
+@media(max-width:1100px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .fundraiser-grid{grid-template-columns:repeat(2,1fr)}
+  .budget-layout{grid-template-columns:1fr}
+  .report-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:780px){
+  .sidebar{transform:translateX(-100%);transition:.2s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;width:100%}
+  .menu-btn{display:inline-block}
+  .content{padding:18px}
+  .grid-2,.grid-equal{grid-template-columns:1fr}
+  .fundraiser-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .analytics-row{grid-template-columns:100px minmax(0,1fr) 75px}
+}
+@media(max-width:520px){
+  .metrics{grid-template-columns:1fr}
+  .page-head{flex-direction:column}
+  .page-head .primary{width:100%}
+  .local-pill{display:none}
+  .report-grid{grid-template-columns:1fr 1fr}
+  .fund-stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">T</div>
+      <div>
+        <h1>Treasurery</h1>
+        <p>Budget & fundraiser tracker</p>
+      </div>
+    </div>
+
+    <div class="nav-label">Overview</div>
+    <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
+    <button class="nav-btn" data-page="budget"><span class="nav-icon">▤</span>Budget Plan</button>
+    <button class="nav-btn" data-page="fundraisers"><span class="nav-icon">◎</span>Fundraisers</button>
+
+    <div class="nav-label">Insights</div>
+    <button class="nav-btn" data-page="analytics"><span class="nav-icon">▥</span>Analytics</button>
+    <button class="nav-btn" data-page="reports"><span class="nav-icon">▧</span>Reports</button>
+
+    <div class="nav-label">App</div>
+    <button class="nav-btn" data-page="settings"><span class="nav-icon">⚙</span>Settings</button>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="page-name" id="pageName">Dashboard</div>
+      </div>
+      <div class="local-pill">● Saved locally</div>
+    </header>
+
+    <div class="content">
+
+      <section class="page active" id="page-dashboard">
+        <div class="page-head">
+          <div>
+            <h2>Dashboard</h2>
+            <p>A friendly overview of your budget and fundraiser progress.</p>
+          </div>
+          <button class="primary" onclick="openFundraiserModal()">+ Add Fundraiser</button>
+        </div>
+
+        <div class="metrics">
+          <div class="card metric">
+            <div class="metric-top">
+              <div>
+                <div class="metric-label">Current balance</div>
+                <div class="metric-value" id="dashBalance">$0</div>
+                <div class="metric-sub">Starting balance + net profit</div>
+              </div>
+              <div class="icon blue">◈</div>
+            </div>
+          </div>
+
+          <div class="card metric">
+            <div class="metric-top">
+              <div>
+                <div class="metric-label">Revenue raised</div>
+                <div class="metric-value" id="dashRevenue">$0</div>
+                <div class="metric-sub" id="dashRevenueSub">0% of goal</div>
+              </div>
+              <div class="icon blue">↗</div>
+            </div>
+          </div>
+
+          <div class="card metric">
+            <div class="metric-top">
+              <div>
+                <div class="metric-label">Total costs</div>
+                <div class="metric-value" id="dashCosts">$0</div>
+                <div class="metric-sub" id="dashCostsSub">0% of limit</div>
+              </div>
+              <div class="icon red">↘</div>
+            </div>
+          </div>
+
+          <div class="card metric">
+            <div class="metric-top">
+              <div>
+                <div class="metric-label">Net profit</div>
+                <div class="metric-value" id="dashProfit">$0</div>
+                <div class="metric-sub" id="dashProfitSub">0% of goal</div>
+              </div>
+              <div class="icon green">◆</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head">
+              <h3>Fundraiser performance</h3>
+              <span style="font-size:10px;color:var(--muted)">Blue revenue · Red costs · Green profit</span>
+            </div>
+            <div class="card-body" id="overviewChart"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Goal progress</h3></div>
+            <div class="card-body goal-list">
+              <div>
+                <div class="goal-row">
+                  <div>
+                    <div class="goal-title">Revenue goal</div>
+                    <div class="goal-small" id="revenueGoalText"></div>
+                  </div>
+                  <span class="status neutral" id="revenueGoalStatus">Not set</span>
+                </div>
+                <div class="progress"><div class="fill-blue" id="revenueGoalBar"></div></div>
+              </div>
+
+              <div>
+                <div class="goal-row">
+                  <div>
+                    <div class="goal-title">Profit goal</div>
+                    <div class="goal-small" id="profitGoalText"></div>
+                  </div>
+                  <span class="status neutral" id="profitGoalStatus">Not set</span>
+                </div>
+                <div class="progress"><div class="fill-green" id="profitGoalBar"></div></div>
+              </div>
+
+              <div>
+                <div class="goal-row">
+                  <div>
+                    <div class="goal-title">Spending limit</div>
+                    <div class="goal-small" id="costGoalText"></div>
+                  </div>
+                  <span class="status neutral" id="costGoalStatus">Not set</span>
+                </div>
+                <div class="progress"><div class="fill-red" id="costGoalBar"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-equal">
+          <div class="card">
+            <div class="card-head">
+              <h3>Fundraisers</h3>
+              <button class="ghost" onclick="switchPage('fundraisers')">View all</button>
+            </div>
+            <div class="card-body" id="dashboardFundraisers"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Budget snapshot</h3></div>
+            <div class="card-body summary-list" id="dashboardBudget"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-budget">
+        <div class="page-head">
+          <div>
+            <h2>Budget Plan</h2>
+            <p>Set the four numbers that matter most.</p>
+          </div>
+        </div>
+
+        <div class="budget-layout">
+          <form class="card form-card" id="budgetForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="startingBalance">Starting balance</label>
+                <input id="startingBalance" type="number" min="0" step="0.01" required>
+                <div class="field-help">Money available before these fundraisers.</div>
+              </div>
+
+              <div class="field">
+                <label for="revenueGoal">Revenue goal</label>
+                <input id="revenueGoal" type="number" min="0" step="0.01" required>
+                <div class="field-help">How much you want to raise overall.</div>
+              </div>
+
+              <div class="field">
+                <label for="profitGoal">Profit goal</label>
+                <input id="profitGoal" type="number" min="0" step="0.01" required>
+                <div class="field-help">Revenue minus fundraiser costs.</div>
+              </div>
+
+              <div class="field">
+                <label for="costLimit">Maximum spending limit</label>
+                <input id="costLimit" type="number" min="0" step="0.01" required>
+                <div class="field-help">Your maximum total fundraiser costs.</div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="primary" type="submit">Save Budget Plan</button>
+            </div>
+          </form>
+
+          <div class="card">
+            <div class="card-head"><h3>Live summary</h3></div>
+            <div class="card-body summary-list" id="budgetLive"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-fundraisers">
+        <div class="page-head">
+          <div>
+            <h2>Fundraisers</h2>
+            <p>Add totals from each fundraiser without entering individual transactions.</p>
+          </div>
+          <button class="primary" onclick="openFundraiserModal()">+ Add Fundraiser</button>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <input id="fundraiserSearch" type="search" placeholder="Search fundraisers...">
+            <select id="fundraiserFilter">
+              <option value="all">All statuses</option>
+              <option value="Planning">Planning</option>
+              <option value="Active">Active</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <div id="fundraiserCount" style="font-size:11px;color:var(--muted)">0 fundraisers</div>
+        </div>
+
+        <div class="fundraiser-grid" id="fundraiserGrid"></div>
+      </section>
+
+      <section class="page" id="page-analytics">
+        <div class="page-head">
+          <div>
+            <h2>Analytics</h2>
+            <p>See which fundraisers are doing the most work.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3>Revenue by fundraiser</h3></div>
+            <div class="card-body analytics-bars" id="revenueAnalytics"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Overall performance</h3></div>
+            <div class="card-body summary-list" id="analyticsSummary"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Profit by fundraiser</h3></div>
+          <div class="card-body analytics-bars" id="profitAnalytics"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-reports">
+        <div class="page-head">
+          <div>
+            <h2>Reports</h2>
+            <p>A clean summary for your sponsor or student-government team.</p>
+          </div>
+          <button class="ghost" id="exportCsvBtn">Export CSV</button>
+        </div>
+
+        <div class="card report-card" id="reportContent"></div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="page-head">
+          <div>
+            <h2>Settings</h2>
+            <p>Manage the sample data and your saved information.</p>
+          </div>
+        </div>
+
+        <div class="settings-stack">
+          <div class="card settings-card">
+            <h3>Sample data</h3>
+            <p>This version starts with five sample fundraisers so you can see how Treasurery looks. You can edit or delete them like normal fundraisers.</p>
+            <div class="settings-actions">
+              <button class="secondary" id="restoreSampleBtn">Restore Sample Data</button>
+            </div>
+          </div>
+
+          <div class="card settings-card">
+            <h3>Backup</h3>
+            <p>Your data is saved in this browser. Download a backup before switching computers or clearing browser storage.</p>
+            <div class="settings-actions">
+              <button class="secondary" id="downloadBackupBtn">Download Backup</button>
+              <button class="secondary" id="importBackupBtn">Import Backup</button>
+              <input class="hidden" type="file" id="backupFile" accept=".json,application/json">
+            </div>
+          </div>
+
+          <div class="card settings-card">
+            <h3>Clear everything</h3>
+            <p>This permanently removes your budget and fundraisers from this browser.</p>
+            <div class="settings-actions">
+              <button class="danger" id="clearDataBtn">Clear All Data</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="fundraiserModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="fundraiserModalTitle">Add Fundraiser</h3>
+      <button class="close-btn" type="button" onclick="closeFundraiserModal()">×</button>
+    </div>
+
+    <form id="fundraiserForm">
+      <input type="hidden" id="fundraiserId">
+
+      <div class="form-grid">
+        <div class="field" style="grid-column:1/-1">
+          <label for="fundraiserName">Fundraiser name</label>
+          <input id="fundraiserName" type="text" maxlength="70" required placeholder="Example: Car Wash">
+        </div>
+
+        <div class="field">
+          <label for="fundraiserGoal">Revenue goal</label>
+          <input id="fundraiserGoal" type="number" min="0" step="0.01" required>
+        </div>
+
+        <div class="field">
+          <label for="fundraiserRaised">Amount raised</label>
+          <input id="fundraiserRaised" type="number" min="0" step="0.01" required>
+        </div>
+
+        <div class="field">
+          <label for="fundraiserCosts">Costs</label>
+          <input id="fundraiserCosts" type="number" min="0" step="0.01" required>
+        </div>
+
+        <div class="field">
+          <label for="fundraiserDeadline">Date / deadline</label>
+          <input id="fundraiserDeadline" type="date">
+        </div>
+
+        <div class="field" style="grid-column:1/-1">
+          <label for="fundraiserStatus">Status</label>
+          <select id="fundraiserStatus">
+            <option value="Planning">Planning</option>
+            <option value="Active">Active</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="secondary" type="button" onclick="closeFundraiserModal()">Cancel</button>
+        <button class="primary" type="submit">Save Fundraiser</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const STORAGE_KEY = "treasurery_local_rgb_v1";
+
+  const SAMPLE_STATE = {
+    budget:{
+      startingBalance:5000,
+      revenueGoal:25000,
+      profitGoal:15000,
+      costLimit:10000
+    },
+    fundraisers:[
+      {
+        id:"sample1",
+        name:"Car Wash",
+        goal:5000,
+        raised:4200,
+        costs:900,
+        deadline:"2026-10-10",
+        status:"Completed"
+      },
+      {
+        id:"sample2",
+        name:"Spirit Wear",
+        goal:7500,
+        raised:6800,
+        costs:2900,
+        deadline:"2026-11-01",
+        status:"Active"
+      },
+      {
+        id:"sample3",
+        name:"Community Night",
+        goal:4500,
+        raised:3200,
+        costs:750,
+        deadline:"2026-11-20",
+        status:"Active"
+      },
+      {
+        id:"sample4",
+        name:"Concession Stand",
+        goal:6000,
+        raised:5100,
+        costs:1800,
+        deadline:"2026-12-12",
+        status:"Planning"
+      },
+      {
+        id:"sample5",
+        name:"Donation Drive",
+        goal:2000,
+        raised:1700,
+        costs:100,
+        deadline:"2027-01-15",
+        status:"Planning"
+      }
+    ]
+  };
+
+  let state = loadState();
+
+  function cloneSample(){
+    return JSON.parse(JSON.stringify(SAMPLE_STATE));
+  }
+
+  function loadState(){
+    try{
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if(!saved) return cloneSample();
+
+      const parsed = JSON.parse(saved);
+
+      return {
+        budget:{
+          ...SAMPLE_STATE.budget,
+          ...(parsed.budget || {})
+        },
+        fundraisers:Array.isArray(parsed.fundraisers)
+          ? parsed.fundraisers
+          : []
+      };
+    }catch(error){
+      console.error(error);
+      return cloneSample();
+    }
+  }
+
+  function saveState(message){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    if(message) showToast(message);
+  }
+
+  function num(value){
+    const n = Number(value);
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function money(value){
+    return num(value).toLocaleString("en-US",{
+      style:"currency",
+      currency:"USD",
+      maximumFractionDigits:2
+    });
+  }
+
+  function esc(value){
+    const div = document.createElement("div");
+    div.textContent = value ?? "";
+    return div.innerHTML;
+  }
+
+  function uid(){
+    return "f_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2,8);
+  }
+
+  function totals(){
+    const revenue = state.fundraisers.reduce((sum,f) => sum + num(f.raised),0);
+    const costs = state.fundraisers.reduce((sum,f) => sum + num(f.costs),0);
+    const profit = revenue - costs;
+    const currentBalance = num(state.budget.startingBalance) + profit;
+
+    return {revenue,costs,profit,currentBalance};
+  }
+
+  function percent(value,goal){
+    const g = num(goal);
+    if(g <= 0) return 0;
+    return (num(value) / g) * 100;
+  }
+
+  function clamp(value){
+    return Math.max(0,Math.min(100,Number.isFinite(value) ? value : 0));
+  }
+
+  function dateText(value){
+    if(!value) return "No date set";
+
+    const d = new Date(value + "T00:00:00");
+
+    if(Number.isNaN(d.getTime())) return value;
+
+    return d.toLocaleDateString("en-US",{
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    });
+  }
+
+  function statusClass(status){
+    if(status === "Completed") return "good";
+    if(status === "Active") return "warn";
+    return "neutral";
+  }
+
+  function goalStatus(value,goal,type){
+    const v = num(value);
+    const g = num(goal);
+
+    if(g <= 0){
+      return {text:"Not set",className:"neutral"};
+    }
+
+    if(type === "cost"){
+      if(v > g) return {text:"Over limit",className:"bad"};
+      if(v >= g * .85) return {text:"Near limit",className:"warn"};
+      return {text:"Within limit",className:"good"};
+    }
+
+    if(v >= g) return {text:"Goal reached",className:"good"};
+    if(v >= g * .70) return {text:"Getting close",className:"good"};
+    return {text:"In progress",className:"neutral"};
+  }
+
+  function renderAll(){
+    renderDashboard();
+    renderBudget();
+    renderFundraisers();
+    renderAnalytics();
+    renderReports();
+  }
+
+  function renderDashboard(){
+    const t = totals();
+    const b = state.budget;
+
+    document.getElementById("dashBalance").textContent = money(t.currentBalance);
+    document.getElementById("dashRevenue").textContent = money(t.revenue);
+    document.getElementById("dashCosts").textContent = money(t.costs);
+    document.getElementById("dashProfit").textContent = money(t.profit);
+
+    document.getElementById("dashRevenueSub").textContent =
+      Math.round(percent(t.revenue,b.revenueGoal)) + "% of revenue goal";
+
+    document.getElementById("dashCostsSub").textContent =
+      Math.round(percent(t.costs,b.costLimit)) + "% of spending limit";
+
+    document.getElementById("dashProfitSub").textContent =
+      Math.round(percent(t.profit,b.profitGoal)) + "% of profit goal";
+
+    renderGoal(
+      "revenueGoal",
+      t.revenue,
+      b.revenueGoal,
+      "goal"
+    );
+
+    renderGoal(
+      "profitGoal",
+      t.profit,
+      b.profitGoal,
+      "goal"
+    );
+
+    renderGoal(
+      "costGoal",
+      t.costs,
+      b.costLimit,
+      "cost"
+    );
+
+    renderOverviewChart();
+    renderDashboardFundraisers();
+
+    document.getElementById("dashboardBudget").innerHTML = `
+      <div class="summary-item"><span>Starting balance</span><strong>${money(b.startingBalance)}</strong></div>
+      <div class="summary-item"><span>Revenue goal</span><strong>${money(b.revenueGoal)}</strong></div>
+      <div class="summary-item"><span>Profit goal</span><strong>${money(b.profitGoal)}</strong></div>
+      <div class="summary-item"><span>Spending limit</span><strong>${money(b.costLimit)}</strong></div>
+      <div class="summary-item"><span>Current balance</span><strong>${money(t.currentBalance)}</strong></div>
+    `;
+  }
+
+  function renderGoal(prefix,value,goal,type){
+    const p = percent(value,goal);
+    const status = goalStatus(value,goal,type);
+
+    document.getElementById(prefix + "Text").textContent =
+      type === "cost"
+        ? `${money(value)} of ${money(goal)} used`
+        : `${money(value)} of ${money(goal)}`;
+
+    const statusEl = document.getElementById(prefix + "Status");
+    statusEl.textContent = status.text;
+    statusEl.className = "status " + status.className;
+
+    document.getElementById(prefix + "Bar").style.width =
+      clamp(p) + "%";
+  }
+
+  function renderOverviewChart(){
+    const container = document.getElementById("overviewChart");
+
+    if(!state.fundraisers.length){
+      container.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">◎</div>
+          <h3>No fundraiser data yet</h3>
+          <p>Add a fundraiser and the chart will appear here.</p>
+          <button class="primary" onclick="openFundraiserModal()">Add Fundraiser</button>
+        </div>
+      `;
+      return;
+    }
+
+    const items = [...state.fundraisers]
+      .sort((a,b) => num(b.raised) - num(a.raised))
+      .slice(0,6);
+
+    const maxValue = Math.max(
+      1,
+      ...items.flatMap(f => [
+        num(f.raised),
+        num(f.costs),
+        Math.max(0,num(f.raised)-num(f.costs))
+      ])
+    );
+
+    container.innerHTML = `
+      <div class="chart">
+        ${items.map(f => {
+          const revenue = num(f.raised);
+          const costs = num(f.costs);
+          const profit = Math.max(0,revenue-costs);
+
+          const revHeight = Math.max(2,(revenue/maxValue)*88);
+          const costHeight = Math.max(2,(costs/maxValue)*88);
+          const profitHeight = Math.max(2,(profit/maxValue)*88);
+
+          return `
+            <div class="chart-group" title="${esc(f.name)}">
+              <div class="bar rev" style="height:${revHeight}%"></div>
+              <div class="bar cost" style="height:${costHeight}%"></div>
+              <div class="bar profit" style="height:${profitHeight}%"></div>
+              <div class="chart-label">${esc(f.name)}</div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+
+      <div class="legend">
+        <span><i class="dot rev"></i>Revenue</span>
+        <span><i class="dot cost"></i>Costs</span>
+        <span><i class="dot profit"></i>Profit</span>
+      </div>
+    `;
+  }
+
+  function renderDashboardFundraisers(){
+    const container = document.getElementById("dashboardFundraisers");
+
+    if(!state.fundraisers.length){
+      container.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">◎</div>
+          <h3>No fundraisers yet</h3>
+          <p>Your fundraiser progress will show here.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const items = [...state.fundraisers]
+      .sort((a,b) => num(b.raised) - num(a.raised))
+      .slice(0,5);
+
+    container.innerHTML = `
+      <div class="mini-list">
+        ${items.map(f => {
+          const profit = num(f.raised)-num(f.costs);
+          const progress = clamp(percent(f.raised,f.goal));
+
+          return `
+            <div class="mini-row">
+              <div class="mini-top">
+                <div class="mini-name">${esc(f.name)}</div>
+                <div class="mini-money">${money(f.raised)}</div>
+              </div>
+              <div class="mini-meta">
+                ${Math.round(progress)}% of fundraiser goal · Profit ${money(profit)}
+              </div>
+              <div class="progress">
+                <div class="fill-blue" style="width:${progress}%"></div>
+              </div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    `;
+  }
+
+  function renderBudget(){
+    const b = state.budget;
+    const t = totals();
+
+    document.getElementById("startingBalance").value = num(b.startingBalance);
+    document.getElementById("revenueGoal").value = num(b.revenueGoal);
+    document.getElementById("profitGoal").value = num(b.profitGoal);
+    document.getElementById("costLimit").value = num(b.costLimit);
+
+    document.getElementById("budgetLive").innerHTML = `
+      <div class="summary-item"><span>Revenue raised</span><strong>${money(t.revenue)}</strong></div>
+      <div class="summary-item"><span>Total costs</span><strong>${money(t.costs)}</strong></div>
+      <div class="summary-item"><span>Net profit</span><strong>${money(t.profit)}</strong></div>
+      <div class="summary-item"><span>Current balance</span><strong>${money(t.currentBalance)}</strong></div>
+      <div class="summary-item"><span>Revenue progress</span><strong>${Math.round(percent(t.revenue,b.revenueGoal))}%</strong></div>
+      <div class="summary-item"><span>Profit progress</span><strong>${Math.round(percent(t.profit,b.profitGoal))}%</strong></div>
+    `;
+  }
+
+  function renderFundraisers(){
+    const grid = document.getElementById("fundraiserGrid");
+    const search = document.getElementById("fundraiserSearch").value.trim().toLowerCase();
+    const filter = document.getElementById("fundraiserFilter").value;
+
+    const list = [...state.fundraisers]
+      .filter(f => {
+        const matchesSearch =
+          !search ||
+          String(f.name).toLowerCase().includes(search);
+
+        const matchesFilter =
+          filter === "all" ||
+          f.status === filter;
+
+        return matchesSearch && matchesFilter;
+      })
+      .sort((a,b) => {
+        const da = a.deadline ? new Date(a.deadline).getTime() : Infinity;
+        const db = b.deadline ? new Date(b.deadline).getTime() : Infinity;
+        return da - db;
+      });
+
+    document.getElementById("fundraiserCount").textContent =
+      `${list.length} fundraiser${list.length === 1 ? "" : "s"}`;
+
+    if(!list.length){
+      grid.innerHTML = `
+        <div class="card empty" style="grid-column:1/-1">
+          <div class="empty-icon">◎</div>
+          <h3>${state.fundraisers.length ? "No matches" : "No fundraisers yet"}</h3>
+          <p>${state.fundraisers.length ? "Try another search or status." : "Add your first fundraiser when you're ready."}</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = list.map(f => {
+      const revenue = num(f.raised);
+      const costs = num(f.costs);
+      const profit = revenue - costs;
+      const progress = clamp(percent(revenue,f.goal));
+
+      return `
+        <article class="card fund-card">
+          <div class="fund-top">
+            <div>
+              <h3>${esc(f.name)}</h3>
+              <div class="fund-date">${dateText(f.deadline)}</div>
+            </div>
+            <span class="status ${statusClass(f.status)}">${esc(f.status)}</span>
+          </div>
+
+          <div class="fund-stats">
+            <div class="fund-stat">
+              <span>Raised</span>
+              <strong style="color:var(--blue)">${money(revenue)}</strong>
+            </div>
+            <div class="fund-stat">
+              <span>Costs</span>
+              <strong style="color:var(--red)">${money(costs)}</strong>
+            </div>
+            <div class="fund-stat">
+              <span>Profit</span>
+              <strong style="color:var(--green)">${money(profit)}</strong>
+            </div>
+          </div>
+
+          <div class="mini-top">
+            <span class="goal-small">Goal progress</span>
+            <span class="goal-small">${Math.round(progress)}%</span>
+          </div>
+
+          <div class="progress">
+            <div class="fill-blue" style="width:${progress}%"></div>
+          </div>
+
+          <div class="goal-small" style="margin-top:5px">
+            ${money(revenue)} of ${money(f.goal)}
+          </div>
+
+          <div class="fund-actions">
+            <button class="secondary" onclick="editFundraiser('${f.id}')">Edit</button>
+            <button class="danger" onclick="deleteFundraiser('${f.id}')">Delete</button>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  function renderAnalytics(){
+    const revenueBox = document.getElementById("revenueAnalytics");
+    const profitBox = document.getElementById("profitAnalytics");
+    const t = totals();
+
+    const byRevenue = [...state.fundraisers]
+      .sort((a,b) => num(b.raised)-num(a.raised));
+
+    if(!byRevenue.length){
+      const empty = `
+        <div class="empty">
+          <div class="empty-icon">▥</div>
+          <h3>No data yet</h3>
+          <p>Add fundraisers to see analytics.</p>
+        </div>
+      `;
+
+      revenueBox.innerHTML = empty;
+      profitBox.innerHTML = empty;
+    }else{
+      const maxRevenue = Math.max(
+        1,
+        ...byRevenue.map(f => num(f.raised))
+      );
+
+      revenueBox.innerHTML = byRevenue.map(f => `
+        <div class="analytics-row">
+          <div class="a-name">${esc(f.name)}</div>
+          <div class="a-track">
+            <div class="a-fill" style="width:${clamp(num(f.raised)/maxRevenue*100)}%;background:var(--blue)"></div>
+          </div>
+          <div class="a-value">${money(f.raised)}</div>
+        </div>
+      `).join("");
+
+      const byProfit = [...state.fundraisers]
+        .sort((a,b) =>
+          (num(b.raised)-num(b.costs)) -
+          (num(a.raised)-num(a.costs))
+        );
+
+      const maxProfit = Math.max(
+        1,
+        ...byProfit.map(f =>
+          Math.max(0,num(f.raised)-num(f.costs))
+        )
+      );
+
+      profitBox.innerHTML = byProfit.map(f => {
+        const profit = num(f.raised)-num(f.costs);
+        const width = profit > 0
+          ? clamp(profit/maxProfit*100)
+          : 0;
+
+        return `
+          <div class="analytics-row">
+            <div class="a-name">${esc(f.name)}</div>
+            <div class="a-track">
+              <div
+                class="a-fill"
+                style="width:${width}%;background:${profit < 0 ? "var(--red)" : "var(--green)"}"
+              ></div>
+            </div>
+            <div class="a-value">${money(profit)}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    const margin = t.revenue > 0
+      ? (t.profit/t.revenue)*100
+      : 0;
+
+    document.getElementById("analyticsSummary").innerHTML = `
+      <div class="summary-item"><span>Total revenue</span><strong>${money(t.revenue)}</strong></div>
+      <div class="summary-item"><span>Total costs</span><strong>${money(t.costs)}</strong></div>
+      <div class="summary-item"><span>Net profit</span><strong>${money(t.profit)}</strong></div>
+      <div class="summary-item"><span>Profit margin</span><strong>${margin.toFixed(1)}%</strong></div>
+      <div class="summary-item"><span>Fundraisers</span><strong>${state.fundraisers.length}</strong></div>
+      <div class="summary-item"><span>Completed</span><strong>${state.fundraisers.filter(f => f.status==="Completed").length}</strong></div>
+    `;
+  }
+
+  function renderReports(){
+    const t = totals();
+    const b = state.budget;
+
+    document.getElementById("reportContent").innerHTML = `
+      <div class="report-top">
+        <div>
+          <h3>Treasurery Financial Summary</h3>
+          <p>Based on the fundraiser totals currently saved in this browser.</p>
+        </div>
+
+        <div>
+          <div class="report-balance">${money(t.currentBalance)}</div>
+          <div style="font-size:10px;color:var(--muted);text-align:right">
+            Current balance
+          </div>
+        </div>
+      </div>
+
+      <div class="report-grid">
+        <div class="report-box">
+          <span>Total revenue</span>
+          <strong style="color:var(--blue)">${money(t.revenue)}</strong>
+        </div>
+        <div class="report-box">
+          <span>Total costs</span>
+          <strong style="color:var(--red)">${money(t.costs)}</strong>
+        </div>
+        <div class="report-box">
+          <span>Net profit</span>
+          <strong style="color:var(--green)">${money(t.profit)}</strong>
+        </div>
+        <div class="report-box">
+          <span>Fundraisers</span>
+          <strong>${state.fundraisers.length}</strong>
+        </div>
+      </div>
+
+      <div class="summary-list" style="margin-top:18px">
+        <div class="summary-item"><span>Starting balance</span><strong>${money(b.startingBalance)}</strong></div>
+        <div class="summary-item"><span>Revenue goal</span><strong>${money(b.revenueGoal)}</strong></div>
+        <div class="summary-item"><span>Profit goal</span><strong>${money(b.profitGoal)}</strong></div>
+        <div class="summary-item"><span>Spending limit</span><strong>${money(b.costLimit)}</strong></div>
+        <div class="summary-item"><span>Revenue progress</span><strong>${Math.round(percent(t.revenue,b.revenueGoal))}%</strong></div>
+        <div class="summary-item"><span>Profit progress</span><strong>${Math.round(percent(t.profit,b.profitGoal))}%</strong></div>
+      </div>
+    `;
+  }
+
+  function switchPage(page){
+    document.querySelectorAll(".page").forEach(section => {
+      section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".nav-btn").forEach(button => {
+      button.classList.remove("active");
+    });
+
+    const section = document.getElementById("page-" + page);
+    const button = document.querySelector(`[data-page="${page}"]`);
+
+    if(section) section.classList.add("active");
+    if(button) button.classList.add("active");
+
+    const names = {
+      dashboard:"Dashboard",
+      budget:"Budget Plan",
+      fundraisers:"Fundraisers",
+      analytics:"Analytics",
+      reports:"Reports",
+      settings:"Settings"
+    };
+
+    document.getElementById("pageName").textContent =
+      names[page] || "Treasurery";
+
+    document.getElementById("sidebar").classList.remove("open");
+
+    if(page === "dashboard") renderDashboard();
+    if(page === "budget") renderBudget();
+    if(page === "fundraisers") renderFundraisers();
+    if(page === "analytics") renderAnalytics();
+    if(page === "reports") renderReports();
+  }
+
+  function openFundraiserModal(fundraiser=null){
+    document.getElementById("fundraiserForm").reset();
+
+    document.getElementById("fundraiserId").value =
+      fundraiser?.id || "";
+
+    document.getElementById("fundraiserModalTitle").textContent =
+      fundraiser ? "Edit Fundraiser" : "Add Fundraiser";
+
+    document.getElementById("fundraiserName").value =
+      fundraiser?.name || "";
+
+    document.getElementById("fundraiserGoal").value =
+      fundraiser?.goal ?? "";
+
+    document.getElementById("fundraiserRaised").value =
+      fundraiser?.raised ?? "";
+
+    document.getElementById("fundraiserCosts").value =
+      fundraiser?.costs ?? "";
+
+    document.getElementById("fundraiserDeadline").value =
+      fundraiser?.deadline || "";
+
+    document.getElementById("fundraiserStatus").value =
+      fundraiser?.status || "Planning";
+
+    document.getElementById("fundraiserModal").classList.add("show");
+
+    setTimeout(() => {
+      document.getElementById("fundraiserName").focus();
+    },0);
+  }
+
+  function closeFundraiserModal(){
+    document.getElementById("fundraiserModal").classList.remove("show");
+  }
+
+  function editFundraiser(id){
+    const fundraiser = state.fundraisers.find(f => f.id === id);
+    if(fundraiser) openFundraiserModal(fundraiser);
+  }
+
+  function deleteFundraiser(id){
+    const fundraiser = state.fundraisers.find(f => f.id === id);
+    if(!fundraiser) return;
+
+    const confirmed = confirm(
+      `Delete "${fundraiser.name}"? This cannot be undone.`
+    );
+
+    if(!confirmed) return;
+
+    state.fundraisers =
+      state.fundraisers.filter(f => f.id !== id);
+
+    saveState("Fundraiser deleted");
+    renderAll();
+  }
+
+  function showToast(message){
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(showToast.timer);
+
+    showToast.timer = setTimeout(() => {
+      toast.classList.remove("show");
+    },1800);
+  }
+
+  function downloadFile(filename,text,type){
+    const blob = new Blob(
+      [text],
+      {type:type || "text/plain"}
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    },1000);
+  }
+
+  document.querySelectorAll(".nav-btn").forEach(button => {
+    button.addEventListener("click",() => {
+      switchPage(button.dataset.page);
+    });
+  });
+
+  document.getElementById("menuBtn").addEventListener("click",() => {
+    document.getElementById("sidebar").classList.toggle("open");
+  });
+
+  document.getElementById("budgetForm").addEventListener("submit",event => {
+    event.preventDefault();
+
+    state.budget = {
+      startingBalance:num(
+        document.getElementById("startingBalance").value
+      ),
+      revenueGoal:num(
+        document.getElementById("revenueGoal").value
+      ),
+      profitGoal:num(
+        document.getElementById("profitGoal").value
+      ),
+      costLimit:num(
+        document.getElementById("costLimit").value
+      )
+    };
+
+    saveState("Budget plan saved");
+    renderAll();
+  });
+
+  document.getElementById("fundraiserForm").addEventListener("submit",event => {
+    event.preventDefault();
+
+    const id =
+      document.getElementById("fundraiserId").value;
+
+    const fundraiser = {
+      id:id || uid(),
+      name:document.getElementById("fundraiserName").value.trim(),
+      goal:num(
+        document.getElementById("fundraiserGoal").value
+      ),
+      raised:num(
+        document.getElementById("fundraiserRaised").value
+      ),
+      costs:num(
+        document.getElementById("fundraiserCosts").value
+      ),
+      deadline:
+        document.getElementById("fundraiserDeadline").value,
+      status:
+        document.getElementById("fundraiserStatus").value
+    };
+
+    if(!fundraiser.name) return;
+
+    if(id){
+      const index =
+        state.fundraisers.findIndex(f => f.id === id);
+
+      if(index !== -1){
+        state.fundraisers[index] = fundraiser;
+      }
+    }else{
+      state.fundraisers.push(fundraiser);
+    }
+
+    saveState(
+      id
+        ? "Fundraiser updated"
+        : "Fundraiser added"
+    );
+
+    closeFundraiserModal();
+    renderAll();
+  });
+
+  document.getElementById("fundraiserSearch").addEventListener("input",renderFundraisers);
+  document.getElementById("fundraiserFilter").addEventListener("change",renderFundraisers);
+
+  document.getElementById("fundraiserModal").addEventListener("click",event => {
+    if(event.target.id === "fundraiserModal"){
+      closeFundraiserModal();
+    }
+  });
+
+  document.addEventListener("keydown",event => {
+    if(event.key === "Escape"){
+      closeFundraiserModal();
+    }
+  });
+
+  document.getElementById("exportCsvBtn").addEventListener("click",() => {
+    const rows = [
+      [
+        "Fundraiser",
+        "Goal",
+        "Amount Raised",
+        "Costs",
+        "Profit",
+        "Deadline",
+        "Status"
+      ],
+      ...state.fundraisers.map(f => [
+        f.name,
+        num(f.goal),
+        num(f.raised),
+        num(f.costs),
+        num(f.raised)-num(f.costs),
+        f.deadline || "",
+        f.status
+      ])
+    ];
+
+    const csv = rows.map(row =>
+      row.map(cell =>
+        `"${String(cell).replaceAll('"','""')}"`
+      ).join(",")
+    ).join("\n");
+
+    downloadFile(
+      "treasurery-report.csv",
+      csv,
+      "text/csv"
+    );
+
+    showToast("CSV exported");
+  });
+
+  document.getElementById("restoreSampleBtn").addEventListener("click",() => {
+    const confirmed = confirm(
+      "Replace your current data with the built-in sample data?"
+    );
+
+    if(!confirmed) return;
+
+    state = cloneSample();
+    saveState("Sample data restored");
+    renderAll();
+    switchPage("dashboard");
+  });
+
+  document.getElementById("downloadBackupBtn").addEventListener("click",() => {
+    downloadFile(
+      "treasurery-backup.json",
+      JSON.stringify(state,null,2),
+      "application/json"
+    );
+
+    showToast("Backup downloaded");
+  });
+
+  document.getElementById("importBackupBtn").addEventListener("click",() => {
+    document.getElementById("backupFile").click();
+  });
+
+  document.getElementById("backupFile").addEventListener("change",async event => {
+    const file = event.target.files?.[0];
+
+    if(!file) return;
+
+    try{
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+
+      if(
+        !parsed ||
+        typeof parsed !== "object" ||
+        !parsed.budget ||
+        !Array.isArray(parsed.fundraisers)
+      ){
+        throw new Error("Invalid backup");
+      }
+
+      const confirmed = confirm(
+        "Replace the current Treasurery data with this backup?"
+      );
+
+      if(!confirmed){
+        event.target.value = "";
+        return;
+      }
+
+      state = {
+        budget:{
+          ...SAMPLE_STATE.budget,
+          ...parsed.budget
+        },
+        fundraisers:parsed.fundraisers
+      };
+
+      saveState("Backup imported");
+      renderAll();
+    }catch(error){
+      alert(
+        "That file does not look like a valid Treasurery backup."
+      );
+    }
+
+    event.target.value = "";
+  });
+
+  document.getElementById("clearDataBtn").addEventListener("click",() => {
+    const first = confirm(
+      "Clear ALL Treasurery data from this browser?"
+    );
+
+    if(!first) return;
+
+    const second = confirm(
+      "Are you sure? Your budget and every fundraiser will be deleted."
+    );
+
+    if(!second) return;
+
+    state = {
+      budget:{
+        startingBalance:0,
+        revenueGoal:0,
+        profitGoal:0,
+        costLimit:0
+      },
+      fundraisers:[]
+    };
+
+    saveState("All data cleared");
+    renderAll();
+    switchPage("dashboard");
+  });
+
+  window.switchPage = switchPage;
+  window.openFundraiserModal = openFundraiserModal;
+  window.closeFundraiserModal = closeFundraiserModal;
+  window.editFundraiser = editFundraiser;
+  window.deleteFundraiser = deleteFundraiser;
+
+  renderAll();
+})();
+</script>
+
+<!-- =========================================================
+     TREASURERY EVENT GOALS ADD-ON
+     Paste this entire block right before </body>
+========================================================= -->
+
+<style>
+.event-goals-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.event-goal-card{
+    padding:18px;
+}
+
+.event-goal-top{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:flex-start;
+}
+
+.event-goal-card h3{
+    margin:0 0 5px;
+    font-size:14px;
+}
+
+.event-goal-note{
+    color:var(--muted);
+    font-size:10px;
+    min-height:16px;
+}
+
+.event-goal-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:16px 0 12px;
+}
+
+.event-goal-stat{
+    background:#f8fafc;
+    border-radius:9px;
+    padding:10px;
+}
+
+.event-goal-stat span{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    margin-bottom:3px;
+}
+
+.event-goal-stat strong{
+    font-size:13px;
+}
+
+.event-goal-actions{
+    display:flex;
+    gap:7px;
+    margin-top:14px;
+}
+
+.event-goal-dashboard{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.event-goal-dashboard-row{
+    border-bottom:1px solid var(--border);
+    padding-bottom:11px;
+}
+
+.event-goal-dashboard-row:last-child{
+    border-bottom:0;
+    padding-bottom:0;
+}
+
+.event-goal-dashboard-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    font-size:12px;
+}
+
+.event-goal-dashboard-name{
+    font-weight:800;
+}
+
+.event-goal-dashboard-money{
+    font-weight:850;
+}
+
+.event-goal-reached{
+    color:var(--green);
+}
+
+.event-goal-short{
+    color:var(--red);
+}
+
+@media(max-width:1100px){
+    .event-goals-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:780px){
+    .event-goals-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+
+<script>
+(() => {
+    const EVENT_GOALS_STORAGE_KEY = "treasurery_event_goals_v1";
+
+    const SAMPLE_EVENT_GOALS = [
+        {
+            id:"event_goal_graduation",
+            name:"Graduation",
+            goal:6000,
+            raised:4700,
+            note:"Graduation-related costs"
+        },
+        {
+            id:"event_goal_field_day",
+            name:"Field Day",
+            goal:4000,
+            raised:4250,
+            note:"Annual field day"
+        }
+    ];
+
+    let eventGoals = loadEventGoals();
+
+    function loadEventGoals(){
+        try{
+            const saved = localStorage.getItem(
+                EVENT_GOALS_STORAGE_KEY
+            );
+
+            if(saved){
+                const parsed = JSON.parse(saved);
+
+                if(Array.isArray(parsed)){
+                    return parsed;
+                }
+            }
+
+            return JSON.parse(
+                JSON.stringify(SAMPLE_EVENT_GOALS)
+            );
+        }
+        catch(error){
+            console.error(
+                "Could not load event goals:",
+                error
+            );
+
+            return JSON.parse(
+                JSON.stringify(SAMPLE_EVENT_GOALS)
+            );
+        }
+    }
+
+    function saveEventGoals(){
+        localStorage.setItem(
+            EVENT_GOALS_STORAGE_KEY,
+            JSON.stringify(eventGoals)
+        );
+
+        renderEventGoalsPage();
+        renderEventGoalsDashboard();
+
+        if(
+            typeof showToast === "function"
+        ){
+            showToast("Event goals saved");
+        }
+    }
+
+    function eventGoalMoney(value){
+        return Number(value || 0).toLocaleString(
+            "en-US",
+            {
+                style:"currency",
+                currency:"USD",
+                maximumFractionDigits:2
+            }
+        );
+    }
+
+    function eventGoalEscape(value){
+        const div =
+            document.createElement("div");
+
+        div.textContent =
+            value ?? "";
+
+        return div.innerHTML;
+    }
+
+    function eventGoalId(){
+        return (
+            "goal_" +
+            Date.now().toString(36) +
+            "_" +
+            Math.random()
+                .toString(36)
+                .slice(2,8)
+        );
+    }
+
+    function eventGoalPercent(
+        raised,
+        goal
+    ){
+        const target =
+            Number(goal || 0);
+
+        if(target <= 0){
+            return 0;
+        }
+
+        return Math.max(
+            0,
+            Math.min(
+                100,
+                (
+                    Number(
+                        raised || 0
+                    ) /
+                    target
+                ) * 100
+            )
+        );
+    }
+
+    function installEventGoalsNavigation(){
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+        if(
+            !sidebar ||
+            document.getElementById(
+                "eventGoalsNav"
+            )
+        ){
+            return;
+        }
+
+        const nav =
+            document.createElement(
+                "button"
+            );
+
+        nav.id =
+            "eventGoalsNav";
+
+        nav.className =
+            "nav-btn";
+
+        nav.innerHTML = `
+            <span class="nav-icon">◉</span>
+            Event Goals
+        `;
+
+        const fundraiserButton =
+            document.querySelector(
+                '[data-page="fundraisers"]'
+            );
+
+        if(
+            fundraiserButton &&
+            fundraiserButton.parentNode
+        ){
+            fundraiserButton.insertAdjacentElement(
+                "afterend",
+                nav
+            );
+        }
+        else{
+            sidebar.appendChild(nav);
+        }
+
+        nav.addEventListener(
+            "click",
+            openEventGoalsPage
+        );
+    }
+
+    function installEventGoalsPage(){
+        if(
+            document.getElementById(
+                "page-event-goals"
+            )
+        ){
+            return;
+        }
+
+        const content =
+            document.querySelector(
+                ".content"
+            );
+
+        if(!content){
+            return;
+        }
+
+        const section =
+            document.createElement(
+                "section"
+            );
+
+        section.className =
+            "page";
+
+        section.id =
+            "page-event-goals";
+
+        section.innerHTML = `
+            <div class="page-head">
+                <div>
+                    <h2>Event Goals</h2>
+
+                    <p>
+                        Track how much money is available
+                        for major events and activities.
+                    </p>
+                </div>
+
+                <button
+                    class="primary"
+                    id="addEventGoalButton"
+                >
+                    + Add Event Goal
+                </button>
+            </div>
+
+            <div
+                class="event-goals-grid"
+                id="eventGoalsGrid"
+            ></div>
+        `;
+
+        content.appendChild(
+            section
+        );
+
+        document
+            .getElementById(
+                "addEventGoalButton"
+            )
+            .addEventListener(
+                "click",
+                () =>
+                    openEventGoalModal()
+            );
+    }
+
+    function installEventGoalModal(){
+        if(
+            document.getElementById(
+                "eventGoalModal"
+            )
+        ){
+            return;
+        }
+
+        const modal =
+            document.createElement(
+                "div"
+            );
+
+        modal.className =
+            "modal-backdrop";
+
+        modal.id =
+            "eventGoalModal";
+
+        modal.innerHTML = `
+            <div class="modal">
+
+                <div class="modal-head">
+                    <h3
+                        id="eventGoalModalTitle"
+                    >
+                        Add Event Goal
+                    </h3>
+
+                    <button
+                        class="close-btn"
+                        type="button"
+                        id="closeEventGoalModal"
+                    >
+                        ×
+                    </button>
+                </div>
+
+                <form
+                    id="eventGoalForm"
+                >
+
+                    <input
+                        type="hidden"
+                        id="eventGoalId"
+                    >
+
+                    <div class="form-grid">
+
+                        <div
+                            class="field"
+                            style="grid-column:1/-1"
+                        >
+                            <label
+                                for="eventGoalName"
+                            >
+                                Event / Goal Name
+                            </label>
+
+                            <input
+                                id="eventGoalName"
+                                type="text"
+                                placeholder="Example: Graduation"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label
+                                for="eventGoalTarget"
+                            >
+                                Amount Needed
+                            </label>
+
+                            <input
+                                id="eventGoalTarget"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label
+                                for="eventGoalRaised"
+                            >
+                                Amount Raised
+                            </label>
+
+                            <input
+                                id="eventGoalRaised"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+                        </div>
+
+                        <div
+                            class="field"
+                            style="grid-column:1/-1"
+                        >
+                            <label
+                                for="eventGoalNote"
+                            >
+                                Note
+                            </label>
+
+                            <input
+                                id="eventGoalNote"
+                                type="text"
+                                placeholder="Optional"
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button
+                            class="secondary"
+                            type="button"
+                            id="cancelEventGoal"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            class="primary"
+                            type="submit"
+                        >
+                            Save Event Goal
+                        </button>
+
+                    </div>
+
+                </form>
+            </div>
+        `;
+
+        document.body.appendChild(
+            modal
+        );
+
+        document
+            .getElementById(
+                "closeEventGoalModal"
+            )
+            .addEventListener(
+                "click",
+                closeEventGoalModal
+            );
+
+        document
+            .getElementById(
+                "cancelEventGoal"
+            )
+            .addEventListener(
+                "click",
+                closeEventGoalModal
+            );
+
+        modal.addEventListener(
+            "click",
+            event => {
+                if(
+                    event.target ===
+                    modal
+                ){
+                    closeEventGoalModal();
+                }
+            }
+        );
+
+        document
+            .getElementById(
+                "eventGoalForm"
+            )
+            .addEventListener(
+                "submit",
+                saveEventGoalFromForm
+            );
+    }
+
+    function openEventGoalsPage(){
+        document
+            .querySelectorAll(
+                ".page"
+            )
+            .forEach(
+                page =>
+                    page.classList.remove(
+                        "active"
+                    )
+            );
+
+        document
+            .querySelectorAll(
+                ".nav-btn"
+            )
+            .forEach(
+                button =>
+                    button.classList.remove(
+                        "active"
+                    )
+            );
+
+        const page =
+            document.getElementById(
+                "page-event-goals"
+            );
+
+        const nav =
+            document.getElementById(
+                "eventGoalsNav"
+            );
+
+        if(page){
+            page.classList.add(
+                "active"
+            );
+        }
+
+        if(nav){
+            nav.classList.add(
+                "active"
+            );
+        }
+
+        const pageName =
+            document.getElementById(
+                "pageName"
+            );
+
+        if(pageName){
+            pageName.textContent =
+                "Event Goals";
+        }
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+        if(sidebar){
+            sidebar.classList.remove(
+                "open"
+            );
+        }
+
+        renderEventGoalsPage();
+    }
+
+    function openEventGoalModal(
+        goal = null
+    ){
+        const modal =
+            document.getElementById(
+                "eventGoalModal"
+            );
+
+        if(!modal){
+            return;
+        }
+
+        document
+            .getElementById(
+                "eventGoalForm"
+            )
+            .reset();
+
+        document
+            .getElementById(
+                "eventGoalId"
+            )
+            .value =
+            goal?.id || "";
+
+        document
+            .getElementById(
+                "eventGoalName"
+            )
+            .value =
+            goal?.name || "";
+
+        document
+            .getElementById(
+                "eventGoalTarget"
+            )
+            .value =
+            goal?.goal ?? "";
+
+        document
+            .getElementById(
+                "eventGoalRaised"
+            )
+            .value =
+            goal?.raised ?? "";
+
+        document
+            .getElementById(
+                "eventGoalNote"
+            )
+            .value =
+            goal?.note || "";
+
+        document
+            .getElementById(
+                "eventGoalModalTitle"
+            )
+            .textContent =
+            goal
+                ? "Edit Event Goal"
+                : "Add Event Goal";
+
+        modal.classList.add(
+            "show"
+        );
+    }
+
+    function closeEventGoalModal(){
+        const modal =
+            document.getElementById(
+                "eventGoalModal"
+            );
+
+        if(modal){
+            modal.classList.remove(
+                "show"
+            );
+        }
+    }
+
+    function saveEventGoalFromForm(
+        event
+    ){
+        event.preventDefault();
+
+        const id =
+            document
+                .getElementById(
+                    "eventGoalId"
+                )
+                .value;
+
+        const goal = {
+            id:
+                id ||
+                eventGoalId(),
+
+            name:
+                document
+                    .getElementById(
+                        "eventGoalName"
+                    )
+                    .value
+                    .trim(),
+
+            goal:
+                Number(
+                    document
+                        .getElementById(
+                            "eventGoalTarget"
+                        )
+                        .value || 0
+                ),
+
+            raised:
+                Number(
+                    document
+                        .getElementById(
+                            "eventGoalRaised"
+                        )
+                        .value || 0
+                ),
+
+            note:
+                document
+                    .getElementById(
+                        "eventGoalNote"
+                    )
+                    .value
+                    .trim()
+        };
+
+        if(!goal.name){
+            return;
+        }
+
+        if(id){
+            const index =
+                eventGoals.findIndex(
+                    item =>
+                        item.id === id
+                );
+
+            if(index !== -1){
+                eventGoals[index] =
+                    goal;
+            }
+        }
+        else{
+            eventGoals.push(
+                goal
+            );
+        }
+
+        saveEventGoals();
+
+        closeEventGoalModal();
+    }
+
+    function editEventGoal(
+        id
+    ){
+        const goal =
+            eventGoals.find(
+                item =>
+                    item.id === id
+            );
+
+        if(goal){
+            openEventGoalModal(
+                goal
+            );
+        }
+    }
+
+    function deleteEventGoal(
+        id
+    ){
+        const goal =
+            eventGoals.find(
+                item =>
+                    item.id === id
+            );
+
+        if(!goal){
+            return;
+        }
+
+        const confirmed =
+            confirm(
+                `Delete "${goal.name}"?`
+            );
+
+        if(!confirmed){
+            return;
+        }
+
+        eventGoals =
+            eventGoals.filter(
+                item =>
+                    item.id !== id
+            );
+
+        saveEventGoals();
+    }
+
+    function renderEventGoalsPage(){
+        const grid =
+            document.getElementById(
+                "eventGoalsGrid"
+            );
+
+        if(!grid){
+            return;
+        }
+
+        if(
+            eventGoals.length === 0
+        ){
+            grid.innerHTML = `
+                <div
+                    class="card empty"
+                    style="grid-column:1/-1"
+                >
+                    <div class="empty-icon">
+                        ◉
+                    </div>
+
+                    <h3>
+                        No event goals yet
+                    </h3>
+
+                    <p>
+                        Add something like
+                        Graduation, Field Day,
+                        Prom, or a senior trip.
+                    </p>
+
+                    <button
+                        class="primary"
+                        onclick="openEventGoalModal()"
+                    >
+                        Add Event Goal
+                    </button>
+                </div>
+            `;
+
+            return;
+        }
+
+        grid.innerHTML =
+            eventGoals
+                .map(goal => {
+
+                    const target =
+                        Number(
+                            goal.goal || 0
+                        );
+
+                    const raised =
+                        Number(
+                            goal.raised || 0
+                        );
+
+                    const remaining =
+                        Math.max(
+                            target -
+                            raised,
+                            0
+                        );
+
+                    const percent =
+                        eventGoalPercent(
+                            raised,
+                            target
+                        );
+
+                    const reached =
+                        target > 0 &&
+                        raised >= target;
+
+                    return `
+                        <div
+                            class="card event-goal-card"
+                        >
+
+                            <div
+                                class="event-goal-top"
+                            >
+
+                                <div>
+                                    <h3>
+                                        ${eventGoalEscape(
+                                            goal.name
+                                        )}
+                                    </h3>
+
+                                    <div
+                                        class="event-goal-note"
+                                    >
+                                        ${eventGoalEscape(
+                                            goal.note ||
+                                            "Event funding goal"
+                                        )}
+                                    </div>
+                                </div>
+
+                                <span
+                                    class="status ${
+                                        reached
+                                            ? "good"
+                                            : "neutral"
+                                    }"
+                                >
+                                    ${
+                                        reached
+                                            ? "Goal Reached"
+                                            : Math.round(
+                                                percent
+                                            ) + "%"
+                                    }
+                                </span>
+
+                            </div>
+
+                            <div
+                                class="event-goal-stats"
+                            >
+
+                                <div
+                                    class="event-goal-stat"
+                                >
+                                    <span>
+                                        Raised
+                                    </span>
+
+                                    <strong
+                                        style="color:var(--blue)"
+                                    >
+                                        ${eventGoalMoney(
+                                            raised
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div
+                                    class="event-goal-stat"
+                                >
+                                    <span>
+                                        Goal
+                                    </span>
+
+                                    <strong>
+                                        ${eventGoalMoney(
+                                            target
+                                        )}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="progress"
+                            >
+                                <div
+                                    class="${
+                                        reached
+                                            ? "fill-green"
+                                            : "fill-blue"
+                                    }"
+                                    style="width:${percent}%"
+                                ></div>
+                            </div>
+
+                            <div
+                                class="mini-meta"
+                                style="margin-top:7px"
+                            >
+                                ${
+                                    reached
+                                        ? `${eventGoalMoney(
+                                            raised - target
+                                        )} above goal`
+                                        : `${eventGoalMoney(
+                                            remaining
+                                        )} still needed`
+                                }
+                            </div>
+
+                            <div
+                                class="event-goal-actions"
+                            >
+
+                                <button
+                                    class="secondary"
+                                    onclick="editEventGoal('${goal.id}')"
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="danger"
+                                    onclick="deleteEventGoal('${goal.id}')"
+                                >
+                                    Delete
+                                </button>
+
+                            </div>
+
+                        </div>
+                    `;
+                })
+                .join("");
+    }
+
+    function installDashboardEventGoals(){
+        if(
+            document.getElementById(
+                "dashboardEventGoalsCard"
+            )
+        ){
+            return;
+        }
+
+        const dashboard =
+            document.getElementById(
+                "page-dashboard"
+            );
+
+        if(!dashboard){
+            return;
+        }
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.id =
+            "dashboardEventGoalsCard";
+
+        card.className =
+            "card";
+
+        card.style.marginBottom =
+            "16px";
+
+        card.innerHTML = `
+            <div class="card-head">
+
+                <div>
+                    <h3>
+                        Event Goals
+                    </h3>
+                </div>
+
+                <button
+                    class="ghost"
+                    id="viewEventGoalsButton"
+                >
+                    View all
+                </button>
+
+            </div>
+
+            <div
+                class="card-body"
+                id="dashboardEventGoals"
+            ></div>
+        `;
+
+        dashboard.appendChild(
+            card
+        );
+
+        document
+            .getElementById(
+                "viewEventGoalsButton"
+            )
+            .addEventListener(
+                "click",
+                openEventGoalsPage
+            );
+    }
+
+    function renderEventGoalsDashboard(){
+        const container =
+            document.getElementById(
+                "dashboardEventGoals"
+            );
+
+        if(!container){
+            return;
+        }
+
+        if(
+            eventGoals.length === 0
+        ){
+            container.innerHTML = `
+                <div class="empty">
+                    <div class="empty-icon">
+                        ◉
+                    </div>
+
+                    <h3>
+                        No event goals yet
+                    </h3>
+
+                    <p>
+                        Add a goal for something
+                        like Graduation or Field Day.
+                    </p>
+
+                    <button
+                        class="primary"
+                        onclick="openEventGoalModal()"
+                    >
+                        Add Event Goal
+                    </button>
+                </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML = `
+            <div
+                class="event-goal-dashboard"
+            >
+
+                ${eventGoals
+                    .slice(0,5)
+                    .map(goal => {
+
+                        const target =
+                            Number(
+                                goal.goal || 0
+                            );
+
+                        const raised =
+                            Number(
+                                goal.raised || 0
+                            );
+
+                        const progress =
+                            eventGoalPercent(
+                                raised,
+                                target
+                            );
+
+                        const reached =
+                            target > 0 &&
+                            raised >= target;
+
+                        return `
+                            <div
+                                class="event-goal-dashboard-row"
+                            >
+
+                                <div
+                                    class="event-goal-dashboard-top"
+                                >
+
+                                    <div
+                                        class="event-goal-dashboard-name"
+                                    >
+                                        ${eventGoalEscape(
+                                            goal.name
+                                        )}
+                                    </div>
+
+                                    <div
+                                        class="event-goal-dashboard-money ${
+                                            reached
+                                                ? "event-goal-reached"
+                                                : ""
+                                        }"
+                                    >
+                                        ${eventGoalMoney(
+                                            raised
+                                        )}
+                                        /
+                                        ${eventGoalMoney(
+                                            target
+                                        )}
+                                    </div>
+
+                                </div>
+
+                                <div
+                                    class="progress"
+                                >
+                                    <div
+                                        class="${
+                                            reached
+                                                ? "fill-green"
+                                                : "fill-blue"
+                                        }"
+                                        style="width:${progress}%"
+                                    ></div>
+                                </div>
+
+                                <div
+                                    class="mini-meta"
+                                >
+                                    ${
+                                        reached
+                                            ? "Goal reached"
+                                            : Math.round(
+                                                progress
+                                            ) + "% funded"
+                                    }
+                                </div>
+
+                            </div>
+                        `;
+                    })
+                    .join("")}
+
+            </div>
+        `;
+    }
+
+    function installEventGoals(){
+        installEventGoalsNavigation();
+        installEventGoalsPage();
+        installEventGoalModal();
+        installDashboardEventGoals();
+
+        renderEventGoalsPage();
+        renderEventGoalsDashboard();
+    }
+
+    window.openEventGoalModal =
+        openEventGoalModal;
+
+    window.closeEventGoalModal =
+        closeEventGoalModal;
+
+    window.editEventGoal =
+        editEventGoal;
+
+    window.deleteEventGoal =
+        deleteEventGoal;
+
+    window.openEventGoalsPage =
+        openEventGoalsPage;
+
+    installEventGoals();
+})();
+</script>
+
+</body>
+</html>
