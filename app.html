@@ -48,7 +48,8 @@ button{
 }
 
 button:disabled,
-input:disabled{
+input:disabled,
+select:disabled{
   opacity:.55;
   cursor:not-allowed;
 }
@@ -203,15 +204,6 @@ input:disabled{
 .page-name{
   font-size:13px;
   color:var(--muted);
-}
-
-.cloud-pill{
-  background:var(--green-soft);
-  color:var(--green);
-  border-radius:999px;
-  padding:7px 10px;
-  font-size:10px;
-  font-weight:800;
 }
 
 .content{
@@ -1011,27 +1003,6 @@ input:disabled{
   text-align:right;
 }
 
-@media(max-width:950px){
-  .officer-row{
-    grid-template-columns:1fr 1fr;
-  }
-}
-
-@media(max-width:620px){
-  .officer-row{
-    grid-template-columns:1fr;
-  }
-
-  .activity-row{
-    flex-direction:column;
-    gap:4px;
-  }
-
-  .activity-time{
-    text-align:left;
-  }
-}
-
 .modal-backdrop{
   position:fixed;
   inset:0;
@@ -1144,6 +1115,12 @@ input:disabled{
   }
 }
 
+@media(max-width:950px){
+  .officer-row{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
 @media(max-width:780px){
   .sidebar{
     transform:translateX(-100%);
@@ -1190,6 +1167,21 @@ input:disabled{
   }
 }
 
+@media(max-width:620px){
+  .officer-row{
+    grid-template-columns:1fr;
+  }
+
+  .activity-row{
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .activity-time{
+    text-align:left;
+  }
+}
+
 @media(max-width:520px){
   .metrics,
   .year-summary{
@@ -1202,10 +1194,6 @@ input:disabled{
 
   .page-head .primary{
     width:100%;
-  }
-
-  .cloud-pill{
-    display:none;
   }
 
   .report-grid{
@@ -1329,67 +1317,47 @@ input:disabled{
   <div class="metrics">
 
     <div class="card metric">
-
       <div class="metric-top">
-
         <div>
           <div class="metric-label">Current Balance</div>
           <div class="metric-value" id="dashBalance">$0</div>
           <div class="metric-sub">Starting balance + net profit</div>
         </div>
-
         <div class="icon blue">◈</div>
-
       </div>
-
     </div>
 
     <div class="card metric">
-
       <div class="metric-top">
-
         <div>
           <div class="metric-label">Revenue Raised</div>
           <div class="metric-value" id="dashRevenue">$0</div>
           <div class="metric-sub" id="dashRevenueSub">0% of goal</div>
         </div>
-
         <div class="icon blue">↗</div>
-
       </div>
-
     </div>
 
     <div class="card metric">
-
       <div class="metric-top">
-
         <div>
           <div class="metric-label">Total Costs</div>
           <div class="metric-value" id="dashCosts">$0</div>
           <div class="metric-sub" id="dashCostsSub">0% of limit</div>
         </div>
-
         <div class="icon red">↘</div>
-
       </div>
-
     </div>
 
     <div class="card metric">
-
       <div class="metric-top">
-
         <div>
           <div class="metric-label">Net Profit</div>
           <div class="metric-value" id="dashProfit">$0</div>
           <div class="metric-sub" id="dashProfitSub">0% of goal</div>
         </div>
-
         <div class="icon green">◆</div>
-
       </div>
-
     </div>
 
   </div>
@@ -1397,17 +1365,13 @@ input:disabled{
   <div class="grid-2">
 
     <div class="card">
-
       <div class="card-head">
         <h3>Fundraiser Performance</h3>
       </div>
-
       <div class="card-body" id="performanceList"></div>
-
     </div>
 
     <div class="card">
-
       <div class="card-head">
         <h3>Goal Progress</h3>
       </div>
@@ -1415,9 +1379,7 @@ input:disabled{
       <div class="card-body goal-list">
 
         <div>
-
           <div class="goal-row">
-
             <div>
               <div class="goal-title">Revenue goal</div>
               <div class="goal-small" id="revenueGoalText"></div>
@@ -1426,19 +1388,15 @@ input:disabled{
             <span class="status neutral" id="revenueGoalStatus">
               Not set
             </span>
-
           </div>
 
           <div class="progress">
             <div class="fill-blue" id="revenueGoalBar"></div>
           </div>
-
         </div>
 
         <div>
-
           <div class="goal-row">
-
             <div>
               <div class="goal-title">Profit goal</div>
               <div class="goal-small" id="profitGoalText"></div>
@@ -1447,19 +1405,15 @@ input:disabled{
             <span class="status neutral" id="profitGoalStatus">
               Not set
             </span>
-
           </div>
 
           <div class="progress">
             <div class="fill-green" id="profitGoalBar"></div>
           </div>
-
         </div>
 
         <div>
-
           <div class="goal-row">
-
             <div>
               <div class="goal-title">Spending limit</div>
               <div class="goal-small" id="costGoalText"></div>
@@ -1468,17 +1422,14 @@ input:disabled{
             <span class="status neutral" id="costGoalStatus">
               Not set
             </span>
-
           </div>
 
           <div class="progress">
             <div class="fill-red" id="costGoalBar"></div>
           </div>
-
         </div>
 
       </div>
-
     </div>
 
   </div>
@@ -1486,7 +1437,6 @@ input:disabled{
   <div class="card full-card">
 
     <div class="card-head">
-
       <h3>Fundraisers</h3>
 
       <button
@@ -1495,7 +1445,6 @@ input:disabled{
       >
         View all
       </button>
-
     </div>
 
     <div class="card-body" id="dashboardFundraisers"></div>
@@ -1505,7 +1454,6 @@ input:disabled{
   <div class="card full-card">
 
     <div class="card-head">
-
       <h3>Event Goals</h3>
 
       <button
@@ -1514,7 +1462,6 @@ input:disabled{
       >
         View all
       </button>
-
     </div>
 
     <div class="card-body" id="dashboardEvents"></div>
@@ -1526,12 +1473,10 @@ input:disabled{
 <section class="page" id="page-budget">
 
   <div class="page-head">
-
     <div>
       <h2>Budget Plan</h2>
       <p>Set the main financial targets for this club.</p>
     </div>
-
   </div>
 
   <div class="budget-layout">
@@ -1541,7 +1486,6 @@ input:disabled{
       <div class="form-grid">
 
         <div class="field">
-
           <label for="startingBalance">
             Starting Balance
           </label>
@@ -1553,11 +1497,9 @@ input:disabled{
             step="0.01"
             required
           >
-
         </div>
 
         <div class="field">
-
           <label for="revenueGoal">
             Revenue Goal
           </label>
@@ -1569,11 +1511,9 @@ input:disabled{
             step="0.01"
             required
           >
-
         </div>
 
         <div class="field">
-
           <label for="profitGoal">
             Profit Goal
           </label>
@@ -1585,11 +1525,9 @@ input:disabled{
             step="0.01"
             required
           >
-
         </div>
 
         <div class="field">
-
           <label for="costLimit">
             Maximum Spending Limit
           </label>
@@ -1601,26 +1539,22 @@ input:disabled{
             step="0.01"
             required
           >
-
         </div>
 
       </div>
 
       <div class="form-actions">
-
         <button
           class="primary edit-finance"
           type="submit"
         >
           Save Budget Plan
         </button>
-
       </div>
 
     </form>
 
     <div class="card">
-
       <div class="card-head">
         <h3>Live Summary</h3>
       </div>
@@ -1629,7 +1563,6 @@ input:disabled{
         class="card-body summary-list"
         id="budgetLive"
       ></div>
-
     </div>
 
   </div>
@@ -1817,12 +1750,10 @@ input:disabled{
     </div>
 
     <div class="card-body">
-
       <div
         class="month-bars"
         id="monthBars"
       ></div>
-
     </div>
 
   </div>
@@ -1993,8 +1924,7 @@ input:disabled{
       <h3>Officers & Roles</h3>
 
       <p>
-        Ownership is separate from officer position. Default positions have preset access.
-        Custom positions can use View Only, Can Edit, or Finance Manager access.
+        Owners and sponsors can manage all officer positions. Presidents can manage normal officer positions, but cannot assign Sponsor, Treasurer, or Finance Manager access.
       </p>
 
       <div
@@ -2190,7 +2120,7 @@ input:disabled{
         >
 
         <div class="field-help">
-          This date is used for monthly and yearly comparisons.
+          This date is used for monthly and school-year comparisons.
         </div>
 
       </div>
@@ -2386,9 +2316,7 @@ const clubId =
   );
 
 let currentUser = null;
-
 let club = null;
-
 let membership = null;
 
 let budget = {
@@ -2399,7 +2327,6 @@ let budget = {
 };
 
 let fundraisers = [];
-
 let eventGoals = [];
 
 const SCHOOL_MONTHS = [
@@ -2437,8 +2364,7 @@ const permissionLabels = {
 };
 
 function num(value){
-  const number =
-    Number(value);
+  const number = Number(value);
 
   return Number.isFinite(number)
     ? number
@@ -2468,9 +2394,7 @@ function esc(value){
 }
 
 function attr(value){
-  return esc(
-    value
-  )
+  return esc(value)
     .replaceAll(
       '"',
       "&quot;"
@@ -2517,6 +2441,7 @@ function clamp(value){
 }
 
 function totals(){
+
   const revenue =
     fundraisers.reduce(
       (sum,item) =>
@@ -2552,6 +2477,7 @@ function totals(){
 }
 
 function memberPermission(member){
+
   if(
     member?.is_owner
   ){
@@ -2575,6 +2501,7 @@ function memberPermission(member){
 }
 
 function canEditFinance(){
+
   return [
     "edit",
     "manage"
@@ -2586,6 +2513,7 @@ function canEditFinance(){
 }
 
 function canManageFinance(){
+
   return (
     memberPermission(
       membership
@@ -2595,9 +2523,65 @@ function canManageFinance(){
 }
 
 function isOwner(){
+
   return Boolean(
     membership?.is_owner
   );
+}
+
+function canManageOfficerRoles(){
+
+  return (
+    isOwner() ||
+    membership?.role === "sponsor" ||
+    membership?.role === "president"
+  );
+}
+
+function isPresidentRoleManager(){
+
+  return (
+    !isOwner() &&
+    membership?.role === "president"
+  );
+}
+
+function canManageOfficerRoleFor(
+  member
+){
+
+  if(
+    isOwner() ||
+    membership?.role === "sponsor"
+  ){
+    return true;
+  }
+
+  if(
+    membership?.role === "president"
+  ){
+
+    if(
+      member?.is_owner
+    ){
+      return false;
+    }
+
+    if(
+      [
+        "sponsor",
+        "treasurer"
+      ].includes(
+        member?.role
+      )
+    ){
+      return false;
+    }
+
+    return true;
+  }
+
+  return false;
 }
 
 function positionLabel(member){
@@ -2621,6 +2605,7 @@ function positionLabel(member){
 }
 
 function permissionLabel(member){
+
   return (
     permissionLabels[
       memberPermission(
@@ -2632,6 +2617,7 @@ function permissionLabel(member){
 }
 
 function fundraiserDate(item){
+
   return (
     item.event_date ||
     item.deadline ||
@@ -2641,6 +2627,7 @@ function fundraiserDate(item){
 }
 
 function dateText(value){
+
   if(!value){
     return "No date";
   }
@@ -2694,7 +2681,9 @@ async function logActivity(
   action,
   details = {}
 ){
+
   try{
+
     await supabaseClient
       .from("activity_log")
       .insert({
@@ -2703,8 +2692,10 @@ async function logActivity(
         action,
         details
       });
+
   }
   catch(error){
+
     console.warn(
       "Activity log skipped",
       error
@@ -2715,9 +2706,11 @@ async function logActivity(
 async function initialize(){
 
   if(!clubId){
+
     window.location.replace(
       "clubs.html"
     );
+
     return;
   }
 
@@ -2731,9 +2724,11 @@ async function initialize(){
       .getSession();
 
   if(!session){
+
     window.location.replace(
       "index.html"
     );
+
     return;
   }
 
@@ -2832,6 +2827,7 @@ async function loadEverything(){
     clubResult.error ||
     memberResult.error
   ){
+
     alert(
       "You do not have access to this club."
     );
@@ -2917,7 +2913,6 @@ function updateBrand(){
 
     logoPreview.textContent =
       letters;
-
   }
 
   document
@@ -2961,12 +2956,14 @@ function applyPermissions(){
   if(
     !canEditFinance()
   ){
+
     document
       .querySelectorAll(
         ".edit-finance"
       )
       .forEach(
         element => {
+
           element.style.display =
             "none";
         }
@@ -2978,6 +2975,7 @@ function applyPermissions(){
       )
       .forEach(
         input => {
+
           input.disabled =
             true;
         }
@@ -2987,12 +2985,14 @@ function applyPermissions(){
   if(
     !isOwner()
   ){
+
     document
       .querySelectorAll(
         ".owner-only"
       )
       .forEach(
         element => {
+
           element.disabled =
             true;
         }
@@ -3004,18 +3004,21 @@ function applyPermissions(){
       )
       .forEach(
         element => {
+
           element.style.display =
             "none";
         }
       );
   }
   else{
+
     const leaveCard =
       document.getElementById(
         "leaveClubCard"
       );
 
     if(leaveCard){
+
       leaveCard.style.display =
         "none";
     }
@@ -3171,42 +3174,50 @@ function renderGoal(
   if(
     num(goal) <= 0
   ){
+
     status.textContent =
       "Not set";
 
     status.className =
       "status neutral";
+
   }
   else if(
     isCost &&
-    value >
-    goal
+    value > goal
   ){
+
     status.textContent =
       "Over limit";
 
     status.className =
       "status bad";
+
   }
   else if(
     isCost
   ){
+
     status.textContent =
       "Within limit";
 
     status.className =
       "status good";
+
   }
   else if(
     value >= goal
   ){
+
     status.textContent =
       "Goal reached";
 
     status.className =
       "status good";
+
   }
   else{
+
     status.textContent =
       "In progress";
 
@@ -3236,12 +3247,14 @@ function renderPerformanceList(){
   if(
     !fundraisers.length
   ){
+
     container.innerHTML = `
       <div class="empty">
         <h3>No fundraiser data yet</h3>
         <p>Add your first fundraiser to start tracking performance.</p>
       </div>
     `;
+
     return;
   }
 
@@ -3304,12 +3317,14 @@ function renderDashboardFundraisers(){
   if(
     !fundraisers.length
   ){
+
     container.innerHTML = `
       <div class="empty">
         <h3>No fundraisers yet</h3>
         <p>Your fundraiser activity will appear here.</p>
       </div>
     `;
+
     return;
   }
 
@@ -3373,12 +3388,14 @@ function renderDashboardEvents(){
   if(
     !eventGoals.length
   ){
+
     container.innerHTML = `
       <div class="empty">
         <h3>No event goals yet</h3>
         <p>Graduation, field day, trips, and other event goals will appear here.</p>
       </div>
     `;
+
     return;
   }
 
@@ -3569,6 +3586,7 @@ function renderFundraisers(){
   if(
     !list.length
   ){
+
     grid.innerHTML = `
       <div
         class="card empty"
@@ -3578,6 +3596,7 @@ function renderFundraisers(){
         <p>Add a fundraiser when you're ready.</p>
       </div>
     `;
+
     return;
   }
 
@@ -3714,6 +3733,7 @@ function renderEvents(){
   if(
     !eventGoals.length
   ){
+
     grid.innerHTML = `
       <div
         class="card empty"
@@ -3723,6 +3743,7 @@ function renderEvents(){
         <p>Add an event goal when you're ready.</p>
       </div>
     `;
+
     return;
   }
 
@@ -3742,9 +3763,9 @@ function renderEvents(){
           num(
             item.amount_raised
           ) >=
-            num(
-              item.amount_needed
-            );
+          num(
+            item.amount_needed
+          );
 
         return `
           <article class="card event-card">
@@ -3889,6 +3910,7 @@ function schoolMonthIndexFromDate(value){
 }
 
 function fundraiserSchoolYear(item){
+
   return schoolYearStartFromDate(
     fundraiserDate(
       item
@@ -3897,6 +3919,7 @@ function fundraiserSchoolYear(item){
 }
 
 function fundraiserSchoolMonth(item){
+
   return schoolMonthIndexFromDate(
     fundraiserDate(
       item
@@ -3956,6 +3979,7 @@ function populateYearSelector(){
         );
 
       if(startYear){
+
         years.add(
           startYear
         );
@@ -4210,26 +4234,33 @@ function renderYearProgress(){
       budget.revenue_goal
     ) <= 0
   ){
+
     status.textContent =
       "No goal";
+
   }
   else if(
     monthsExpected === 0
   ){
+
     status.textContent =
       "Not started";
+
   }
   else if(
     yearRevenue >=
     expected
   ){
+
     status.textContent =
       "On Track";
 
     status.style.color =
       "var(--green)";
+
   }
   else{
+
     status.textContent =
       "Behind Pace";
 
@@ -4609,12 +4640,14 @@ function switchPage(page){
   if(
     page === "year"
   ){
+
     renderYearProgress();
   }
 
   if(
     page === "settings"
   ){
+
     loadClubOfficers();
     loadActivityLog();
   }
@@ -4738,6 +4771,7 @@ function editFundraiser(id){
     );
 
   if(item){
+
     openFundraiserModal(
       item
     );
@@ -4779,9 +4813,11 @@ async function deleteFundraiser(id){
       );
 
   if(error){
+
     alert(
       error.message
     );
+
     return;
   }
 
@@ -4886,6 +4922,7 @@ function editEvent(id){
     );
 
   if(item){
+
     openEventModal(
       item
     );
@@ -4927,9 +4964,11 @@ async function deleteEvent(id){
       );
 
   if(error){
+
     alert(
       error.message
     );
+
     return;
   }
 
@@ -5020,6 +5059,7 @@ async function refreshFinance(){
 async function uploadClubLogo(file){
 
   if(!file){
+
     return club.logo_url;
   }
 
@@ -5046,6 +5086,7 @@ async function uploadClubLogo(file){
       );
 
   if(error){
+
     throw error;
   }
 
@@ -5065,7 +5106,8 @@ async function uploadClubLogo(file){
 }
 
 function roleOptionsHtml(
-  selectedRole
+  selectedRole,
+  presidentLimited = false
 ){
 
   const normalized =
@@ -5089,23 +5131,41 @@ function roleOptionsHtml(
   ];
 
   return options.map(
-    ([value,label]) => `
-      <option
-        value="${value}"
-        ${
-          normalized === value
-            ? "selected"
-            : ""
-        }
-      >
-        ${label}
-      </option>
-    `
+    ([value,label]) => {
+
+      const blocked =
+        presidentLimited &&
+        [
+          "sponsor",
+          "treasurer"
+        ].includes(
+          value
+        );
+
+      return `
+        <option
+          value="${value}"
+          ${
+            normalized === value
+              ? "selected"
+              : ""
+          }
+          ${
+            blocked
+              ? "disabled"
+              : ""
+          }
+        >
+          ${label}
+        </option>
+      `;
+    }
   ).join("");
 }
 
 function permissionOptionsHtml(
-  selectedPermission
+  selectedPermission,
+  presidentLimited = false
 ){
 
   return [
@@ -5113,18 +5173,30 @@ function permissionOptionsHtml(
     ["edit","Can Edit"],
     ["manage","Finance Manager"]
   ].map(
-    ([value,label]) => `
-      <option
-        value="${value}"
-        ${
-          selectedPermission === value
-            ? "selected"
-            : ""
-        }
-      >
-        ${label}
-      </option>
-    `
+    ([value,label]) => {
+
+      const blocked =
+        presidentLimited &&
+        value === "manage";
+
+      return `
+        <option
+          value="${value}"
+          ${
+            selectedPermission === value
+              ? "selected"
+              : ""
+          }
+          ${
+            blocked
+              ? "disabled"
+              : ""
+          }
+        >
+          ${label}
+        </option>
+      `;
+    }
   ).join("");
 }
 
@@ -5216,6 +5288,7 @@ async function loadClubOfficers(){
       );
 
   if(profileError){
+
     console.warn(
       profileError
     );
@@ -5226,6 +5299,7 @@ async function loadClubOfficers(){
   (profiles || [])
     .forEach(
       profile => {
+
         profileMap[
           profile.id
         ] =
@@ -5289,7 +5363,12 @@ async function loadClubOfficers(){
             : "none";
 
         const canChange =
-          isOwner();
+          canManageOfficerRoleFor(
+            member
+          );
+
+        const presidentLimited =
+          isPresidentRoleManager();
 
         const permissionDisabled =
           !canChange ||
@@ -5297,7 +5376,7 @@ async function loadClubOfficers(){
           "custom";
 
         const canRemove =
-          canChange &&
+          isOwner() &&
           !member.is_owner;
 
         return `
@@ -5346,7 +5425,10 @@ async function loadClubOfficers(){
                 onchange="handleRoleChoice('${member.user_id}')"
                 ${canChange ? "" : "disabled"}
               >
-                ${roleOptionsHtml(normalizedRole)}
+                ${roleOptionsHtml(
+                  normalizedRole,
+                  presidentLimited
+                )}
               </select>
 
               <input
@@ -5369,7 +5451,10 @@ async function loadClubOfficers(){
                 class="officer-permission-select"
                 ${permissionDisabled ? "disabled" : ""}
               >
-                ${permissionOptionsHtml(permission)}
+                ${permissionOptionsHtml(
+                  permission,
+                  presidentLimited
+                )}
               </select>
 
               <div class="permission-note">
@@ -5464,6 +5549,7 @@ function handleRoleChoice(
   if(
     !isCustom
   ){
+
     permissionSelect.value =
       fixedRolePermissions[
         role
@@ -5472,12 +5558,24 @@ function handleRoleChoice(
   }
 
   permissionSelect.disabled =
-    !isOwner() ||
+    !canManageOfficerRoles() ||
     !isCustom;
 
+  if(
+    isPresidentRoleManager() &&
+    permissionSelect.value ===
+    "manage"
+  ){
+
+    permissionSelect.value =
+      "edit";
+  }
+
   if(isCustom){
+
     setTimeout(
       () => {
+
         customInput.focus();
       },
       0
@@ -5490,7 +5588,7 @@ async function saveOfficerRole(
 ){
 
   if(
-    !isOwner()
+    !canManageOfficerRoles()
   ){
     return;
   }
@@ -5535,9 +5633,11 @@ async function saveOfficerRole(
     role === "custom" &&
     !customRoleName
   ){
+
     alert(
       "Enter the custom position title first."
     );
+
     return;
   }
 
@@ -5550,6 +5650,36 @@ async function saveOfficerRole(
           ] ||
           "view"
         );
+
+  if(
+    isPresidentRoleManager() &&
+    [
+      "sponsor",
+      "treasurer"
+    ].includes(
+      role
+    )
+  ){
+
+    alert(
+      "Presidents cannot assign Sponsor or Treasurer."
+    );
+
+    return;
+  }
+
+  if(
+    isPresidentRoleManager() &&
+    permission ===
+    "manage"
+  ){
+
+    alert(
+      "Presidents cannot grant Finance Manager access."
+    );
+
+    return;
+  }
 
   const {
     error
@@ -5684,7 +5814,6 @@ async function removeOfficer(
     {
       user_id:
         userId,
-
       officer_name:
         "an officer"
     }
@@ -5868,6 +5997,7 @@ async function loadActivityLog(){
 
   profiles.forEach(
     profile => {
+
       profileMap[
         profile.id
       ] =
@@ -5940,6 +6070,7 @@ document
       button.addEventListener(
         "click",
         () => {
+
           switchPage(
             button.dataset.page
           );
@@ -6042,9 +6173,11 @@ document
           );
 
       if(error){
+
         alert(
           error.message
         );
+
         return;
       }
 
@@ -6181,13 +6314,14 @@ document
             .insert(
               values
             ));
-
       }
 
       if(error){
+
         alert(
           error.message
         );
+
         return;
       }
 
@@ -6303,13 +6437,14 @@ document
             .insert(
               values
             ));
-
       }
 
       if(error){
+
         alert(
           error.message
         );
+
         return;
       }
 
@@ -6403,6 +6538,7 @@ document
             );
 
         if(error){
+
           throw error;
         }
 
@@ -6562,9 +6698,11 @@ document
           );
 
       if(error){
+
         alert(
           error.message
         );
+
         return;
       }
 
@@ -6621,9 +6759,11 @@ document
           );
 
       if(error){
+
         alert(
           error.message
         );
+
         return;
       }
 
@@ -6774,6 +6914,7 @@ document
         event.target.id ===
         "fundraiserModal"
       ){
+
         closeFundraiserModal();
       }
     }
@@ -6791,6 +6932,7 @@ document
         event.target.id ===
         "eventModal"
       ){
+
         closeEventModal();
       }
     }
@@ -6804,6 +6946,7 @@ document.addEventListener(
       event.key ===
       "Escape"
     ){
+
       closeFundraiserModal();
       closeEventModal();
     }
