@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Treasurery</title>
+
+<title>Treasurery | Workspace</title>
 
 <style>
 :root{
   --bg:#f6f8fb;
-  --card:#fff;
+  --card:#ffffff;
   --sidebar:#0d1220;
   --sidebar2:#1a2333;
   --text:#162033;
@@ -20,6 +21,8 @@
   --green-soft:#eaf8f0;
   --red:#df5a63;
   --red-soft:#fff0f1;
+  --yellow:#e6a23c;
+  --yellow-soft:#fff7e8;
   --shadow:0 8px 28px rgba(20,30,50,.06);
 }
 
@@ -42,6 +45,12 @@ select{
 
 button{
   cursor:pointer;
+}
+
+button:disabled,
+input:disabled{
+  opacity:.55;
+  cursor:not-allowed;
 }
 
 .app{
@@ -71,14 +80,21 @@ button{
 }
 
 .logo{
-  width:38px;
-  height:38px;
+  width:42px;
+  height:42px;
   display:grid;
   place-items:center;
+  overflow:hidden;
   border-radius:12px;
   background:var(--blue);
   font-weight:900;
   font-size:18px;
+}
+
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .brand h1{
@@ -132,6 +148,23 @@ button{
   text-align:center;
 }
 
+.back-btn{
+  width:100%;
+  margin-top:18px;
+  border:1px solid #283348;
+  border-radius:9px;
+  background:transparent;
+  color:#b8c1d2;
+  padding:10px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.back-btn:hover{
+  background:#151c29;
+  color:white;
+}
+
 .main{
   margin-left:230px;
   width:calc(100% - 230px);
@@ -140,7 +173,7 @@ button{
 
 .topbar{
   height:66px;
-  background:rgba(255,255,255,.94);
+  background:rgba(255,255,255,.95);
   border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
@@ -150,6 +183,12 @@ button{
   top:0;
   z-index:20;
   backdrop-filter:blur(10px);
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .menu-btn{
@@ -166,7 +205,7 @@ button{
   color:var(--muted);
 }
 
-.local-pill{
+.cloud-pill{
   background:var(--green-soft);
   color:var(--green);
   border-radius:999px;
@@ -218,7 +257,8 @@ button{
 .primary,
 .secondary,
 .danger,
-.ghost{
+.ghost,
+.warning{
   border:0;
   border-radius:9px;
   padding:10px 14px;
@@ -239,6 +279,11 @@ button{
 .danger{
   background:var(--red-soft);
   color:var(--red);
+}
+
+.warning{
+  background:var(--yellow-soft);
+  color:#a76b13;
 }
 
 .ghost{
@@ -399,8 +444,8 @@ button{
 }
 
 .status.warn{
-  background:var(--blue-soft);
-  color:var(--blue);
+  background:var(--yellow-soft);
+  color:#a76b13;
 }
 
 .status.bad{
@@ -411,92 +456,6 @@ button{
 .status.neutral{
   background:#eff2f6;
   color:#677386;
-}
-
-.chart{
-  height:250px;
-  display:flex;
-  align-items:flex-end;
-  gap:18px;
-  padding:14px 8px 4px;
-  border-bottom:1px solid var(--border);
-}
-
-.chart-group{
-  flex:1;
-  min-width:58px;
-  height:100%;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  gap:7px;
-  position:relative;
-}
-
-.bar{
-  width:27%;
-  min-width:12px;
-  max-width:28px;
-  border-radius:7px 7px 2px 2px;
-  min-height:2px;
-}
-
-.bar.rev{
-  background:var(--blue);
-}
-
-.bar.cost{
-  background:var(--red);
-}
-
-.bar.profit{
-  background:var(--green);
-}
-
-.chart-label{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-24px;
-  font-size:10px;
-  color:var(--muted);
-  text-align:center;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.legend{
-  display:flex;
-  gap:14px;
-  margin-top:30px;
-  flex-wrap:wrap;
-}
-
-.legend span{
-  font-size:10px;
-  color:var(--muted);
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-.dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-}
-
-.dot.rev{
-  background:var(--blue);
-}
-
-.dot.cost{
-  background:var(--red);
-}
-
-.dot.profit{
-  background:var(--green);
 }
 
 .mini-list{
@@ -535,32 +494,6 @@ button{
   font-size:10px;
   color:var(--muted);
   margin-top:4px;
-}
-
-.summary-list{
-  display:flex;
-  flex-direction:column;
-}
-
-.summary-item{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  padding:13px 0;
-  border-bottom:1px solid var(--border);
-  font-size:12px;
-}
-
-.summary-item:last-child{
-  border-bottom:0;
-}
-
-.summary-item span{
-  color:var(--muted);
-}
-
-.summary-item strong{
-  text-align:right;
 }
 
 .budget-layout{
@@ -641,7 +574,7 @@ button{
 }
 
 .fundraiser-grid,
-.event-goals-grid{
+.event-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:16px;
@@ -725,73 +658,30 @@ button{
   font-size:12px;
 }
 
-.analytics-bars{
+.summary-list{
   display:flex;
   flex-direction:column;
-  gap:14px;
 }
 
-.analytics-row{
-  display:grid;
-  grid-template-columns:150px minmax(0,1fr) 90px;
-  gap:10px;
-  align-items:center;
-  font-size:11px;
+.summary-item{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid var(--border);
+  font-size:12px;
 }
 
-.a-name{
-  font-weight:750;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.summary-item:last-child{
+  border-bottom:0;
 }
 
-.a-track{
-  height:22px;
-  background:#eef1f5;
-  border-radius:7px;
-  overflow:hidden;
-}
-
-.a-fill{
-  height:100%;
-  border-radius:7px;
-}
-
-.a-value{
-  text-align:right;
-  font-weight:850;
+.summary-item span{
+  color:var(--muted);
 }
 
 .report-card{
   padding:22px;
-}
-
-.report-top{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  align-items:flex-start;
-  padding-bottom:18px;
-  border-bottom:1px solid var(--border);
-  margin-bottom:16px;
-}
-
-.report-top h3{
-  margin:0 0 4px;
-  font-size:17px;
-}
-
-.report-top p{
-  margin:0;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.report-balance{
-  text-align:right;
-  font-size:24px;
-  font-weight:900;
 }
 
 .report-grid{
@@ -820,10 +710,122 @@ button{
   font-size:15px;
 }
 
+.year-toolbar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.year-toolbar select{
+  border:1px solid var(--border);
+  background:white;
+  border-radius:9px;
+  padding:9px 12px;
+}
+
+.year-summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.year-summary-box{
+  padding:16px;
+}
+
+.year-summary-box span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:850;
+  text-transform:uppercase;
+}
+
+.year-summary-box strong{
+  display:block;
+  margin-top:5px;
+  font-size:20px;
+}
+
+.chart-wrap{
+  overflow-x:auto;
+}
+
+.year-chart{
+  width:100%;
+  min-width:760px;
+  height:320px;
+}
+
+.month-bars{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:8px;
+  height:200px;
+  align-items:end;
+  margin-top:20px;
+}
+
+.month-col{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  text-align:center;
+}
+
+.month-count{
+  font-size:10px;
+  font-weight:850;
+  margin-bottom:5px;
+}
+
+.month-bar-track{
+  height:150px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.month-bar{
+  width:65%;
+  min-height:2px;
+  background:var(--blue);
+  border-radius:6px 6px 2px 2px;
+}
+
+.month-name{
+  margin-top:6px;
+  font-size:9px;
+  color:var(--muted);
+}
+
+.legend{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.legend-item{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  font-size:10px;
+  color:var(--muted);
+}
+
+.legend-line{
+  width:18px;
+  height:3px;
+  border-radius:999px;
+}
+
 .settings-stack{
   display:grid;
   gap:16px;
-  max-width:800px;
 }
 
 .settings-card{
@@ -832,19 +834,61 @@ button{
 
 .settings-card h3{
   margin:0 0 6px;
-  font-size:14px;
+  font-size:15px;
 }
 
 .settings-card p{
-  margin:0 0 14px;
+  margin:0 0 16px;
   color:var(--muted);
   font-size:11px;
   line-height:1.55;
 }
 
-.settings-actions{
+.profile-grid{
+  display:grid;
+  grid-template-columns:130px minmax(0,1fr);
+  gap:22px;
+}
+
+.logo-editor{
+  text-align:center;
+}
+
+.logo-preview{
+  width:110px;
+  height:110px;
+  margin:0 auto 10px;
+  border-radius:22px;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  background:var(--blue-soft);
+  color:var(--blue);
+  font-size:30px;
+  font-weight:900;
+}
+
+.logo-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.role-box{
+  margin-top:14px;
+  padding:12px;
+  background:#f8fafc;
+  border-radius:10px;
+  font-size:11px;
+}
+
+.danger-zone{
+  border-color:#f2c8cc;
+}
+
+.danger-actions{
   display:flex;
-  gap:8px;
+  gap:10px;
   flex-wrap:wrap;
 }
 
@@ -916,17 +960,38 @@ button{
   transform:translateY(0);
 }
 
+.loading-screen{
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  z-index:999;
+  display:grid;
+  place-items:center;
+  text-align:center;
+}
+
+.loading-screen h2{
+  margin:0 0 5px;
+}
+
+.loading-screen p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+}
+
 .hidden{
   display:none!important;
 }
 
 @media(max-width:1100px){
-  .metrics{
+  .metrics,
+  .year-summary{
     grid-template-columns:repeat(2,1fr);
   }
 
   .fundraiser-grid,
-  .event-goals-grid{
+  .event-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
@@ -967,21 +1032,27 @@ button{
   }
 
   .fundraiser-grid,
-  .event-goals-grid{
+  .event-grid{
     grid-template-columns:1fr;
   }
 
-  .form-grid{
+  .form-grid,
+  .profile-grid{
     grid-template-columns:1fr;
   }
 
-  .analytics-row{
-    grid-template-columns:100px minmax(0,1fr) 75px;
+  .logo-editor{
+    text-align:left;
+  }
+
+  .logo-preview{
+    margin:0 0 10px;
   }
 }
 
 @media(max-width:520px){
-  .metrics{
+  .metrics,
+  .year-summary{
     grid-template-columns:1fr;
   }
 
@@ -993,7 +1064,7 @@ button{
     width:100%;
   }
 
-  .local-pill{
+  .cloud-pill{
     display:none;
   }
 
@@ -1010,617 +1081,751 @@ button{
 
 <body>
 
+<div id="loadingScreen" class="loading-screen">
+  <div>
+    <h2>Opening Treasurery...</h2>
+    <p>Loading your club's shared financial workspace.</p>
+  </div>
+</div>
+
 <div class="app">
 
-  <aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar">
 
-    <div class="brand">
-      <div class="logo">T</div>
+  <div class="brand">
 
-      <div>
-        <h1>Treasurery</h1>
-        <p id="clubLabel">Budget & fundraiser tracker</p>
-      </div>
+    <div class="logo" id="sidebarLogo">
+      T
     </div>
 
-    <div class="nav-label">Overview</div>
+    <div>
+      <h1>Treasurery</h1>
+      <p id="clubLabel">Loading club...</p>
+    </div>
 
-    <button class="nav-btn active" data-page="dashboard">
-      <span class="nav-icon">⌂</span>
-      Dashboard
+  </div>
+
+  <div class="nav-label">Overview</div>
+
+  <button class="nav-btn active" data-page="dashboard">
+    <span class="nav-icon">⌂</span>
+    Dashboard
+  </button>
+
+  <button class="nav-btn" data-page="budget">
+    <span class="nav-icon">▤</span>
+    Budget Plan
+  </button>
+
+  <button class="nav-btn" data-page="fundraisers">
+    <span class="nav-icon">◎</span>
+    Fundraisers
+  </button>
+
+  <button class="nav-btn" data-page="events">
+    <span class="nav-icon">◉</span>
+    Event Goals
+  </button>
+
+  <div class="nav-label">Insights</div>
+
+  <button class="nav-btn" data-page="year">
+    <span class="nav-icon">↗</span>
+    Year Progress
+  </button>
+
+  <button class="nav-btn" data-page="reports">
+    <span class="nav-icon">▧</span>
+    Reports
+  </button>
+
+  <div class="nav-label">App</div>
+
+  <button class="nav-btn" data-page="settings">
+    <span class="nav-icon">⚙</span>
+    Settings
+  </button>
+
+  <button
+    class="back-btn"
+    onclick="window.location.href='clubs.html'"
+  >
+    ← Back to My Clubs
+  </button>
+
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+
+  <div class="top-left">
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <div class="page-name" id="pageName">Dashboard</div>
+  </div>
+
+  <div class="cloud-pill">
+    ● Saved to Supabase
+  </div>
+
+</header>
+
+<div class="content">
+
+<section class="page active" id="page-dashboard">
+
+  <div class="page-head">
+
+    <div>
+      <h2 id="dashboardTitle">Dashboard</h2>
+      <p>A live overview of this club's finances.</p>
+    </div>
+
+    <button
+      class="primary edit-finance"
+      onclick="openFundraiserModal()"
+    >
+      + Add Fundraiser
     </button>
 
-    <button class="nav-btn" data-page="budget">
-      <span class="nav-icon">▤</span>
-      Budget Plan
-    </button>
+  </div>
 
-    <button class="nav-btn" data-page="fundraisers">
-      <span class="nav-icon">◎</span>
-      Fundraisers
-    </button>
+  <div class="metrics">
 
-    <button class="nav-btn" data-page="event-goals">
-      <span class="nav-icon">◉</span>
-      Event Goals
-    </button>
+    <div class="card metric">
 
-    <div class="nav-label">Insights</div>
+      <div class="metric-top">
 
-    <button class="nav-btn" data-page="analytics">
-      <span class="nav-icon">▥</span>
-      Analytics
-    </button>
+        <div>
+          <div class="metric-label">Current Balance</div>
+          <div class="metric-value" id="dashBalance">$0</div>
+          <div class="metric-sub">Starting balance + net profit</div>
+        </div>
 
-    <button class="nav-btn" data-page="reports">
-      <span class="nav-icon">▧</span>
-      Reports
-    </button>
+        <div class="icon blue">◈</div>
 
-    <div class="nav-label">App</div>
-
-    <button class="nav-btn" data-page="settings">
-      <span class="nav-icon">⚙</span>
-      Settings
-    </button>
-
-  </aside>
-
-  <main class="main">
-
-    <header class="topbar">
-
-      <div style="display:flex;align-items:center;gap:10px">
-        <button class="menu-btn" id="menuBtn">☰</button>
-        <div class="page-name" id="pageName">Dashboard</div>
       </div>
 
-      <div class="local-pill">
-        ● Saved locally
+    </div>
+
+    <div class="card metric">
+
+      <div class="metric-top">
+
+        <div>
+          <div class="metric-label">Revenue Raised</div>
+          <div class="metric-value" id="dashRevenue">$0</div>
+          <div class="metric-sub" id="dashRevenueSub">0% of goal</div>
+        </div>
+
+        <div class="icon blue">↗</div>
+
       </div>
 
-    </header>
+    </div>
 
-    <div class="content">
+    <div class="card metric">
 
-      <section class="page active" id="page-dashboard">
+      <div class="metric-top">
 
-        <div class="page-head">
+        <div>
+          <div class="metric-label">Total Costs</div>
+          <div class="metric-value" id="dashCosts">$0</div>
+          <div class="metric-sub" id="dashCostsSub">0% of limit</div>
+        </div>
+
+        <div class="icon red">↘</div>
+
+      </div>
+
+    </div>
+
+    <div class="card metric">
+
+      <div class="metric-top">
+
+        <div>
+          <div class="metric-label">Net Profit</div>
+          <div class="metric-value" id="dashProfit">$0</div>
+          <div class="metric-sub" id="dashProfitSub">0% of goal</div>
+        </div>
+
+        <div class="icon green">◆</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="grid-2">
+
+    <div class="card">
+
+      <div class="card-head">
+        <h3>Fundraiser Performance</h3>
+      </div>
+
+      <div class="card-body" id="performanceList"></div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="card-head">
+        <h3>Goal Progress</h3>
+      </div>
+
+      <div class="card-body goal-list">
+
+        <div>
+
+          <div class="goal-row">
+
+            <div>
+              <div class="goal-title">Revenue goal</div>
+              <div class="goal-small" id="revenueGoalText"></div>
+            </div>
+
+            <span class="status neutral" id="revenueGoalStatus">
+              Not set
+            </span>
+
+          </div>
+
+          <div class="progress">
+            <div class="fill-blue" id="revenueGoalBar"></div>
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="goal-row">
+
+            <div>
+              <div class="goal-title">Profit goal</div>
+              <div class="goal-small" id="profitGoalText"></div>
+            </div>
+
+            <span class="status neutral" id="profitGoalStatus">
+              Not set
+            </span>
+
+          </div>
+
+          <div class="progress">
+            <div class="fill-green" id="profitGoalBar"></div>
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="goal-row">
+
+            <div>
+              <div class="goal-title">Spending limit</div>
+              <div class="goal-small" id="costGoalText"></div>
+            </div>
+
+            <span class="status neutral" id="costGoalStatus">
+              Not set
+            </span>
+
+          </div>
+
+          <div class="progress">
+            <div class="fill-red" id="costGoalBar"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card full-card">
+
+    <div class="card-head">
+
+      <h3>Fundraisers</h3>
+
+      <button
+        class="ghost"
+        onclick="switchPage('fundraisers')"
+      >
+        View all
+      </button>
+
+    </div>
+
+    <div class="card-body" id="dashboardFundraisers"></div>
+
+  </div>
+
+  <div class="card full-card">
+
+    <div class="card-head">
+
+      <h3>Event Goals</h3>
+
+      <button
+        class="ghost"
+        onclick="switchPage('events')"
+      >
+        View all
+      </button>
+
+    </div>
+
+    <div class="card-body" id="dashboardEvents"></div>
+
+  </div>
+
+</section>
+
+<section class="page" id="page-budget">
+
+  <div class="page-head">
+
+    <div>
+      <h2>Budget Plan</h2>
+      <p>Set the main financial targets for this club.</p>
+    </div>
+
+  </div>
+
+  <div class="budget-layout">
+
+    <form class="card form-card" id="budgetForm">
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label for="startingBalance">
+            Starting Balance
+          </label>
+
+          <input
+            id="startingBalance"
+            type="number"
+            min="0"
+            step="0.01"
+            required
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label for="revenueGoal">
+            Revenue Goal
+          </label>
+
+          <input
+            id="revenueGoal"
+            type="number"
+            min="0"
+            step="0.01"
+            required
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label for="profitGoal">
+            Profit Goal
+          </label>
+
+          <input
+            id="profitGoal"
+            type="number"
+            min="0"
+            step="0.01"
+            required
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label for="costLimit">
+            Maximum Spending Limit
+          </label>
+
+          <input
+            id="costLimit"
+            type="number"
+            min="0"
+            step="0.01"
+            required
+          >
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          class="primary edit-finance"
+          type="submit"
+        >
+          Save Budget Plan
+        </button>
+
+      </div>
+
+    </form>
+
+    <div class="card">
+
+      <div class="card-head">
+        <h3>Live Summary</h3>
+      </div>
+
+      <div
+        class="card-body summary-list"
+        id="budgetLive"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="page" id="page-fundraisers">
+
+  <div class="page-head">
+
+    <div>
+      <h2>Fundraisers</h2>
+      <p>Track every fundraiser and when it happened.</p>
+    </div>
+
+    <button
+      class="primary edit-finance"
+      onclick="openFundraiserModal()"
+    >
+      + Add Fundraiser
+    </button>
+
+  </div>
+
+  <div class="toolbar">
+
+    <div class="toolbar-left">
+
+      <input
+        id="fundraiserSearch"
+        type="search"
+        placeholder="Search fundraisers..."
+      >
+
+      <select id="fundraiserFilter">
+        <option value="all">All statuses</option>
+        <option value="Planning">Planning</option>
+        <option value="Active">Active</option>
+        <option value="Completed">Completed</option>
+      </select>
+
+    </div>
+
+    <div
+      id="fundraiserCount"
+      style="font-size:11px;color:var(--muted)"
+    >
+      0 fundraisers
+    </div>
+
+  </div>
+
+  <div
+    class="fundraiser-grid"
+    id="fundraiserGrid"
+  ></div>
+
+</section>
+
+<section class="page" id="page-events">
+
+  <div class="page-head">
+
+    <div>
+      <h2>Event Goals</h2>
+      <p>Track funding for graduation, field day, trips, and other major events.</p>
+    </div>
+
+    <button
+      class="primary edit-finance"
+      onclick="openEventModal()"
+    >
+      + Add Event Goal
+    </button>
+
+  </div>
+
+  <div
+    class="event-grid"
+    id="eventGrid"
+  ></div>
+
+</section>
+
+<section class="page" id="page-year">
+
+  <div class="page-head">
+
+    <div>
+      <h2>Year Progress</h2>
+      <p>See monthly progress and compare this club with previous years.</p>
+    </div>
+
+    <div class="year-toolbar">
+
+      <label
+        for="yearSelect"
+        style="font-size:11px;font-weight:800"
+      >
+        Year
+      </label>
+
+      <select id="yearSelect"></select>
+
+    </div>
+
+  </div>
+
+  <div class="year-summary">
+
+    <div class="card year-summary-box">
+      <span>Revenue</span>
+      <strong id="yearRevenue">$0</strong>
+    </div>
+
+    <div class="card year-summary-box">
+      <span>Previous Year</span>
+      <strong id="previousRevenue">$0</strong>
+    </div>
+
+    <div class="card year-summary-box">
+      <span>Fundraisers</span>
+      <strong id="yearFundraisers">0</strong>
+    </div>
+
+    <div class="card year-summary-box">
+      <span>Goal Pace</span>
+      <strong id="yearStatus">Not set</strong>
+    </div>
+
+  </div>
+
+  <div class="card full-card">
+
+    <div class="card-head">
+      <h3>Cumulative Revenue by Month</h3>
+    </div>
+
+    <div class="card-body">
+
+      <div class="chart-wrap">
+        <svg
+          id="yearLineChart"
+          class="year-chart"
+          viewBox="0 0 900 320"
+        ></svg>
+      </div>
+
+      <div class="legend">
+
+        <div class="legend-item">
+          <div
+            class="legend-line"
+            style="background:#4f7df3"
+          ></div>
+          Selected year
+        </div>
+
+        <div class="legend-item">
+          <div
+            class="legend-line"
+            style="background:#2fa36b"
+          ></div>
+          Previous year
+        </div>
+
+        <div class="legend-item">
+          <div
+            class="legend-line"
+            style="background:#df5a63"
+          ></div>
+          Goal pace
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-head">
+      <h3>Fundraisers Held Each Month</h3>
+    </div>
+
+    <div class="card-body">
+
+      <div
+        class="month-bars"
+        id="monthBars"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="page" id="page-reports">
+
+  <div class="page-head">
+
+    <div>
+      <h2>Reports</h2>
+      <p>A clean financial summary for officers and sponsors.</p>
+    </div>
+
+    <button
+      class="ghost"
+      id="exportCsvBtn"
+    >
+      Export CSV
+    </button>
+
+  </div>
+
+  <div
+    class="card report-card"
+    id="reportContent"
+  ></div>
+
+</section>
+
+<section class="page" id="page-settings">
+
+  <div class="page-head">
+
+    <div>
+      <h2>Settings</h2>
+      <p>Manage this club's profile and workspace.</p>
+    </div>
+
+  </div>
+
+  <div class="settings-stack">
+
+    <div class="card settings-card">
+
+      <h3>Club Profile</h3>
+
+      <p>
+        Update the club name, sponsor, school, and logo.
+      </p>
+
+      <form id="clubProfileForm">
+
+        <div class="profile-grid">
+
+          <div class="logo-editor">
+
+            <div
+              class="logo-preview"
+              id="logoPreview"
+            >
+              T
+            </div>
+
+            <input
+              id="clubLogoInput"
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              class="owner-only"
+            >
+
+          </div>
 
           <div>
-            <h2>Dashboard</h2>
-            <p>A friendly overview of your budget and fundraiser progress.</p>
-          </div>
-
-          <button class="primary" onclick="openFundraiserModal()">
-            + Add Fundraiser
-          </button>
-
-        </div>
-
-        <div class="metrics">
-
-          <div class="card metric">
-            <div class="metric-top">
-
-              <div>
-                <div class="metric-label">Current balance</div>
-                <div class="metric-value" id="dashBalance">$0</div>
-                <div class="metric-sub">Starting balance + net profit</div>
-              </div>
-
-              <div class="icon blue">◈</div>
-
-            </div>
-          </div>
-
-          <div class="card metric">
-            <div class="metric-top">
-
-              <div>
-                <div class="metric-label">Revenue raised</div>
-                <div class="metric-value" id="dashRevenue">$0</div>
-                <div class="metric-sub" id="dashRevenueSub">0% of goal</div>
-              </div>
-
-              <div class="icon blue">↗</div>
-
-            </div>
-          </div>
-
-          <div class="card metric">
-            <div class="metric-top">
-
-              <div>
-                <div class="metric-label">Total costs</div>
-                <div class="metric-value" id="dashCosts">$0</div>
-                <div class="metric-sub" id="dashCostsSub">0% of limit</div>
-              </div>
-
-              <div class="icon red">↘</div>
-
-            </div>
-          </div>
-
-          <div class="card metric">
-            <div class="metric-top">
-
-              <div>
-                <div class="metric-label">Net profit</div>
-                <div class="metric-value" id="dashProfit">$0</div>
-                <div class="metric-sub" id="dashProfitSub">0% of goal</div>
-              </div>
-
-              <div class="icon green">◆</div>
-
-            </div>
-          </div>
-
-        </div>
-
-        <div class="grid-2">
-
-          <div class="card">
-
-            <div class="card-head">
-              <h3>Fundraiser performance</h3>
-
-              <span style="font-size:10px;color:var(--muted)">
-                Blue revenue · Red costs · Green profit
-              </span>
-            </div>
-
-            <div class="card-body" id="overviewChart"></div>
-
-          </div>
-
-          <div class="card">
-
-            <div class="card-head">
-              <h3>Goal progress</h3>
-            </div>
-
-            <div class="card-body goal-list">
-
-              <div>
-
-                <div class="goal-row">
-
-                  <div>
-                    <div class="goal-title">Revenue goal</div>
-                    <div class="goal-small" id="revenueGoalText"></div>
-                  </div>
-
-                  <span class="status neutral" id="revenueGoalStatus">
-                    Not set
-                  </span>
-
-                </div>
-
-                <div class="progress">
-                  <div class="fill-blue" id="revenueGoalBar"></div>
-                </div>
-
-              </div>
-
-              <div>
-
-                <div class="goal-row">
-
-                  <div>
-                    <div class="goal-title">Profit goal</div>
-                    <div class="goal-small" id="profitGoalText"></div>
-                  </div>
-
-                  <span class="status neutral" id="profitGoalStatus">
-                    Not set
-                  </span>
-
-                </div>
-
-                <div class="progress">
-                  <div class="fill-green" id="profitGoalBar"></div>
-                </div>
-
-              </div>
-
-              <div>
-
-                <div class="goal-row">
-
-                  <div>
-                    <div class="goal-title">Spending limit</div>
-                    <div class="goal-small" id="costGoalText"></div>
-                  </div>
-
-                  <span class="status neutral" id="costGoalStatus">
-                    Not set
-                  </span>
-
-                </div>
-
-                <div class="progress">
-                  <div class="fill-red" id="costGoalBar"></div>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="card full-card">
-
-          <div class="card-head">
-
-            <h3>Fundraisers</h3>
-
-            <button class="ghost" onclick="switchPage('fundraisers')">
-              View all
-            </button>
-
-          </div>
-
-          <div class="card-body" id="dashboardFundraisers"></div>
-
-        </div>
-
-        <div class="card full-card">
-
-          <div class="card-head">
-
-            <h3>Event Goals</h3>
-
-            <button class="ghost" onclick="switchPage('event-goals')">
-              View all
-            </button>
-
-          </div>
-
-          <div class="card-body" id="dashboardEventGoals"></div>
-
-        </div>
-
-      </section>
-
-      <section class="page" id="page-budget">
-
-        <div class="page-head">
-
-          <div>
-            <h2>Budget Plan</h2>
-            <p>Set the four numbers that matter most.</p>
-          </div>
-
-        </div>
-
-        <div class="budget-layout">
-
-          <form class="card form-card" id="budgetForm">
 
             <div class="form-grid">
 
               <div class="field">
 
-                <label for="startingBalance">
-                  Starting balance
+                <label for="clubNameInput">
+                  Club Name
                 </label>
 
                 <input
-                  id="startingBalance"
-                  type="number"
-                  min="0"
-                  step="0.01"
+                  id="clubNameInput"
+                  type="text"
                   required
+                  class="owner-only"
                 >
-
-                <div class="field-help">
-                  Money available before these fundraisers.
-                </div>
 
               </div>
 
               <div class="field">
 
-                <label for="revenueGoal">
-                  Revenue goal
+                <label for="sponsorNameInput">
+                  Sponsor Name
                 </label>
 
                 <input
-                  id="revenueGoal"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  required
+                  id="sponsorNameInput"
+                  type="text"
+                  class="owner-only"
                 >
-
-                <div class="field-help">
-                  How much you want to raise overall.
-                </div>
 
               </div>
 
-              <div class="field">
+              <div class="field" style="grid-column:1/-1">
 
-                <label for="profitGoal">
-                  Profit goal
+                <label for="schoolNameInput">
+                  School / Organization
                 </label>
 
                 <input
-                  id="profitGoal"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  required
+                  id="schoolNameInput"
+                  type="text"
+                  class="owner-only"
                 >
-
-                <div class="field-help">
-                  Revenue minus fundraiser costs.
-                </div>
 
               </div>
 
-              <div class="field">
+            </div>
 
-                <label for="costLimit">
-                  Maximum spending limit
-                </label>
+            <div class="role-box">
 
-                <input
-                  id="costLimit"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  required
-                >
-
-                <div class="field-help">
-                  Your maximum total fundraiser costs.
-                </div>
-
-              </div>
+              Your role:
+              <strong id="currentRoleText">
+                Loading...
+              </strong>
 
             </div>
 
             <div class="form-actions">
 
-              <button class="primary" type="submit">
-                Save Budget Plan
-              </button>
-
-            </div>
-
-          </form>
-
-          <div class="card">
-
-            <div class="card-head">
-              <h3>Live summary</h3>
-            </div>
-
-            <div class="card-body summary-list" id="budgetLive"></div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <section class="page" id="page-fundraisers">
-
-        <div class="page-head">
-
-          <div>
-            <h2>Fundraisers</h2>
-
-            <p>
-              Add totals from each fundraiser without entering individual transactions.
-            </p>
-          </div>
-
-          <button class="primary" onclick="openFundraiserModal()">
-            + Add Fundraiser
-          </button>
-
-        </div>
-
-        <div class="toolbar">
-
-          <div class="toolbar-left">
-
-            <input
-              id="fundraiserSearch"
-              type="search"
-              placeholder="Search fundraisers..."
-            >
-
-            <select id="fundraiserFilter">
-              <option value="all">All statuses</option>
-              <option value="Planning">Planning</option>
-              <option value="Active">Active</option>
-              <option value="Completed">Completed</option>
-            </select>
-
-          </div>
-
-          <div id="fundraiserCount" style="font-size:11px;color:var(--muted)">
-            0 fundraisers
-          </div>
-
-        </div>
-
-        <div class="fundraiser-grid" id="fundraiserGrid"></div>
-
-      </section>
-
-      <section class="page" id="page-event-goals">
-
-        <div class="page-head">
-
-          <div>
-            <h2>Event Goals</h2>
-
-            <p>
-              Track how much money is available for major events and activities.
-            </p>
-          </div>
-
-          <button class="primary" onclick="openEventGoalModal()">
-            + Add Event Goal
-          </button>
-
-        </div>
-
-        <div class="event-goals-grid" id="eventGoalsGrid"></div>
-
-      </section>
-
-      <section class="page" id="page-analytics">
-
-        <div class="page-head">
-
-          <div>
-            <h2>Analytics</h2>
-            <p>See which fundraisers are doing the most work.</p>
-          </div>
-
-        </div>
-
-        <div class="grid-2">
-
-          <div class="card">
-
-            <div class="card-head">
-              <h3>Revenue by fundraiser</h3>
-            </div>
-
-            <div class="card-body analytics-bars" id="revenueAnalytics"></div>
-
-          </div>
-
-          <div class="card">
-
-            <div class="card-head">
-              <h3>Overall performance</h3>
-            </div>
-
-            <div class="card-body summary-list" id="analyticsSummary"></div>
-
-          </div>
-
-        </div>
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Profit by fundraiser</h3>
-          </div>
-
-          <div class="card-body analytics-bars" id="profitAnalytics"></div>
-
-        </div>
-
-      </section>
-
-      <section class="page" id="page-reports">
-
-        <div class="page-head">
-
-          <div>
-            <h2>Reports</h2>
-
-            <p>
-              A clean summary for your sponsor or student-government team.
-            </p>
-          </div>
-
-          <button class="ghost" id="exportCsvBtn">
-            Export CSV
-          </button>
-
-        </div>
-
-        <div class="card report-card" id="reportContent"></div>
-
-      </section>
-
-      <section class="page" id="page-settings">
-
-        <div class="page-head">
-
-          <div>
-            <h2>Settings</h2>
-
-            <p>
-              Manage sample data and your locally saved information.
-            </p>
-          </div>
-
-        </div>
-
-        <div class="settings-stack">
-
-          <div class="card settings-card">
-
-            <h3>Sample data</h3>
-
-            <p>
-              Restore the built-in sample budget, fundraisers, and event goals.
-            </p>
-
-            <div class="settings-actions">
-
-              <button class="secondary" id="restoreSampleBtn">
-                Restore Sample Data
-              </button>
-
-            </div>
-
-          </div>
-
-          <div class="card settings-card">
-
-            <h3>Backup</h3>
-
-            <p>
-              Your data is saved in this browser until Supabase is connected.
-            </p>
-
-            <div class="settings-actions">
-
-              <button class="secondary" id="downloadBackupBtn">
-                Download Backup
-              </button>
-
-              <button class="secondary" id="importBackupBtn">
-                Import Backup
-              </button>
-
-              <input
-                class="hidden"
-                type="file"
-                id="backupFile"
-                accept=".json,application/json"
+              <button
+                class="primary owner-only"
+                type="submit"
               >
-
-            </div>
-
-          </div>
-
-          <div class="card settings-card">
-
-            <h3>Clear everything</h3>
-
-            <p>
-              This removes the local budget, fundraisers, and event goals from this browser.
-            </p>
-
-            <div class="settings-actions">
-
-              <button class="danger" id="clearDataBtn">
-                Clear All Data
+                Save Club Profile
               </button>
 
             </div>
@@ -1629,354 +1834,415 @@ button{
 
         </div>
 
-      </section>
+      </form>
 
     </div>
 
-  </main>
+    <div class="card settings-card">
+
+      <h3>Invite Code</h3>
+
+      <p>
+        Share this code with another officer so they can join this club.
+      </p>
+
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+
+        <strong id="settingsInviteCode">
+          —
+        </strong>
+
+        <button
+          class="secondary"
+          id="copyInviteButton"
+        >
+          Copy Invite Code
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="card settings-card danger-zone owner-settings">
+
+      <h3>Archive or Delete Club</h3>
+
+      <p>
+        Archive keeps the club's information for later. Delete permanently removes the club and its financial data.
+      </p>
+
+      <div class="danger-actions">
+
+        <button
+          class="warning"
+          id="archiveClubButton"
+        >
+          Archive Club
+        </button>
+
+        <button
+          class="danger"
+          id="deleteClubButton"
+        >
+          Delete Club
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 </div>
+</main>
+</div>
 
-<div class="modal-backdrop" id="fundraiserModal">
+<div
+  class="modal-backdrop"
+  id="fundraiserModal"
+>
 
-  <div class="modal">
+<div class="modal">
 
-    <div class="modal-head">
+  <div class="modal-head">
 
-      <h3 id="fundraiserModalTitle">
-        Add Fundraiser
-      </h3>
+    <h3 id="fundraiserModalTitle">
+      Add Fundraiser
+    </h3>
+
+    <button
+      class="close-btn"
+      onclick="closeFundraiserModal()"
+    >
+      ×
+    </button>
+
+  </div>
+
+  <form id="fundraiserForm">
+
+    <input
+      id="fundraiserId"
+      type="hidden"
+    >
+
+    <div class="form-grid">
+
+      <div class="field" style="grid-column:1/-1">
+
+        <label for="fundraiserName">
+          Fundraiser Name
+        </label>
+
+        <input
+          id="fundraiserName"
+          type="text"
+          required
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="fundraiserGoal">
+          Revenue Goal
+        </label>
+
+        <input
+          id="fundraiserGoal"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="fundraiserRaised">
+          Amount Raised
+        </label>
+
+        <input
+          id="fundraiserRaised"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="fundraiserCosts">
+          Costs
+        </label>
+
+        <input
+          id="fundraiserCosts"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="fundraiserEventDate">
+          Fundraiser Date
+        </label>
+
+        <input
+          id="fundraiserEventDate"
+          type="date"
+          required
+        >
+
+        <div class="field-help">
+          This date is used for monthly and yearly comparisons.
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label for="fundraiserDeadline">
+          Deadline
+        </label>
+
+        <input
+          id="fundraiserDeadline"
+          type="date"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="fundraiserStatus">
+          Status
+        </label>
+
+        <select id="fundraiserStatus">
+
+          <option value="Planning">
+            Planning
+          </option>
+
+          <option value="Active">
+            Active
+          </option>
+
+          <option value="Completed">
+            Completed
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="form-actions">
 
       <button
-        class="close-btn"
+        class="secondary"
         type="button"
         onclick="closeFundraiserModal()"
       >
-        ×
+        Cancel
       </button>
-
-    </div>
-
-    <form id="fundraiserForm">
-
-      <input type="hidden" id="fundraiserId">
-
-      <div class="form-grid">
-
-        <div class="field" style="grid-column:1/-1">
-
-          <label for="fundraiserName">
-            Fundraiser name
-          </label>
-
-          <input
-            id="fundraiserName"
-            type="text"
-            maxlength="70"
-            required
-            placeholder="Example: Car Wash"
-          >
-
-        </div>
-
-        <div class="field">
-
-          <label for="fundraiserGoal">
-            Revenue goal
-          </label>
-
-          <input
-            id="fundraiserGoal"
-            type="number"
-            min="0"
-            step="0.01"
-            required
-          >
-
-        </div>
-
-        <div class="field">
-
-          <label for="fundraiserRaised">
-            Amount raised
-          </label>
-
-          <input
-            id="fundraiserRaised"
-            type="number"
-            min="0"
-            step="0.01"
-            required
-          >
-
-        </div>
-
-        <div class="field">
-
-          <label for="fundraiserCosts">
-            Costs
-          </label>
-
-          <input
-            id="fundraiserCosts"
-            type="number"
-            min="0"
-            step="0.01"
-            required
-          >
-
-        </div>
-
-        <div class="field">
-
-          <label for="fundraiserDeadline">
-            Date / deadline
-          </label>
-
-          <input
-            id="fundraiserDeadline"
-            type="date"
-          >
-
-        </div>
-
-        <div class="field" style="grid-column:1/-1">
-
-          <label for="fundraiserStatus">
-            Status
-          </label>
-
-          <select id="fundraiserStatus">
-            <option value="Planning">Planning</option>
-            <option value="Active">Active</option>
-            <option value="Completed">Completed</option>
-          </select>
-
-        </div>
-
-      </div>
-
-      <div class="form-actions">
-
-        <button
-          class="secondary"
-          type="button"
-          onclick="closeFundraiserModal()"
-        >
-          Cancel
-        </button>
-
-        <button class="primary" type="submit">
-          Save Fundraiser
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
-
-</div>
-
-<div class="modal-backdrop" id="eventGoalModal">
-
-  <div class="modal">
-
-    <div class="modal-head">
-
-      <h3 id="eventGoalModalTitle">
-        Add Event Goal
-      </h3>
 
       <button
-        class="close-btn"
-        type="button"
-        onclick="closeEventGoalModal()"
+        class="primary"
+        type="submit"
       >
-        ×
+        Save Fundraiser
       </button>
 
     </div>
 
-    <form id="eventGoalForm">
+  </form>
 
-      <input type="hidden" id="eventGoalId">
+</div>
+</div>
 
-      <div class="form-grid">
+<div
+  class="modal-backdrop"
+  id="eventModal"
+>
 
-        <div class="field" style="grid-column:1/-1">
+<div class="modal">
 
-          <label for="eventGoalName">
-            Event / Goal Name
-          </label>
+  <div class="modal-head">
 
-          <input
-            id="eventGoalName"
-            type="text"
-            required
-            placeholder="Example: Graduation"
-          >
+    <h3 id="eventModalTitle">
+      Add Event Goal
+    </h3>
 
-        </div>
-
-        <div class="field">
-
-          <label for="eventGoalTarget">
-            Amount Needed
-          </label>
-
-          <input
-            id="eventGoalTarget"
-            type="number"
-            min="0"
-            step="0.01"
-            required
-          >
-
-        </div>
-
-        <div class="field">
-
-          <label for="eventGoalRaised">
-            Amount Raised
-          </label>
-
-          <input
-            id="eventGoalRaised"
-            type="number"
-            min="0"
-            step="0.01"
-            required
-          >
-
-        </div>
-
-        <div class="field" style="grid-column:1/-1">
-
-          <label for="eventGoalNote">
-            Note
-          </label>
-
-          <input
-            id="eventGoalNote"
-            type="text"
-            placeholder="Optional"
-          >
-
-        </div>
-
-      </div>
-
-      <div class="form-actions">
-
-        <button
-          class="secondary"
-          type="button"
-          onclick="closeEventGoalModal()"
-        >
-          Cancel
-        </button>
-
-        <button class="primary" type="submit">
-          Save Event Goal
-        </button>
-
-      </div>
-
-    </form>
+    <button
+      class="close-btn"
+      onclick="closeEventModal()"
+    >
+      ×
+    </button>
 
   </div>
 
+  <form id="eventForm">
+
+    <input
+      id="eventId"
+      type="hidden"
+    >
+
+    <div class="form-grid">
+
+      <div class="field" style="grid-column:1/-1">
+
+        <label for="eventName">
+          Event Name
+        </label>
+
+        <input
+          id="eventName"
+          type="text"
+          required
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="eventNeeded">
+          Amount Needed
+        </label>
+
+        <input
+          id="eventNeeded"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="eventRaised">
+          Amount Raised
+        </label>
+
+        <input
+          id="eventRaised"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+
+      <button
+        class="secondary"
+        type="button"
+        onclick="closeEventModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="primary"
+        type="submit"
+      >
+        Save Event Goal
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
 </div>
 
 <div class="toast" id="toast">
   Saved
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-(() => {
+const SUPABASE_URL =
+  "https://pnynheaaybivlexidgka.supabase.co";
 
-"use strict";
+const SUPABASE_KEY =
+  "sb_publishable_qP03WN5DLUAUAQiMI0Gbzw_fLwXJzCH";
 
-const STORAGE_KEY =
-  "treasurery_local_rgb_v1";
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-const EVENT_KEY =
-  "treasurery_event_goals_v1";
+const clubId =
+  sessionStorage.getItem(
+    "selectedClubId"
+  );
 
-const SAMPLE_STATE = {
+let currentUser = null;
 
-  budget:{
-    startingBalance:5000,
-    revenueGoal:25000,
-    profitGoal:15000,
-    costLimit:10000
-  },
+let club = null;
 
-  fundraisers:[
-    {
-      id:"sample1",
-      name:"Car Wash",
-      goal:5000,
-      raised:4200,
-      costs:900,
-      deadline:"2026-10-10",
-      status:"Completed"
-    },
-    {
-      id:"sample2",
-      name:"Spirit Wear",
-      goal:7500,
-      raised:6800,
-      costs:2900,
-      deadline:"2026-11-01",
-      status:"Active"
-    },
-    {
-      id:"sample3",
-      name:"Community Night",
-      goal:4500,
-      raised:3200,
-      costs:750,
-      deadline:"2026-11-20",
-      status:"Active"
-    }
-  ]
+let membership = null;
 
+let budget = {
+  starting_balance:0,
+  revenue_goal:0,
+  profit_goal:0,
+  max_cost:0
 };
 
-const SAMPLE_EVENTS = [
-  {
-    id:"event_goal_graduation",
-    name:"Graduation",
-    goal:6000,
-    raised:4700,
-    note:"Graduation-related costs"
-  },
-  {
-    id:"event_goal_field_day",
-    name:"Field Day",
-    goal:4000,
-    raised:4250,
-    note:"Annual field day"
-  }
+let fundraisers = [];
+
+let eventGoals = [];
+
+const MONTHS = [
+  "Jan","Feb","Mar","Apr","May","Jun",
+  "Jul","Aug","Sep","Oct","Nov","Dec"
 ];
 
-const clone =
-  value =>
-    JSON.parse(
-      JSON.stringify(value)
-    );
+const roleLabels = {
+  sponsor:"Sponsor",
+  treasurer:"Treasurer",
+  president:"President",
+  vice_president:"Vice President",
+  secretary:"Secretary",
+  other_officer:"Other Officer"
+};
 
-const num =
-  value =>
-    Number.isFinite(Number(value))
-      ? Number(value)
-      : 0;
+function num(value){
+  const number =
+    Number(value);
 
-const money =
-  value =>
-    num(value).toLocaleString(
+  return Number.isFinite(number)
+    ? number
+    : 0;
+}
+
+function money(value){
+  return num(value)
+    .toLocaleString(
       "en-US",
       {
         style:"currency",
@@ -1984,169 +2250,64 @@ const money =
         maximumFractionDigits:2
       }
     );
-
-const esc =
-  value => {
-
-    const div =
-      document.createElement("div");
-
-    div.textContent =
-      value ?? "";
-
-    return div.innerHTML;
-
-  };
-
-const uid =
-  prefix =>
-    prefix +
-    "_" +
-    Date.now().toString(36) +
-    "_" +
-    Math.random()
-      .toString(36)
-      .slice(2,8);
-
-const percent =
-  (value,goal) =>
-    num(goal) > 0
-      ? (
-          num(value) /
-          num(goal)
-        ) * 100
-      : 0;
-
-const clamp =
-  value =>
-    Math.max(
-      0,
-      Math.min(
-        100,
-        Number.isFinite(value)
-          ? value
-          : 0
-      )
-    );
-
-function loadState(){
-
-  try{
-
-    const saved =
-      localStorage.getItem(
-        STORAGE_KEY
-      );
-
-    if(!saved){
-      return clone(
-        SAMPLE_STATE
-      );
-    }
-
-    const parsed =
-      JSON.parse(saved);
-
-    return {
-
-      budget:{
-        ...SAMPLE_STATE.budget,
-        ...(parsed.budget || {})
-      },
-
-      fundraisers:
-        Array.isArray(
-          parsed.fundraisers
-        )
-          ? parsed.fundraisers
-          : []
-
-    };
-
-  }
-  catch{
-
-    return clone(
-      SAMPLE_STATE
-    );
-
-  }
-
 }
 
-function loadEvents(){
+function esc(value){
+  const div =
+    document.createElement("div");
 
-  try{
+  div.textContent =
+    value ?? "";
 
-    const saved =
-      localStorage.getItem(
-        EVENT_KEY
-      );
-
-    if(
-      saved &&
-      Array.isArray(
-        JSON.parse(saved)
-      )
-    ){
-
-      return JSON.parse(saved);
-
-    }
-
-    return clone(
-      SAMPLE_EVENTS
-    );
-
-  }
-  catch{
-
-    return clone(
-      SAMPLE_EVENTS
-    );
-
-  }
-
+  return div.innerHTML;
 }
 
-let state =
-  loadState();
+function initials(value){
+  return String(value || "T")
+    .split(/\s+/)
+    .slice(0,2)
+    .map(
+      word =>
+        word.charAt(0)
+          .toUpperCase()
+    )
+    .join("");
+}
 
-let eventGoals =
-  loadEvents();
+function percent(value,goal){
+  if(
+    num(goal) <= 0
+  ){
+    return 0;
+  }
 
-function save(
-  message = "Saved"
-){
+  return (
+    num(value) /
+    num(goal)
+  ) * 100;
+}
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(state)
+function clamp(value){
+  return Math.max(
+    0,
+    Math.min(
+      100,
+      num(value)
+    )
   );
-
-  localStorage.setItem(
-    EVENT_KEY,
-    JSON.stringify(eventGoals)
-  );
-
-  showToast(message);
-
-  renderAll();
-
 }
 
 function totals(){
-
   const revenue =
-    state.fundraisers.reduce(
+    fundraisers.reduce(
       (sum,item) =>
         sum +
-        num(item.raised),
+        num(item.amount_raised),
       0
     );
 
   const costs =
-    state.fundraisers.reduce(
+    fundraisers.reduce(
       (sum,item) =>
         sum +
         num(item.costs),
@@ -2157,23 +2318,70 @@ function totals(){
     revenue -
     costs;
 
+  const currentBalance =
+    num(
+      budget.starting_balance
+    ) +
+    profit;
+
   return {
     revenue,
     costs,
     profit,
-    currentBalance:
-      num(
-        state.budget.startingBalance
-      ) +
-      profit
+    currentBalance
   };
+}
 
+function canEditFinance(){
+  if(
+    membership?.is_owner
+  ){
+    return true;
+  }
+
+  return [
+    "sponsor",
+    "treasurer",
+    "president",
+    "vice_president"
+  ].includes(
+    membership?.role
+  );
+}
+
+function canManageFinance(){
+  if(
+    membership?.is_owner
+  ){
+    return true;
+  }
+
+  return [
+    "sponsor",
+    "treasurer"
+  ].includes(
+    membership?.role
+  );
+}
+
+function isOwner(){
+  return Boolean(
+    membership?.is_owner
+  );
+}
+
+function fundraiserDate(item){
+  return (
+    item.event_date ||
+    item.deadline ||
+    item.created_at?.slice(0,10) ||
+    null
+  );
 }
 
 function dateText(value){
-
   if(!value){
-    return "No date set";
+    return "No date";
   }
 
   const date =
@@ -2181,14 +2389,6 @@ function dateText(value){
       value +
       "T00:00:00"
     );
-
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
-    return value;
-  }
 
   return date.toLocaleDateString(
     "en-US",
@@ -2198,172 +2398,384 @@ function dateText(value){
       year:"numeric"
     }
   );
-
 }
 
-function statusClass(status){
+function showToast(message){
 
-  if(
-    status ===
-    "Completed"
-  ){
-    return "good";
-  }
-
-  if(
-    status ===
-    "Active"
-  ){
-    return "warn";
-  }
-
-  return "neutral";
-
-}
-
-function goalStatus(
-  value,
-  goal,
-  type
-){
-
-  if(
-    num(goal) <= 0
-  ){
-
-    return {
-      text:"Not set",
-      className:"neutral"
-    };
-
-  }
-
-  if(
-    type === "cost"
-  ){
-
-    if(
-      num(value) >
-      num(goal)
-    ){
-
-      return {
-        text:"Over limit",
-        className:"bad"
-      };
-
-    }
-
-    if(
-      num(value) >=
-      num(goal) * .85
-    ){
-
-      return {
-        text:"Near limit",
-        className:"warn"
-      };
-
-    }
-
-    return {
-      text:"Within limit",
-      className:"good"
-    };
-
-  }
-
-  if(
-    num(value) >=
-    num(goal)
-  ){
-
-    return {
-      text:"Goal reached",
-      className:"good"
-    };
-
-  }
-
-  if(
-    num(value) >=
-    num(goal) * .7
-  ){
-
-    return {
-      text:"Getting close",
-      className:"good"
-    };
-
-  }
-
-  return {
-    text:"In progress",
-    className:"neutral"
-  };
-
-}
-
-function renderGoal(
-  prefix,
-  value,
-  goal,
-  type
-){
-
-  const status =
-    goalStatus(
-      value,
-      goal,
-      type
+  const toast =
+    document.getElementById(
+      "toast"
     );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    showToast.timer
+  );
+
+  showToast.timer =
+    setTimeout(
+      () => {
+        toast.classList.remove(
+          "show"
+        );
+      },
+      1800
+    );
+}
+
+async function logActivity(
+  action,
+  details = {}
+){
+  try{
+    await supabaseClient
+      .from("activity_log")
+      .insert({
+        club_id:clubId,
+        actor_id:currentUser.id,
+        action,
+        details
+      });
+  }
+  catch(error){
+    console.warn(
+      "Activity log skipped",
+      error
+    );
+  }
+}
+
+async function initialize(){
+
+  if(!clubId){
+    window.location.replace(
+      "clubs.html"
+    );
+    return;
+  }
+
+  const {
+    data:{
+      session
+    }
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+  if(!session){
+    window.location.replace(
+      "index.html"
+    );
+    return;
+  }
+
+  currentUser =
+    session.user;
+
+  await loadEverything();
+
+  applyPermissions();
+
+  renderAll();
 
   document
     .getElementById(
-      prefix +
-      "Text"
+      "loadingScreen"
+    )
+    .classList.add(
+      "hidden"
+    );
+}
+
+async function loadEverything(){
+
+  const [
+    clubResult,
+    memberResult,
+    budgetResult,
+    fundResult,
+    eventResult
+  ] =
+    await Promise.all([
+
+      supabaseClient
+        .from("clubs")
+        .select("*")
+        .eq(
+          "id",
+          clubId
+        )
+        .single(),
+
+      supabaseClient
+        .from("club_members")
+        .select("*")
+        .eq(
+          "club_id",
+          clubId
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .single(),
+
+      supabaseClient
+        .from("budget_plans")
+        .select("*")
+        .eq(
+          "club_id",
+          clubId
+        )
+        .maybeSingle(),
+
+      supabaseClient
+        .from("fundraisers")
+        .select("*")
+        .eq(
+          "club_id",
+          clubId
+        )
+        .order(
+          "event_date",
+          {
+            ascending:false,
+            nullsFirst:false
+          }
+        ),
+
+      supabaseClient
+        .from("event_goals")
+        .select("*")
+        .eq(
+          "club_id",
+          clubId
+        )
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        )
+
+    ]);
+
+  if(
+    clubResult.error ||
+    memberResult.error
+  ){
+    alert(
+      "You do not have access to this club."
+    );
+
+    window.location.replace(
+      "clubs.html"
+    );
+
+    return;
+  }
+
+  club =
+    clubResult.data;
+
+  membership =
+    memberResult.data;
+
+  if(
+    budgetResult.data
+  ){
+    budget =
+      budgetResult.data;
+  }
+
+  fundraisers =
+    fundResult.data ||
+    [];
+
+  eventGoals =
+    eventResult.data ||
+    [];
+
+  updateBrand();
+}
+
+function updateBrand(){
+
+  document
+    .getElementById(
+      "clubLabel"
     )
     .textContent =
-    type === "cost"
-      ? `${money(value)} of ${money(goal)} used`
-      : `${money(value)} of ${money(goal)}`;
-
-  const badge =
-    document.getElementById(
-      prefix +
-      "Status"
-    );
-
-  badge.textContent =
-    status.text;
-
-  badge.className =
-    "status " +
-    status.className;
+    club.name;
 
   document
     .getElementById(
-      prefix +
-      "Bar"
+      "dashboardTitle"
     )
-    .style.width =
-    clamp(
-      percent(
-        value,
-        goal
-      )
-    ) +
-    "%";
+    .textContent =
+    club.name +
+    " Dashboard";
 
+  const sidebarLogo =
+    document.getElementById(
+      "sidebarLogo"
+    );
+
+  const logoPreview =
+    document.getElementById(
+      "logoPreview"
+    );
+
+  if(
+    club.logo_url
+  ){
+
+    sidebarLogo.innerHTML =
+      `<img src="${esc(club.logo_url)}" alt="">`;
+
+    logoPreview.innerHTML =
+      `<img src="${esc(club.logo_url)}" alt="">`;
+
+  }
+  else{
+
+    const letters =
+      initials(
+        club.name
+      );
+
+    sidebarLogo.textContent =
+      letters;
+
+    logoPreview.textContent =
+      letters;
+
+  }
+
+  document
+    .getElementById(
+      "clubNameInput"
+    )
+    .value =
+    club.name ||
+    "";
+
+  document
+    .getElementById(
+      "sponsorNameInput"
+    )
+    .value =
+    club.sponsor_name ||
+    "";
+
+  document
+    .getElementById(
+      "schoolNameInput"
+    )
+    .value =
+    club.school_name ||
+    "";
+
+  document
+    .getElementById(
+      "settingsInviteCode"
+    )
+    .textContent =
+    club.invite_code ||
+    "—";
+
+  document
+    .getElementById(
+      "currentRoleText"
+    )
+    .textContent =
+    membership.is_owner
+      ? "Owner"
+      : (
+          roleLabels[
+            membership.role
+          ] ||
+          "Officer"
+        );
+}
+
+function applyPermissions(){
+
+  if(
+    !canEditFinance()
+  ){
+    document
+      .querySelectorAll(
+        ".edit-finance"
+      )
+      .forEach(
+        element => {
+          element.style.display =
+            "none";
+        }
+      );
+
+    document
+      .querySelectorAll(
+        "#budgetForm input"
+      )
+      .forEach(
+        input => {
+          input.disabled =
+            true;
+        }
+      );
+  }
+
+  if(
+    !isOwner()
+  ){
+    document
+      .querySelectorAll(
+        ".owner-only"
+      )
+      .forEach(
+        element => {
+          element.disabled =
+            true;
+        }
+      );
+
+    document
+      .querySelectorAll(
+        ".owner-settings"
+      )
+      .forEach(
+        element => {
+          element.style.display =
+            "none";
+        }
+      );
+  }
+}
+
+function renderAll(){
+
+  renderDashboard();
+  renderBudget();
+  renderFundraisers();
+  renderEvents();
+  populateYearSelector();
+  renderYearProgress();
+  renderReports();
 }
 
 function renderDashboard(){
 
-  const totalsData =
+  const total =
     totals();
-
-  const budget =
-    state.budget;
 
   document
     .getElementById(
@@ -2371,7 +2783,7 @@ function renderDashboard(){
     )
     .textContent =
     money(
-      totalsData.currentBalance
+      total.currentBalance
     );
 
   document
@@ -2380,7 +2792,7 @@ function renderDashboard(){
     )
     .textContent =
     money(
-      totalsData.revenue
+      total.revenue
     );
 
   document
@@ -2389,7 +2801,7 @@ function renderDashboard(){
     )
     .textContent =
     money(
-      totalsData.costs
+      total.costs
     );
 
   document
@@ -2398,7 +2810,7 @@ function renderDashboard(){
     )
     .textContent =
     money(
-      totalsData.profit
+      total.profit
     );
 
   document
@@ -2408,11 +2820,11 @@ function renderDashboard(){
     .textContent =
     Math.round(
       percent(
-        totalsData.revenue,
-        budget.revenueGoal
+        total.revenue,
+        budget.revenue_goal
       )
     ) +
-    "% of revenue goal";
+    "% of goal";
 
   document
     .getElementById(
@@ -2421,11 +2833,11 @@ function renderDashboard(){
     .textContent =
     Math.round(
       percent(
-        totalsData.costs,
-        budget.costLimit
+        total.costs,
+        budget.max_cost
       )
     ) +
-    "% of spending limit";
+    "% of limit";
 
   document
     .getElementById(
@@ -2434,167 +2846,191 @@ function renderDashboard(){
     .textContent =
     Math.round(
       percent(
-        totalsData.profit,
-        budget.profitGoal
+        total.profit,
+        budget.profit_goal
       )
     ) +
-    "% of profit goal";
+    "% of goal";
 
   renderGoal(
     "revenueGoal",
-    totalsData.revenue,
-    budget.revenueGoal,
-    "goal"
+    total.revenue,
+    budget.revenue_goal,
+    false
   );
 
   renderGoal(
     "profitGoal",
-    totalsData.profit,
-    budget.profitGoal,
-    "goal"
+    total.profit,
+    budget.profit_goal,
+    false
   );
 
   renderGoal(
     "costGoal",
-    totalsData.costs,
-    budget.costLimit,
-    "cost"
+    total.costs,
+    budget.max_cost,
+    true
   );
 
-  renderOverviewChart();
-
+  renderPerformanceList();
   renderDashboardFundraisers();
-
   renderDashboardEvents();
-
 }
 
-function renderOverviewChart(){
+function renderGoal(
+  prefix,
+  value,
+  goal,
+  isCost
+){
 
-  const container =
+  const progress =
+    percent(
+      value,
+      goal
+    );
+
+  document
+    .getElementById(
+      prefix +
+      "Text"
+    )
+    .textContent =
+    isCost
+      ? `${money(value)} of ${money(goal)} used`
+      : `${money(value)} of ${money(goal)}`;
+
+  const status =
     document.getElementById(
-      "overviewChart"
+      prefix +
+      "Status"
     );
 
   if(
-    !state.fundraisers.length
+    num(goal) <= 0
   ){
+    status.textContent =
+      "Not set";
 
+    status.className =
+      "status neutral";
+  }
+  else if(
+    isCost &&
+    value >
+    goal
+  ){
+    status.textContent =
+      "Over limit";
+
+    status.className =
+      "status bad";
+  }
+  else if(
+    isCost
+  ){
+    status.textContent =
+      "Within limit";
+
+    status.className =
+      "status good";
+  }
+  else if(
+    value >= goal
+  ){
+    status.textContent =
+      "Goal reached";
+
+    status.className =
+      "status good";
+  }
+  else{
+    status.textContent =
+      "In progress";
+
+    status.className =
+      "status neutral";
+  }
+
+  document
+    .getElementById(
+      prefix +
+      "Bar"
+    )
+    .style.width =
+    clamp(
+      progress
+    ) +
+    "%";
+}
+
+function renderPerformanceList(){
+
+  const container =
+    document.getElementById(
+      "performanceList"
+    );
+
+  if(
+    !fundraisers.length
+  ){
     container.innerHTML = `
       <div class="empty">
         <h3>No fundraiser data yet</h3>
-        <p>
-          Add a fundraiser and the chart will appear here.
-        </p>
+        <p>Add your first fundraiser to start tracking performance.</p>
       </div>
     `;
-
     return;
-
   }
 
-  const items =
-    [...state.fundraisers]
+  const sorted =
+    [...fundraisers]
       .sort(
         (a,b) =>
-          num(b.raised) -
-          num(a.raised)
+          num(b.amount_raised) -
+          num(a.amount_raised)
       )
-      .slice(0,6);
+      .slice(0,5);
 
-  const max =
-    Math.max(
-      1,
-      ...items.flatMap(
-        item => [
-          num(item.raised),
-          num(item.costs),
-          Math.max(
-            0,
-            num(item.raised) -
-            num(item.costs)
-          )
-        ]
-      )
-    );
+  container.innerHTML =
+    `<div class="mini-list">` +
+    sorted.map(
+      item => {
 
-  container.innerHTML = `
-    <div class="chart">
+        const profit =
+          num(
+            item.amount_raised
+          ) -
+          num(
+            item.costs
+          );
 
-      ${items
-        .map(
-          item => {
+        return `
+          <div class="mini-row">
 
-            const revenue =
-              num(
-                item.raised
-              );
+            <div class="mini-top">
 
-            const costs =
-              num(
-                item.costs
-              );
-
-            const profit =
-              Math.max(
-                0,
-                revenue -
-                costs
-              );
-
-            return `
-              <div class="chart-group">
-
-                <div
-                  class="bar rev"
-                  style="height:${Math.max(
-                    2,
-                    revenue /
-                    max *
-                    88
-                  )}%"
-                ></div>
-
-                <div
-                  class="bar cost"
-                  style="height:${Math.max(
-                    2,
-                    costs /
-                    max *
-                    88
-                  )}%"
-                ></div>
-
-                <div
-                  class="bar profit"
-                  style="height:${Math.max(
-                    2,
-                    profit /
-                    max *
-                    88
-                  )}%"
-                ></div>
-
-                <div class="chart-label">
-                  ${esc(item.name)}
-                </div>
-
+              <div class="mini-name">
+                ${esc(item.name)}
               </div>
-            `;
 
-          }
-        )
-        .join("")}
+              <div class="mini-money">
+                ${money(item.amount_raised)}
+              </div>
 
-    </div>
+            </div>
 
-    <div class="legend">
-      <span><i class="dot rev"></i>Revenue</span>
-      <span><i class="dot cost"></i>Costs</span>
-      <span><i class="dot profit"></i>Profit</span>
-    </div>
-  `;
+            <div class="mini-meta">
+              Cost ${money(item.costs)}
+              · Profit ${money(profit)}
+            </div>
 
+          </div>
+        `;
+      }
+    ).join("") +
+    `</div>`;
 }
 
 function renderDashboardFundraisers(){
@@ -2605,189 +3041,151 @@ function renderDashboardFundraisers(){
     );
 
   if(
-    !state.fundraisers.length
+    !fundraisers.length
   ){
-
     container.innerHTML = `
       <div class="empty">
         <h3>No fundraisers yet</h3>
-        <p>
-          Add your first fundraiser when you're ready.
-        </p>
+        <p>Your fundraiser activity will appear here.</p>
       </div>
     `;
-
     return;
-
   }
 
-  container.innerHTML = `
-    <div class="mini-list">
+  container.innerHTML =
+    `<div class="mini-list">` +
+    fundraisers
+      .slice(0,5)
+      .map(
+        item => {
 
-      ${[...state.fundraisers]
-        .sort(
-          (a,b) =>
-            num(b.raised) -
-            num(a.raised)
-        )
-        .slice(0,5)
-        .map(
-          item => {
+          const progress =
+            clamp(
+              percent(
+                item.amount_raised,
+                item.goal
+              )
+            );
 
-            const progress =
-              clamp(
-                percent(
-                  item.raised,
-                  item.goal
-                )
-              );
+          return `
+            <div class="mini-row">
 
-            return `
-              <div class="mini-row">
+              <div class="mini-top">
 
-                <div class="mini-top">
-
-                  <div class="mini-name">
-                    ${esc(item.name)}
-                  </div>
-
-                  <div class="mini-money">
-                    ${money(item.raised)}
-                  </div>
-
+                <div class="mini-name">
+                  ${esc(item.name)}
                 </div>
 
-                <div class="mini-meta">
-                  ${Math.round(progress)}% of fundraiser goal ·
-                  Profit ${money(
-                    num(item.raised) -
-                    num(item.costs)
-                  )}
-                </div>
-
-                <div class="progress">
-                  <div
-                    class="fill-blue"
-                    style="width:${progress}%"
-                  ></div>
+                <div class="mini-money">
+                  ${money(item.amount_raised)}
                 </div>
 
               </div>
-            `;
 
-          }
-        )
-        .join("")}
+              <div class="mini-meta">
+                ${dateText(fundraiserDate(item))}
+                · ${Math.round(progress)}% of goal
+              </div>
 
-    </div>
-  `;
+              <div class="progress">
+                <div
+                  class="fill-blue"
+                  style="width:${progress}%"
+                ></div>
+              </div>
 
+            </div>
+          `;
+        }
+      )
+      .join("") +
+    `</div>`;
 }
 
 function renderDashboardEvents(){
 
   const container =
     document.getElementById(
-      "dashboardEventGoals"
+      "dashboardEvents"
     );
 
   if(
     !eventGoals.length
   ){
-
     container.innerHTML = `
       <div class="empty">
         <h3>No event goals yet</h3>
-        <p>
-          Add an event goal when you're ready.
-        </p>
+        <p>Graduation, field day, trips, and other event goals will appear here.</p>
       </div>
     `;
-
     return;
-
   }
 
-  container.innerHTML = `
-    <div class="mini-list">
+  container.innerHTML =
+    `<div class="mini-list">` +
+    eventGoals
+      .slice(0,5)
+      .map(
+        item => {
 
-      ${eventGoals
-        .slice(0,5)
-        .map(
-          item => {
+          const progress =
+            clamp(
+              percent(
+                item.amount_raised,
+                item.amount_needed
+              )
+            );
 
-            const progress =
-              clamp(
-                percent(
-                  item.raised,
-                  item.goal
-                )
-              );
+          const reached =
+            num(
+              item.amount_raised
+            ) >=
+            num(
+              item.amount_needed
+            );
 
-            const reached =
-              num(item.goal) > 0 &&
-              num(item.raised) >=
-              num(item.goal);
+          return `
+            <div class="mini-row">
 
-            return `
-              <div class="mini-row">
+              <div class="mini-top">
 
-                <div class="mini-top">
-
-                  <div class="mini-name">
-                    ${esc(item.name)}
-                  </div>
-
-                  <div
-                    class="mini-money"
-                    style="${reached
-                      ? "color:var(--green)"
-                      : ""}"
-                  >
-                    ${money(item.raised)}
-                    /
-                    ${money(item.goal)}
-                  </div>
-
+                <div class="mini-name">
+                  ${esc(item.name)}
                 </div>
 
-                <div class="progress">
-
-                  <div
-                    class="${reached
-                      ? "fill-green"
-                      : "fill-blue"}"
-                    style="width:${progress}%"
-                  ></div>
-
-                </div>
-
-                <div class="mini-meta">
-                  ${reached
-                    ? "Goal reached"
-                    : Math.round(progress) +
-                      "% funded"}
+                <div
+                  class="mini-money"
+                  style="${reached ? "color:var(--green)" : ""}"
+                >
+                  ${money(item.amount_raised)}
+                  /
+                  ${money(item.amount_needed)}
                 </div>
 
               </div>
-            `;
 
-          }
-        )
-        .join("")}
+              <div class="progress">
 
-    </div>
-  `;
+                <div
+                  class="${reached ? "fill-green" : "fill-blue"}"
+                  style="width:${progress}%"
+                ></div>
 
+              </div>
+
+              <div class="mini-meta">
+                ${reached ? "Goal reached" : Math.round(progress) + "% funded"}
+              </div>
+
+            </div>
+          `;
+        }
+      )
+      .join("") +
+    `</div>`;
 }
 
 function renderBudget(){
-
-  const budget =
-    state.budget;
-
-  const totalsData =
-    totals();
 
   document
     .getElementById(
@@ -2795,7 +3193,7 @@ function renderBudget(){
     )
     .value =
     num(
-      budget.startingBalance
+      budget.starting_balance
     );
 
   document
@@ -2804,7 +3202,7 @@ function renderBudget(){
     )
     .value =
     num(
-      budget.revenueGoal
+      budget.revenue_goal
     );
 
   document
@@ -2813,7 +3211,7 @@ function renderBudget(){
     )
     .value =
     num(
-      budget.profitGoal
+      budget.profit_goal
     );
 
   document
@@ -2822,8 +3220,11 @@ function renderBudget(){
     )
     .value =
     num(
-      budget.costLimit
+      budget.max_cost
     );
+
+  const total =
+    totals();
 
   document
     .getElementById(
@@ -2833,49 +3234,24 @@ function renderBudget(){
 
       <div class="summary-item">
         <span>Revenue raised</span>
-        <strong>${money(totalsData.revenue)}</strong>
+        <strong>${money(total.revenue)}</strong>
       </div>
 
       <div class="summary-item">
         <span>Total costs</span>
-        <strong>${money(totalsData.costs)}</strong>
+        <strong>${money(total.costs)}</strong>
       </div>
 
       <div class="summary-item">
         <span>Net profit</span>
-        <strong>${money(totalsData.profit)}</strong>
+        <strong>${money(total.profit)}</strong>
       </div>
 
       <div class="summary-item">
         <span>Current balance</span>
-        <strong>${money(totalsData.currentBalance)}</strong>
-      </div>
-
-      <div class="summary-item">
-        <span>Revenue progress</span>
-        <strong>
-          ${Math.round(
-            percent(
-              totalsData.revenue,
-              budget.revenueGoal
-            )
-          )}%
-        </strong>
-      </div>
-
-      <div class="summary-item">
-        <span>Profit progress</span>
-        <strong>
-          ${Math.round(
-            percent(
-              totalsData.profit,
-              budget.profitGoal
-            )
-          )}%
-        </strong>
+        <strong>${money(total.currentBalance)}</strong>
       </div>
     `;
-
 }
 
 function renderFundraisers(){
@@ -2902,27 +3278,25 @@ function renderFundraisers(){
       .value;
 
   const list =
-    [...state.fundraisers]
-      .filter(
-        item => {
+    fundraisers.filter(
+      item => {
 
-          const matchesSearch =
-            !search ||
-            String(item.name)
-              .toLowerCase()
-              .includes(search);
+        const searchMatch =
+          !search ||
+          item.name
+            .toLowerCase()
+            .includes(search);
 
-          const matchesFilter =
-            filter === "all" ||
-            item.status === filter;
+        const filterMatch =
+          filter === "all" ||
+          item.status === filter;
 
-          return (
-            matchesSearch &&
-            matchesFilter
-          );
-
-        }
-      );
+        return (
+          searchMatch &&
+          filterMatch
+        );
+      }
+    );
 
   document
     .getElementById(
@@ -2934,533 +3308,784 @@ function renderFundraisers(){
   if(
     !list.length
   ){
-
     grid.innerHTML = `
       <div
         class="card empty"
         style="grid-column:1/-1"
       >
-
-        <h3>
-          ${state.fundraisers.length
-            ? "No matches"
-            : "No fundraisers yet"}
-        </h3>
-
-        <p>
-          ${state.fundraisers.length
-            ? "Try another search or status."
-            : "Add your first fundraiser."}
-        </p>
-
+        <h3>No fundraisers found</h3>
+        <p>Add a fundraiser when you're ready.</p>
       </div>
     `;
-
     return;
-
   }
 
   grid.innerHTML =
-    list
-      .map(
-        item => {
+    list.map(
+      item => {
 
-          const revenue =
-            num(
-              item.raised
-            );
+        const profit =
+          num(
+            item.amount_raised
+          ) -
+          num(
+            item.costs
+          );
 
-          const costs =
-            num(
-              item.costs
-            );
+        const progress =
+          clamp(
+            percent(
+              item.amount_raised,
+              item.goal
+            )
+          );
 
-          const profit =
-            revenue -
-            costs;
+        return `
+          <article class="card fund-card">
 
-          const progress =
-            clamp(
-              percent(
-                revenue,
-                item.goal
-              )
-            );
+            <div class="fund-top">
 
-          return `
-            <article class="card fund-card">
+              <div>
 
-              <div class="fund-top">
+                <h3>
+                  ${esc(item.name)}
+                </h3>
 
-                <div>
-
-                  <h3>
-                    ${esc(item.name)}
-                  </h3>
-
-                  <div class="fund-date">
-                    ${dateText(item.deadline)}
-                  </div>
-
-                </div>
-
-                <span
-                  class="status ${statusClass(item.status)}"
-                >
-                  ${esc(item.status)}
-                </span>
-
-              </div>
-
-              <div class="fund-stats">
-
-                <div class="fund-stat">
-                  <span>Raised</span>
-                  <strong style="color:var(--blue)">
-                    ${money(revenue)}
-                  </strong>
-                </div>
-
-                <div class="fund-stat">
-                  <span>Costs</span>
-                  <strong style="color:var(--red)">
-                    ${money(costs)}
-                  </strong>
-                </div>
-
-                <div class="fund-stat">
-                  <span>Profit</span>
-                  <strong style="color:var(--green)">
-                    ${money(profit)}
-                  </strong>
+                <div class="fund-date">
+                  ${dateText(fundraiserDate(item))}
                 </div>
 
               </div>
 
-              <div class="mini-top">
+              <span class="status neutral">
+                ${esc(item.status)}
+              </span>
 
-                <span class="goal-small">
-                  Goal progress
-                </span>
+            </div>
 
-                <span class="goal-small">
-                  ${Math.round(progress)}%
-                </span>
+            <div class="fund-stats">
 
+              <div class="fund-stat">
+                <span>Raised</span>
+                <strong style="color:var(--blue)">
+                  ${money(item.amount_raised)}
+                </strong>
               </div>
 
-              <div class="progress">
-
-                <div
-                  class="fill-blue"
-                  style="width:${progress}%"
-                ></div>
-
+              <div class="fund-stat">
+                <span>Costs</span>
+                <strong style="color:var(--red)">
+                  ${money(item.costs)}
+                </strong>
               </div>
 
-              <div class="fund-actions">
-
-                <button
-                  class="secondary"
-                  onclick="editFundraiser('${item.id}')"
-                >
-                  Edit
-                </button>
-
-                <button
-                  class="danger"
-                  onclick="deleteFundraiser('${item.id}')"
-                >
-                  Delete
-                </button>
-
+              <div class="fund-stat">
+                <span>Profit</span>
+                <strong style="color:var(--green)">
+                  ${money(profit)}
+                </strong>
               </div>
 
-            </article>
-          `;
+            </div>
 
-        }
-      )
-      .join("");
+            <div class="mini-top">
 
+              <span class="goal-small">
+                Goal progress
+              </span>
+
+              <span class="goal-small">
+                ${Math.round(progress)}%
+              </span>
+
+            </div>
+
+            <div class="progress">
+              <div
+                class="fill-blue"
+                style="width:${progress}%"
+              ></div>
+            </div>
+
+            ${
+              canEditFinance()
+              ? `
+                <div class="fund-actions">
+
+                  <button
+                    class="secondary"
+                    onclick="editFundraiser('${item.id}')"
+                  >
+                    Edit
+                  </button>
+
+                  ${
+                    canManageFinance()
+                      ? `
+                        <button
+                          class="danger"
+                          onclick="deleteFundraiser('${item.id}')"
+                        >
+                          Delete
+                        </button>
+                      `
+                      : ""
+                  }
+
+                </div>
+              `
+              : ""
+            }
+
+          </article>
+        `;
+      }
+    ).join("");
 }
 
 function renderEvents(){
 
   const grid =
     document.getElementById(
-      "eventGoalsGrid"
+      "eventGrid"
     );
 
   if(
     !eventGoals.length
   ){
-
     grid.innerHTML = `
       <div
         class="card empty"
         style="grid-column:1/-1"
       >
-
-        <h3>
-          No event goals yet
-        </h3>
-
-        <p>
-          Add something like Graduation or Field Day.
-        </p>
-
+        <h3>No event goals yet</h3>
+        <p>Add an event goal when you're ready.</p>
       </div>
     `;
-
     return;
-
   }
 
   grid.innerHTML =
-    eventGoals
+    eventGoals.map(
+      item => {
+
+        const progress =
+          clamp(
+            percent(
+              item.amount_raised,
+              item.amount_needed
+            )
+          );
+
+        const reached =
+          num(
+            item.amount_raised
+          ) >=
+          num(
+            item.amount_needed
+          );
+
+        return `
+          <article class="card event-card">
+
+            <div class="fund-top">
+
+              <h3>
+                ${esc(item.name)}
+              </h3>
+
+              <span
+                class="status ${reached ? "good" : "neutral"}"
+              >
+                ${reached ? "Goal Reached" : Math.round(progress) + "%"}
+              </span>
+
+            </div>
+
+            <div class="event-stats">
+
+              <div class="event-stat">
+                <span>Raised</span>
+                <strong>${money(item.amount_raised)}</strong>
+              </div>
+
+              <div class="event-stat">
+                <span>Needed</span>
+                <strong>${money(item.amount_needed)}</strong>
+              </div>
+
+            </div>
+
+            <div class="progress">
+
+              <div
+                class="${reached ? "fill-green" : "fill-blue"}"
+                style="width:${progress}%"
+              ></div>
+
+            </div>
+
+            ${
+              canEditFinance()
+              ? `
+                <div class="fund-actions">
+
+                  <button
+                    class="secondary"
+                    onclick="editEvent('${item.id}')"
+                  >
+                    Edit
+                  </button>
+
+                  ${
+                    canManageFinance()
+                      ? `
+                        <button
+                          class="danger"
+                          onclick="deleteEvent('${item.id}')"
+                        >
+                          Delete
+                        </button>
+                      `
+                      : ""
+                  }
+
+                </div>
+              `
+              : ""
+            }
+
+          </article>
+        `;
+      }
+    ).join("");
+}
+
+function fundraiserYear(item){
+
+  const value =
+    fundraiserDate(item);
+
+  if(!value){
+    return null;
+  }
+
+  return Number(
+    value.slice(0,4)
+  );
+}
+
+function fundraiserMonth(item){
+
+  const value =
+    fundraiserDate(item);
+
+  if(!value){
+    return null;
+  }
+
+  return Number(
+    value.slice(5,7)
+  ) - 1;
+}
+
+function populateYearSelector(){
+
+  const currentYear =
+    new Date()
+      .getFullYear();
+
+  const years =
+    new Set([
+      currentYear,
+      currentYear - 1
+    ]);
+
+  fundraisers.forEach(
+    item => {
+
+      const year =
+        fundraiserYear(item);
+
+      if(year){
+        years.add(year);
+      }
+    }
+  );
+
+  const sorted =
+    [...years]
+      .sort(
+        (a,b) =>
+          b - a
+      );
+
+  const select =
+    document.getElementById(
+      "yearSelect"
+    );
+
+  const previousValue =
+    Number(
+      select.value
+    );
+
+  select.innerHTML =
+    sorted.map(
+      year =>
+        `<option value="${year}">${year}</option>`
+    ).join("");
+
+  select.value =
+    sorted.includes(
+      previousValue
+    )
+      ? previousValue
+      : currentYear;
+}
+
+function monthlyData(year){
+
+  const revenue =
+    Array(12).fill(0);
+
+  const counts =
+    Array(12).fill(0);
+
+  fundraisers.forEach(
+    item => {
+
+      if(
+        fundraiserYear(item) !==
+        year
+      ){
+        return;
+      }
+
+      const month =
+        fundraiserMonth(item);
+
+      if(
+        month === null ||
+        month < 0 ||
+        month > 11
+      ){
+        return;
+      }
+
+      revenue[month] +=
+        num(
+          item.amount_raised
+        );
+
+      counts[month] +=
+        1;
+    }
+  );
+
+  const cumulative = [];
+
+  let running =
+    0;
+
+  revenue.forEach(
+    value => {
+
+      running +=
+        value;
+
+      cumulative.push(
+        running
+      );
+    }
+  );
+
+  return {
+    revenue,
+    counts,
+    cumulative
+  };
+}
+
+function renderYearProgress(){
+
+  const year =
+    Number(
+      document
+        .getElementById(
+          "yearSelect"
+        )
+        .value
+    ) ||
+    new Date()
+      .getFullYear();
+
+  const current =
+    monthlyData(
+      year
+    );
+
+  const previous =
+    monthlyData(
+      year - 1
+    );
+
+  const yearRevenue =
+    current.revenue.reduce(
+      (sum,value) =>
+        sum + value,
+      0
+    );
+
+  const previousRevenue =
+    previous.revenue.reduce(
+      (sum,value) =>
+        sum + value,
+      0
+    );
+
+  const fundraiserCount =
+    current.counts.reduce(
+      (sum,value) =>
+        sum + value,
+      0
+    );
+
+  document
+    .getElementById(
+      "yearRevenue"
+    )
+    .textContent =
+    money(
+      yearRevenue
+    );
+
+  document
+    .getElementById(
+      "previousRevenue"
+    )
+    .textContent =
+    money(
+      previousRevenue
+    );
+
+  document
+    .getElementById(
+      "yearFundraisers"
+    )
+    .textContent =
+    fundraiserCount;
+
+  const now =
+    new Date();
+
+  let monthsExpected =
+    12;
+
+  if(
+    year ===
+    now.getFullYear()
+  ){
+    monthsExpected =
+      now.getMonth() +
+      1;
+  }
+
+  if(
+    year >
+    now.getFullYear()
+  ){
+    monthsExpected =
+      0;
+  }
+
+  const expected =
+    num(
+      budget.revenue_goal
+    ) *
+    (
+      monthsExpected /
+      12
+    );
+
+  const status =
+    document.getElementById(
+      "yearStatus"
+    );
+
+  if(
+    num(
+      budget.revenue_goal
+    ) <= 0
+  ){
+    status.textContent =
+      "No goal";
+  }
+  else if(
+    yearRevenue >=
+    expected
+  ){
+    status.textContent =
+      "On Track";
+    status.style.color =
+      "var(--green)";
+  }
+  else{
+    status.textContent =
+      "Behind Pace";
+    status.style.color =
+      "var(--red)";
+  }
+
+  renderYearLineChart(
+    year,
+    current.cumulative,
+    previous.cumulative
+  );
+
+  renderMonthBars(
+    current.counts
+  );
+}
+
+function renderYearLineChart(
+  year,
+  current,
+  previous
+){
+
+  const svg =
+    document.getElementById(
+      "yearLineChart"
+    );
+
+  const goalPace =
+    MONTHS.map(
+      (_,index) =>
+        num(
+          budget.revenue_goal
+        ) *
+        (
+          (index + 1) /
+          12
+        )
+    );
+
+  const maxValue =
+    Math.max(
+      1,
+      ...current,
+      ...previous,
+      ...goalPace
+    );
+
+  const left =
+    55;
+
+  const right =
+    865;
+
+  const top =
+    25;
+
+  const bottom =
+    270;
+
+  const width =
+    right -
+    left;
+
+  const height =
+    bottom -
+    top;
+
+  const x =
+    index =>
+      left +
+      (
+        width *
+        index /
+        11
+      );
+
+  const y =
+    value =>
+      bottom -
+      (
+        num(value) /
+        maxValue *
+        height
+      );
+
+  function points(values){
+
+    return values.map(
+      (value,index) =>
+        `${x(index)},${y(value)}`
+    ).join(" ");
+  }
+
+  const gridLines =
+    [0,.25,.5,.75,1]
       .map(
-        item => {
+        ratio => {
 
-          const target =
-            num(item.goal);
+          const yy =
+            bottom -
+            height *
+            ratio;
 
-          const raised =
-            num(item.raised);
-
-          const progress =
-            clamp(
-              percent(
-                raised,
-                target
-              )
-            );
-
-          const reached =
-            target > 0 &&
-            raised >= target;
+          const amount =
+            maxValue *
+            ratio;
 
           return `
-            <article class="card event-card">
+            <line
+              x1="${left}"
+              y1="${yy}"
+              x2="${right}"
+              y2="${yy}"
+              stroke="#e4e9f0"
+              stroke-width="1"
+            />
 
-              <div class="fund-top">
-
-                <div>
-
-                  <h3>
-                    ${esc(item.name)}
-                  </h3>
-
-                  <div class="fund-date">
-                    ${esc(
-                      item.note ||
-                      "Event funding goal"
-                    )}
-                  </div>
-
-                </div>
-
-                <span
-                  class="status ${reached
-                    ? "good"
-                    : "neutral"}"
-                >
-                  ${reached
-                    ? "Goal Reached"
-                    : Math.round(progress) +
-                      "%"}
-                </span>
-
-              </div>
-
-              <div class="event-stats">
-
-                <div class="event-stat">
-                  <span>Raised</span>
-                  <strong style="color:var(--blue)">
-                    ${money(raised)}
-                  </strong>
-                </div>
-
-                <div class="event-stat">
-                  <span>Goal</span>
-                  <strong>
-                    ${money(target)}
-                  </strong>
-                </div>
-
-              </div>
-
-              <div class="progress">
-
-                <div
-                  class="${reached
-                    ? "fill-green"
-                    : "fill-blue"}"
-                  style="width:${progress}%"
-                ></div>
-
-              </div>
-
-              <div class="mini-meta">
-
-                ${reached
-                  ? money(
-                      raised -
-                      target
-                    ) +
-                    " above goal"
-                  : money(
-                      Math.max(
-                        target -
-                        raised,
-                        0
-                      )
-                    ) +
-                    " still needed"}
-
-              </div>
-
-              <div class="fund-actions">
-
-                <button
-                  class="secondary"
-                  onclick="editEventGoal('${item.id}')"
-                >
-                  Edit
-                </button>
-
-                <button
-                  class="danger"
-                  onclick="deleteEventGoal('${item.id}')"
-                >
-                  Delete
-                </button>
-
-              </div>
-
-            </article>
+            <text
+              x="5"
+              y="${yy + 4}"
+              font-size="10"
+              fill="#718096"
+            >
+              ${money(amount)}
+            </text>
           `;
-
         }
       )
       .join("");
 
+  const labels =
+    MONTHS.map(
+      (month,index) => `
+        <text
+          x="${x(index)}"
+          y="295"
+          text-anchor="middle"
+          font-size="10"
+          fill="#718096"
+        >
+          ${month}
+        </text>
+      `
+    ).join("");
+
+  svg.innerHTML = `
+
+    ${gridLines}
+
+    ${labels}
+
+    <polyline
+      fill="none"
+      stroke="#4f7df3"
+      stroke-width="4"
+      points="${points(current)}"
+    />
+
+    <polyline
+      fill="none"
+      stroke="#2fa36b"
+      stroke-width="3"
+      stroke-dasharray="7 5"
+      points="${points(previous)}"
+    />
+
+    <polyline
+      fill="none"
+      stroke="#df5a63"
+      stroke-width="2"
+      stroke-dasharray="4 5"
+      points="${points(goalPace)}"
+    />
+
+    ${current.map(
+      (value,index) => `
+        <circle
+          cx="${x(index)}"
+          cy="${y(value)}"
+          r="4"
+          fill="#4f7df3"
+        />
+      `
+    ).join("")}
+
+    <text
+      x="${left}"
+      y="15"
+      font-size="11"
+      font-weight="700"
+      fill="#162033"
+    >
+      ${year} vs ${year - 1}
+    </text>
+  `;
 }
 
-function renderAnalytics(){
+function renderMonthBars(
+  counts
+){
 
-  const totalsData =
-    totals();
-
-  const revenueItems =
-    [...state.fundraisers]
-      .sort(
-        (a,b) =>
-          num(b.raised) -
-          num(a.raised)
-      );
-
-  const revenueBox =
-    document.getElementById(
-      "revenueAnalytics"
+  const maxCount =
+    Math.max(
+      1,
+      ...counts
     );
-
-  const profitBox =
-    document.getElementById(
-      "profitAnalytics"
-    );
-
-  if(
-    !revenueItems.length
-  ){
-
-    const empty = `
-      <div class="empty">
-        <h3>No data yet</h3>
-        <p>
-          Add fundraisers to see analytics.
-        </p>
-      </div>
-    `;
-
-    revenueBox.innerHTML =
-      empty;
-
-    profitBox.innerHTML =
-      empty;
-
-  }
-  else{
-
-    const maxRevenue =
-      Math.max(
-        1,
-        ...revenueItems.map(
-          item =>
-            num(item.raised)
-        )
-      );
-
-    revenueBox.innerHTML =
-      revenueItems
-        .map(
-          item => `
-            <div class="analytics-row">
-
-              <div class="a-name">
-                ${esc(item.name)}
-              </div>
-
-              <div class="a-track">
-
-                <div
-                  class="a-fill"
-                  style="
-                    width:${clamp(
-                      num(item.raised) /
-                      maxRevenue *
-                      100
-                    )}%;
-                    background:var(--blue)
-                  "
-                ></div>
-
-              </div>
-
-              <div class="a-value">
-                ${money(item.raised)}
-              </div>
-
-            </div>
-          `
-        )
-        .join("");
-
-    const profitItems =
-      [...state.fundraisers]
-        .sort(
-          (a,b) =>
-            (
-              num(b.raised) -
-              num(b.costs)
-            ) -
-            (
-              num(a.raised) -
-              num(a.costs)
-            )
-        );
-
-    const maxProfit =
-      Math.max(
-        1,
-        ...profitItems.map(
-          item =>
-            Math.max(
-              0,
-              num(item.raised) -
-              num(item.costs)
-            )
-        )
-      );
-
-    profitBox.innerHTML =
-      profitItems
-        .map(
-          item => {
-
-            const profit =
-              num(item.raised) -
-              num(item.costs);
-
-            return `
-              <div class="analytics-row">
-
-                <div class="a-name">
-                  ${esc(item.name)}
-                </div>
-
-                <div class="a-track">
-
-                  <div
-                    class="a-fill"
-                    style="
-                      width:${profit > 0
-                        ? clamp(
-                            profit /
-                            maxProfit *
-                            100
-                          )
-                        : 0}%;
-                      background:${profit < 0
-                        ? "var(--red)"
-                        : "var(--green)"}
-                    "
-                  ></div>
-
-                </div>
-
-                <div class="a-value">
-                  ${money(profit)}
-                </div>
-
-              </div>
-            `;
-
-          }
-        )
-        .join("");
-
-  }
-
-  const margin =
-    totalsData.revenue > 0
-      ? totalsData.profit /
-        totalsData.revenue *
-        100
-      : 0;
 
   document
     .getElementById(
-      "analyticsSummary"
+      "monthBars"
     )
-    .innerHTML = `
+    .innerHTML =
+    counts.map(
+      (count,index) => {
 
-      <div class="summary-item">
-        <span>Total revenue</span>
-        <strong>${money(totalsData.revenue)}</strong>
-      </div>
+        const height =
+          count === 0
+            ? 2
+            : (
+                count /
+                maxCount *
+                100
+              );
 
-      <div class="summary-item">
-        <span>Total costs</span>
-        <strong>${money(totalsData.costs)}</strong>
-      </div>
+        return `
+          <div class="month-col">
 
-      <div class="summary-item">
-        <span>Net profit</span>
-        <strong>${money(totalsData.profit)}</strong>
-      </div>
+            <div class="month-count">
+              ${count}
+            </div>
 
-      <div class="summary-item">
-        <span>Profit margin</span>
-        <strong>${margin.toFixed(1)}%</strong>
-      </div>
+            <div class="month-bar-track">
 
-      <div class="summary-item">
-        <span>Fundraisers</span>
-        <strong>${state.fundraisers.length}</strong>
-      </div>
-    `;
+              <div
+                class="month-bar"
+                style="height:${height}%"
+              ></div>
 
+            </div>
+
+            <div class="month-name">
+              ${MONTHS[index]}
+            </div>
+
+          </div>
+        `;
+      }
+    ).join("");
 }
 
 function renderReports(){
 
-  const totalsData =
+  const total =
     totals();
-
-  const budget =
-    state.budget;
 
   document
     .getElementById(
@@ -3468,107 +4093,47 @@ function renderReports(){
     )
     .innerHTML = `
 
-      <div class="report-top">
+      <h3 style="margin-top:0">
+        ${esc(club.name)} Financial Summary
+      </h3>
 
-        <div>
-
-          <h3>
-            Treasurery Financial Summary
-          </h3>
-
-          <p>
-            Based on the fundraiser totals currently saved in this browser.
-          </p>
-
-        </div>
-
-        <div>
-
-          <div class="report-balance">
-            ${money(totalsData.currentBalance)}
-          </div>
-
-          <div style="font-size:10px;color:var(--muted);text-align:right">
-            Current balance
-          </div>
-
-        </div>
-
-      </div>
+      <p style="color:var(--muted);font-size:11px">
+        Sponsor:
+        ${esc(club.sponsor_name || "Not set")}
+        ·
+        ${esc(club.school_name || "School not set")}
+      </p>
 
       <div class="report-grid">
 
         <div class="report-box">
-          <span>Total revenue</span>
+          <span>Current Balance</span>
+          <strong>${money(total.currentBalance)}</strong>
+        </div>
+
+        <div class="report-box">
+          <span>Total Revenue</span>
           <strong style="color:var(--blue)">
-            ${money(totalsData.revenue)}
+            ${money(total.revenue)}
           </strong>
         </div>
 
         <div class="report-box">
-          <span>Total costs</span>
+          <span>Total Costs</span>
           <strong style="color:var(--red)">
-            ${money(totalsData.costs)}
+            ${money(total.costs)}
           </strong>
         </div>
 
         <div class="report-box">
-          <span>Net profit</span>
+          <span>Net Profit</span>
           <strong style="color:var(--green)">
-            ${money(totalsData.profit)}
+            ${money(total.profit)}
           </strong>
-        </div>
-
-        <div class="report-box">
-          <span>Fundraisers</span>
-          <strong>
-            ${state.fundraisers.length}
-          </strong>
-        </div>
-
-      </div>
-
-      <div class="summary-list" style="margin-top:18px">
-
-        <div class="summary-item">
-          <span>Starting balance</span>
-          <strong>${money(budget.startingBalance)}</strong>
-        </div>
-
-        <div class="summary-item">
-          <span>Revenue goal</span>
-          <strong>${money(budget.revenueGoal)}</strong>
-        </div>
-
-        <div class="summary-item">
-          <span>Profit goal</span>
-          <strong>${money(budget.profitGoal)}</strong>
-        </div>
-
-        <div class="summary-item">
-          <span>Spending limit</span>
-          <strong>${money(budget.costLimit)}</strong>
         </div>
 
       </div>
     `;
-
-}
-
-function renderAll(){
-
-  renderDashboard();
-
-  renderBudget();
-
-  renderFundraisers();
-
-  renderEvents();
-
-  renderAnalytics();
-
-  renderReports();
-
 }
 
 function switchPage(page){
@@ -3616,8 +4181,8 @@ function switchPage(page){
     dashboard:"Dashboard",
     budget:"Budget Plan",
     fundraisers:"Fundraisers",
-    "event-goals":"Event Goals",
-    analytics:"Analytics",
+    events:"Event Goals",
+    year:"Year Progress",
     reports:"Reports",
     settings:"Settings"
   };
@@ -3638,11 +4203,22 @@ function switchPage(page){
       "open"
     );
 
+  if(
+    page === "year"
+  ){
+    renderYearProgress();
+  }
 }
 
 function openFundraiserModal(
-  fundraiser = null
+  item = null
 ){
+
+  if(
+    !canEditFinance()
+  ){
+    return;
+  }
 
   document
     .getElementById(
@@ -3655,7 +4231,7 @@ function openFundraiserModal(
       "fundraiserId"
     )
     .value =
-    fundraiser?.id ||
+    item?.id ||
     "";
 
   document
@@ -3663,7 +4239,7 @@ function openFundraiserModal(
       "fundraiserModalTitle"
     )
     .textContent =
-    fundraiser
+    item
       ? "Edit Fundraiser"
       : "Add Fundraiser";
 
@@ -3672,7 +4248,7 @@ function openFundraiserModal(
       "fundraiserName"
     )
     .value =
-    fundraiser?.name ||
+    item?.name ||
     "";
 
   document
@@ -3680,7 +4256,7 @@ function openFundraiserModal(
       "fundraiserGoal"
     )
     .value =
-    fundraiser?.goal ??
+    item?.goal ??
     "";
 
   document
@@ -3688,7 +4264,7 @@ function openFundraiserModal(
       "fundraiserRaised"
     )
     .value =
-    fundraiser?.raised ??
+    item?.amount_raised ??
     "";
 
   document
@@ -3696,7 +4272,15 @@ function openFundraiserModal(
       "fundraiserCosts"
     )
     .value =
-    fundraiser?.costs ??
+    item?.costs ??
+    "";
+
+  document
+    .getElementById(
+      "fundraiserEventDate"
+    )
+    .value =
+    item?.event_date ||
     "";
 
   document
@@ -3704,7 +4288,7 @@ function openFundraiserModal(
       "fundraiserDeadline"
     )
     .value =
-    fundraiser?.deadline ||
+    item?.deadline ||
     "";
 
   document
@@ -3712,7 +4296,7 @@ function openFundraiserModal(
       "fundraiserStatus"
     )
     .value =
-    fundraiser?.status ||
+    item?.status ||
     "Planning";
 
   document
@@ -3722,7 +4306,6 @@ function openFundraiserModal(
     .classList.add(
       "show"
     );
-
 }
 
 function closeFundraiserModal(){
@@ -3734,262 +4317,341 @@ function closeFundraiserModal(){
     .classList.remove(
       "show"
     );
-
 }
 
 function editFundraiser(id){
 
-  const fundraiser =
-    state.fundraisers.find(
-      item =>
-        item.id === id
+  const item =
+    fundraisers.find(
+      fundraiser =>
+        fundraiser.id === id
     );
 
-  if(fundraiser){
-
+  if(item){
     openFundraiserModal(
-      fundraiser
+      item
     );
-
   }
-
 }
 
-function deleteFundraiser(id){
+async function deleteFundraiser(id){
 
-  const fundraiser =
-    state.fundraisers.find(
-      item =>
-        item.id === id
+  if(
+    !canManageFinance()
+  ){
+    return;
+  }
+
+  const item =
+    fundraisers.find(
+      fundraiser =>
+        fundraiser.id === id
     );
 
   if(
-    fundraiser &&
-    confirm(
-      `Delete "${fundraiser.name}"?`
+    !item ||
+    !confirm(
+      `Delete "${item.name}"?`
     )
   ){
-
-    state.fundraisers =
-      state.fundraisers.filter(
-        item =>
-          item.id !== id
-      );
-
-    save(
-      "Fundraiser deleted"
-    );
-
+    return;
   }
 
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("fundraisers")
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+  if(error){
+    alert(
+      error.message
+    );
+    return;
+  }
+
+  await logActivity(
+    "fundraiser_deleted",
+    {
+      fundraiser_name:
+        item.name
+    }
+  );
+
+  await refreshFinance();
+
+  showToast(
+    "Fundraiser deleted"
+  );
 }
 
-function openEventGoalModal(
-  goal = null
+function openEventModal(
+  item = null
 ){
+
+  if(
+    !canEditFinance()
+  ){
+    return;
+  }
 
   document
     .getElementById(
-      "eventGoalForm"
+      "eventForm"
     )
     .reset();
 
   document
     .getElementById(
-      "eventGoalId"
+      "eventId"
     )
     .value =
-    goal?.id ||
+    item?.id ||
     "";
 
   document
     .getElementById(
-      "eventGoalModalTitle"
+      "eventModalTitle"
     )
     .textContent =
-    goal
+    item
       ? "Edit Event Goal"
       : "Add Event Goal";
 
   document
     .getElementById(
-      "eventGoalName"
+      "eventName"
     )
     .value =
-    goal?.name ||
+    item?.name ||
     "";
 
   document
     .getElementById(
-      "eventGoalTarget"
+      "eventNeeded"
     )
     .value =
-    goal?.goal ??
+    item?.amount_needed ??
     "";
 
   document
     .getElementById(
-      "eventGoalRaised"
+      "eventRaised"
     )
     .value =
-    goal?.raised ??
+    item?.amount_raised ??
     "";
 
   document
     .getElementById(
-      "eventGoalNote"
-    )
-    .value =
-    goal?.note ||
-    "";
-
-  document
-    .getElementById(
-      "eventGoalModal"
+      "eventModal"
     )
     .classList.add(
       "show"
     );
-
 }
 
-function closeEventGoalModal(){
+function closeEventModal(){
 
   document
     .getElementById(
-      "eventGoalModal"
+      "eventModal"
     )
     .classList.remove(
       "show"
     );
-
 }
 
-function editEventGoal(id){
+function editEvent(id){
 
-  const goal =
+  const item =
     eventGoals.find(
-      item =>
-        item.id === id
+      event =>
+        event.id === id
     );
 
-  if(goal){
-
-    openEventGoalModal(
-      goal
+  if(item){
+    openEventModal(
+      item
     );
+  }
+}
 
+async function deleteEvent(id){
+
+  if(
+    !canManageFinance()
+  ){
+    return;
   }
 
-}
-
-function deleteEventGoal(id){
-
-  const goal =
+  const item =
     eventGoals.find(
-      item =>
-        item.id === id
+      event =>
+        event.id === id
     );
 
   if(
-    goal &&
-    confirm(
-      `Delete "${goal.name}"?`
+    !item ||
+    !confirm(
+      `Delete "${item.name}"?`
     )
   ){
-
-    eventGoals =
-      eventGoals.filter(
-        item =>
-          item.id !== id
-      );
-
-    save(
-      "Event goal deleted"
-    );
-
+    return;
   }
 
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("event_goals")
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+  if(error){
+    alert(
+      error.message
+    );
+    return;
+  }
+
+  await logActivity(
+    "event_goal_deleted",
+    {
+      event_name:
+        item.name
+    }
+  );
+
+  await refreshFinance();
+
+  showToast(
+    "Event goal deleted"
+  );
 }
 
-function showToast(message){
+async function refreshFinance(){
 
-  const toast =
-    document.getElementById(
-      "toast"
-    );
+  const [
+    budgetResult,
+    fundResult,
+    eventResult
+  ] =
+    await Promise.all([
 
-  toast.textContent =
-    message;
+      supabaseClient
+        .from("budget_plans")
+        .select("*")
+        .eq(
+          "club_id",
+          clubId
+        )
+        .maybeSingle(),
 
-  toast.classList.add(
-    "show"
-  );
+      supabaseClient
+        .from("fundraisers")
+        .select("*")
+        .eq(
+          "club_id",
+          clubId
+        )
+        .order(
+          "event_date",
+          {
+            ascending:false,
+            nullsFirst:false
+          }
+        ),
 
-  clearTimeout(
-    showToast.timer
-  );
+      supabaseClient
+        .from("event_goals")
+        .select("*")
+        .eq(
+          "club_id",
+          clubId
+        )
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        )
 
-  showToast.timer =
-    setTimeout(
-      () => {
+    ]);
 
-        toast.classList.remove(
-          "show"
-        );
+  budget =
+    budgetResult.data ||
+    {
+      starting_balance:0,
+      revenue_goal:0,
+      profit_goal:0,
+      max_cost:0
+    };
 
-      },
-      1800
-    );
+  fundraisers =
+    fundResult.data ||
+    [];
 
+  eventGoals =
+    eventResult.data ||
+    [];
+
+  renderAll();
 }
 
-function downloadFile(
-  filename,
-  text,
-  type
-){
+async function uploadClubLogo(file){
 
-  const blob =
-    new Blob(
-      [text],
-      {
-        type
-      }
+  if(!file){
+    return club.logo_url;
+  }
+
+  const safeName =
+    file.name.replace(
+      /[^a-zA-Z0-9._-]/g,
+      "-"
     );
 
-  const url =
-    URL.createObjectURL(
-      blob
-    );
+  const path =
+    `${clubId}/${Date.now()}-${safeName}`;
 
-  const link =
-    document.createElement(
-      "a"
-    );
+  const {
+    error
+  } =
+    await supabaseClient
+      .storage
+      .from(
+        "club-logos"
+      )
+      .upload(
+        path,
+        file
+      );
 
-  link.href =
-    url;
+  if(error){
+    throw error;
+  }
 
-  link.download =
-    filename;
+  const {
+    data
+  } =
+    supabaseClient
+      .storage
+      .from(
+        "club-logos"
+      )
+      .getPublicUrl(
+        path
+      );
 
-  document.body.appendChild(
-    link
-  );
-
-  link.click();
-
-  link.remove();
-
-  setTimeout(
-    () =>
-      URL.revokeObjectURL(
-        url
-      ),
-    500
-  );
-
+  return data.publicUrl;
 }
 
 document
@@ -4001,12 +4663,12 @@ document
 
       button.addEventListener(
         "click",
-        () =>
+        () => {
           switchPage(
             button.dataset.page
-          )
+          );
+        }
       );
-
     }
   );
 
@@ -4025,7 +4687,6 @@ document
         .classList.toggle(
           "open"
         );
-
     }
   );
 
@@ -4035,13 +4696,20 @@ document
   )
   .addEventListener(
     "submit",
-    event => {
+    async event => {
 
       event.preventDefault();
 
-      state.budget = {
+      if(
+        !canEditFinance()
+      ){
+        return;
+      }
 
-        startingBalance:
+      const values = {
+        club_id:clubId,
+
+        starting_balance:
           num(
             document
               .getElementById(
@@ -4050,7 +4718,7 @@ document
               .value
           ),
 
-        revenueGoal:
+        revenue_goal:
           num(
             document
               .getElementById(
@@ -4059,7 +4727,7 @@ document
               .value
           ),
 
-        profitGoal:
+        profit_goal:
           num(
             document
               .getElementById(
@@ -4068,21 +4736,51 @@ document
               .value
           ),
 
-        costLimit:
+        max_cost:
           num(
             document
               .getElementById(
                 "costLimit"
               )
               .value
-          )
+          ),
 
+        updated_at:
+          new Date()
+            .toISOString()
       };
 
-      save(
-        "Budget plan saved"
+      const {
+        error
+      } =
+        await supabaseClient
+          .from(
+            "budget_plans"
+          )
+          .upsert(
+            values,
+            {
+              onConflict:
+                "club_id"
+            }
+          );
+
+      if(error){
+        alert(
+          error.message
+        );
+        return;
+      }
+
+      await logActivity(
+        "budget_updated"
       );
 
+      await refreshFinance();
+
+      showToast(
+        "Budget saved"
+      );
     }
   );
 
@@ -4092,9 +4790,15 @@ document
   )
   .addEventListener(
     "submit",
-    event => {
+    async event => {
 
       event.preventDefault();
+
+      if(
+        !canEditFinance()
+      ){
+        return;
+      }
 
       const id =
         document
@@ -4103,11 +4807,9 @@ document
           )
           .value;
 
-      const fundraiser = {
+      const values = {
 
-        id:
-          id ||
-          uid("f"),
+        club_id:clubId,
 
         name:
           document
@@ -4126,7 +4828,7 @@ document
               .value
           ),
 
-        raised:
+        amount_raised:
           num(
             document
               .getElementById(
@@ -4144,171 +4846,477 @@ document
               .value
           ),
 
+        event_date:
+          document
+            .getElementById(
+              "fundraiserEventDate"
+            )
+            .value,
+
         deadline:
           document
             .getElementById(
               "fundraiserDeadline"
             )
-            .value,
+            .value ||
+          null,
 
         status:
           document
             .getElementById(
               "fundraiserStatus"
             )
-            .value
+            .value,
 
+        updated_at:
+          new Date()
+            .toISOString()
       };
 
-      if(
-        !fundraiser.name
-      ){
-        return;
-      }
+      let error;
 
       if(id){
 
-        const index =
-          state.fundraisers
-            .findIndex(
-              item =>
-                item.id === id
-            );
-
-        if(
-          index !== -1
-        ){
-
-          state.fundraisers[
-            index
-          ] =
-            fundraiser;
-
-        }
+        ({
+          error
+        } =
+          await supabaseClient
+            .from(
+              "fundraisers"
+            )
+            .update(
+              values
+            )
+            .eq(
+              "id",
+              id
+            ));
 
       }
       else{
 
-        state.fundraisers.push(
-          fundraiser
-        );
+        ({
+          error
+        } =
+          await supabaseClient
+            .from(
+              "fundraisers"
+            )
+            .insert(
+              values
+            ));
 
       }
 
+      if(error){
+        alert(
+          error.message
+        );
+        return;
+      }
+
+      await logActivity(
+        id
+          ? "fundraiser_updated"
+          : "fundraiser_created",
+        {
+          fundraiser_name:
+            values.name
+        }
+      );
+
       closeFundraiserModal();
 
-      save(
+      await refreshFinance();
+
+      showToast(
         id
           ? "Fundraiser updated"
           : "Fundraiser added"
       );
-
     }
   );
 
 document
   .getElementById(
-    "eventGoalForm"
+    "eventForm"
   )
   .addEventListener(
     "submit",
-    event => {
+    async event => {
 
       event.preventDefault();
 
-      const id =
-        document
-          .getElementById(
-            "eventGoalId"
-          )
-          .value;
-
-      const goal = {
-
-        id:
-          id ||
-          uid("goal"),
-
-        name:
-          document
-            .getElementById(
-              "eventGoalName"
-            )
-            .value
-            .trim(),
-
-        goal:
-          num(
-            document
-              .getElementById(
-                "eventGoalTarget"
-              )
-              .value
-          ),
-
-        raised:
-          num(
-            document
-              .getElementById(
-                "eventGoalRaised"
-              )
-              .value
-          ),
-
-        note:
-          document
-            .getElementById(
-              "eventGoalNote"
-            )
-            .value
-            .trim()
-
-      };
-
       if(
-        !goal.name
+        !canEditFinance()
       ){
         return;
       }
 
+      const id =
+        document
+          .getElementById(
+            "eventId"
+          )
+          .value;
+
+      const values = {
+
+        club_id:clubId,
+
+        name:
+          document
+            .getElementById(
+              "eventName"
+            )
+            .value
+            .trim(),
+
+        amount_needed:
+          num(
+            document
+              .getElementById(
+                "eventNeeded"
+              )
+              .value
+          ),
+
+        amount_raised:
+          num(
+            document
+              .getElementById(
+                "eventRaised"
+              )
+              .value
+          ),
+
+        updated_at:
+          new Date()
+            .toISOString()
+      };
+
+      let error;
+
       if(id){
 
-        const index =
-          eventGoals
-            .findIndex(
-              item =>
-                item.id === id
-            );
-
-        if(
-          index !== -1
-        ){
-
-          eventGoals[
-            index
-          ] =
-            goal;
-
-        }
+        ({
+          error
+        } =
+          await supabaseClient
+            .from(
+              "event_goals"
+            )
+            .update(
+              values
+            )
+            .eq(
+              "id",
+              id
+            ));
 
       }
       else{
 
-        eventGoals.push(
-          goal
-        );
+        ({
+          error
+        } =
+          await supabaseClient
+            .from(
+              "event_goals"
+            )
+            .insert(
+              values
+            ));
 
       }
 
-      closeEventGoalModal();
+      if(error){
+        alert(
+          error.message
+        );
+        return;
+      }
 
-      save(
+      await logActivity(
+        id
+          ? "event_goal_updated"
+          : "event_goal_created",
+        {
+          event_name:
+            values.name
+        }
+      );
+
+      closeEventModal();
+
+      await refreshFinance();
+
+      showToast(
         id
           ? "Event goal updated"
           : "Event goal added"
       );
-
     }
+  );
+
+document
+  .getElementById(
+    "clubProfileForm"
+  )
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+      if(
+        !isOwner()
+      ){
+        return;
+      }
+
+      try{
+
+        const logoFile =
+          document
+            .getElementById(
+              "clubLogoInput"
+            )
+            .files?.[0];
+
+        const logoUrl =
+          await uploadClubLogo(
+            logoFile
+          );
+
+        const updates = {
+
+          name:
+            document
+              .getElementById(
+                "clubNameInput"
+              )
+              .value
+              .trim(),
+
+          sponsor_name:
+            document
+              .getElementById(
+                "sponsorNameInput"
+              )
+              .value
+              .trim() ||
+            null,
+
+          school_name:
+            document
+              .getElementById(
+                "schoolNameInput"
+              )
+              .value
+              .trim() ||
+            null,
+
+          logo_url:
+            logoUrl ||
+            null
+        };
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from("clubs")
+            .update(
+              updates
+            )
+            .eq(
+              "id",
+              clubId
+            );
+
+        if(error){
+          throw error;
+        }
+
+        club = {
+          ...club,
+          ...updates
+        };
+
+        sessionStorage.setItem(
+          "selectedClubName",
+          club.name
+        );
+
+        await logActivity(
+          "club_profile_updated"
+        );
+
+        updateBrand();
+
+        showToast(
+          "Club profile saved"
+        );
+
+      }
+      catch(error){
+
+        alert(
+          error.message
+        );
+      }
+    }
+  );
+
+document
+  .getElementById(
+    "copyInviteButton"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      try{
+
+        await navigator
+          .clipboard
+          .writeText(
+            club.invite_code
+          );
+
+        showToast(
+          "Invite code copied"
+        );
+
+      }
+      catch{
+
+        alert(
+          "Invite code: " +
+          club.invite_code
+        );
+      }
+    }
+  );
+
+document
+  .getElementById(
+    "archiveClubButton"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      if(
+        !isOwner()
+      ){
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          `Archive "${club.name}"? You can keep its financial history instead of permanently deleting it.`
+        );
+
+      if(
+        !confirmed
+      ){
+        return;
+      }
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from("clubs")
+          .update({
+            archived_at:
+              new Date()
+                .toISOString()
+          })
+          .eq(
+            "id",
+            clubId
+          );
+
+      if(error){
+        alert(
+          error.message
+        );
+        return;
+      }
+
+      sessionStorage.removeItem(
+        "selectedClubId"
+      );
+
+      window.location.replace(
+        "clubs.html"
+      );
+    }
+  );
+
+document
+  .getElementById(
+    "deleteClubButton"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      if(
+        !isOwner()
+      ){
+        return;
+      }
+
+      const typed =
+        prompt(
+          `This permanently deletes the club and its financial data.\n\nType "${club.name}" to continue.`
+        );
+
+      if(
+        typed !==
+        club.name
+      ){
+        return;
+      }
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .rpc(
+            "delete_club",
+            {
+              check_club_id:
+                clubId
+            }
+          );
+
+      if(error){
+        alert(
+          error.message
+        );
+        return;
+      }
+
+      sessionStorage.clear();
+
+      window.location.replace(
+        "clubs.html"
+      );
+    }
+  );
+
+document
+  .getElementById(
+    "yearSelect"
+  )
+  .addEventListener(
+    "change",
+    renderYearProgress
   );
 
 document
@@ -4331,69 +5339,6 @@ document
 
 document
   .getElementById(
-    "fundraiserModal"
-  )
-  .addEventListener(
-    "click",
-    event => {
-
-      if(
-        event.target ===
-        document.getElementById(
-          "fundraiserModal"
-        )
-      ){
-
-        closeFundraiserModal();
-
-      }
-
-    }
-  );
-
-document
-  .getElementById(
-    "eventGoalModal"
-  )
-  .addEventListener(
-    "click",
-    event => {
-
-      if(
-        event.target ===
-        document.getElementById(
-          "eventGoalModal"
-        )
-      ){
-
-        closeEventGoalModal();
-
-      }
-
-    }
-  );
-
-document
-  .addEventListener(
-    "keydown",
-    event => {
-
-      if(
-        event.key ===
-        "Escape"
-      ){
-
-        closeFundraiserModal();
-
-        closeEventGoalModal();
-
-      }
-
-    }
-  );
-
-document
-  .getElementById(
     "exportCsvBtn"
   )
   .addEventListener(
@@ -4404,25 +5349,30 @@ document
 
         [
           "Fundraiser",
+          "Fundraiser Date",
           "Goal",
           "Amount Raised",
           "Costs",
           "Profit",
-          "Deadline",
           "Status"
         ],
 
-        ...state.fundraisers.map(
+        ...fundraisers.map(
           item => [
 
             item.name,
+
+            fundraiserDate(
+              item
+            ) ||
+            "",
 
             num(
               item.goal
             ),
 
             num(
-              item.raised
+              item.amount_raised
             ),
 
             num(
@@ -4430,268 +5380,110 @@ document
             ),
 
             num(
-              item.raised
+              item.amount_raised
             ) -
             num(
               item.costs
             ),
 
-            item.deadline ||
-            "",
-
             item.status
 
           ]
         )
-
       ];
 
       const csv =
-        rows
-          .map(
-            row =>
-              row
-                .map(
-                  cell =>
-                    `"${String(cell)
-                      .replaceAll(
-                        '"',
-                        '""'
-                      )}"`
-                )
-                .join(",")
-          )
-          .join("\n");
+        rows.map(
+          row =>
+            row.map(
+              cell =>
+                `"${String(cell)
+                  .replaceAll(
+                    '"',
+                    '""'
+                  )}"`
+            ).join(",")
+        ).join("\n");
 
-      downloadFile(
-        "treasurery-report.csv",
-        csv,
-        "text/csv"
-      );
-
-      showToast(
-        "CSV exported"
-      );
-
-    }
-  );
-
-document
-  .getElementById(
-    "restoreSampleBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      if(
-        confirm(
-          "Replace your current data with the built-in sample data?"
-        )
-      ){
-
-        state =
-          clone(
-            SAMPLE_STATE
-          );
-
-        eventGoals =
-          clone(
-            SAMPLE_EVENTS
-          );
-
-        save(
-          "Sample data restored"
-        );
-
-        switchPage(
-          "dashboard"
-        );
-
-      }
-
-    }
-  );
-
-document
-  .getElementById(
-    "downloadBackupBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      downloadFile(
-        "treasurery-backup.json",
-        JSON.stringify(
+      const blob =
+        new Blob(
+          [csv],
           {
-            state,
-            eventGoals
-          },
-          null,
-          2
-        ),
-        "application/json"
-      );
-
-      showToast(
-        "Backup downloaded"
-      );
-
-    }
-  );
-
-document
-  .getElementById(
-    "importBackupBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById(
-          "backupFile"
-        )
-        .click();
-
-    }
-  );
-
-document
-  .getElementById(
-    "backupFile"
-  )
-  .addEventListener(
-    "change",
-    async event => {
-
-      const file =
-        event.target
-          .files?.[0];
-
-      if(!file){
-        return;
-      }
-
-      try{
-
-        const parsed =
-          JSON.parse(
-            await file.text()
-          );
-
-        if(
-          !parsed.state ||
-          !parsed.state.budget ||
-          !Array.isArray(
-            parsed.state.fundraisers
-          ) ||
-          !Array.isArray(
-            parsed.eventGoals
-          )
-        ){
-
-          throw new Error(
-            "Invalid backup"
-          );
-
-        }
-
-        if(
-          confirm(
-            "Replace current data with this backup?"
-          )
-        ){
-
-          state =
-            parsed.state;
-
-          eventGoals =
-            parsed.eventGoals;
-
-          save(
-            "Backup imported"
-          );
-
-        }
-
-      }
-      catch{
-
-        alert(
-          "That file does not look like a valid Treasurery backup."
+            type:"text/csv"
+          }
         );
 
-      }
+      const url =
+        URL.createObjectURL(
+          blob
+        );
 
-      event.target.value =
-        "";
+      const link =
+        document.createElement(
+          "a"
+        );
 
+      link.href =
+        url;
+
+      link.download =
+        `${club.name.replace(/\s+/g,"-")}-Treasurery-report.csv`;
+
+      link.click();
+
+      URL.revokeObjectURL(
+        url
+      );
     }
   );
 
 document
   .getElementById(
-    "clearDataBtn"
+    "fundraiserModal"
   )
   .addEventListener(
     "click",
-    () => {
+    event => {
 
       if(
-        confirm(
-          "Clear ALL Treasurery data from this browser?"
-        ) &&
-        confirm(
-          "Are you sure? This cannot be undone."
-        )
+        event.target.id ===
+        "fundraiserModal"
       ){
-
-        state = {
-
-          budget:{
-            startingBalance:0,
-            revenueGoal:0,
-            profitGoal:0,
-            costLimit:0
-          },
-
-          fundraisers:[]
-
-        };
-
-        eventGoals =
-          [];
-
-        save(
-          "All data cleared"
-        );
-
-        switchPage(
-          "dashboard"
-        );
-
+        closeFundraiserModal();
       }
-
     }
   );
 
-const selectedClub =
-  sessionStorage.getItem(
-    "selectedClubName"
+document
+  .getElementById(
+    "eventModal"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "eventModal"
+      ){
+        closeEventModal();
+      }
+    }
   );
 
-if(selectedClub){
+document.addEventListener(
+  "keydown",
+  event => {
 
-  document
-    .getElementById(
-      "clubLabel"
-    )
-    .textContent =
-    selectedClub;
-
-}
+    if(
+      event.key ===
+      "Escape"
+    ){
+      closeFundraiserModal();
+      closeEventModal();
+    }
+  }
+);
 
 window.switchPage =
   switchPage;
@@ -4708,21 +5500,19 @@ window.editFundraiser =
 window.deleteFundraiser =
   deleteFundraiser;
 
-window.openEventGoalModal =
-  openEventGoalModal;
+window.openEventModal =
+  openEventModal;
 
-window.closeEventGoalModal =
-  closeEventGoalModal;
+window.closeEventModal =
+  closeEventModal;
 
-window.editEventGoal =
-  editEventGoal;
+window.editEvent =
+  editEvent;
 
-window.deleteEventGoal =
-  deleteEventGoal;
+window.deleteEvent =
+  deleteEvent;
 
-renderAll();
-
-})();
+initialize();
 </script>
 
 </body>
