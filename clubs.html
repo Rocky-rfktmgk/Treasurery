@@ -2,607 +2,534 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Treasurery | Your Clubs</title>
-
-  <style>
-    :root{
-      --bg:#f6f8fb;
-      --card:#ffffff;
-      --text:#162033;
-      --muted:#718096;
-      --border:#e4e9f0;
-
-      --blue:#4f7df3;
-      --blue-dark:#3e68d6;
-      --blue-soft:#edf3ff;
-
-      --green:#2fa36b;
-      --green-soft:#eaf8f0;
-
-      --red:#df5a63;
-      --red-soft:#fff0f1;
-
-      --sidebar:#0d1220;
-
-      --shadow:0 10px 30px rgba(20,30,50,.07);
-    }
-
-    *{
-      box-sizing:border-box;
-    }
-
-    body{
-      margin:0;
-
-      min-height:100vh;
-
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-      background:var(--bg);
-      color:var(--text);
-    }
-
-    button,
-    input{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    .topbar{
-      height:70px;
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:20px;
-
-      padding:0 28px;
-
-      background:white;
-
-      border-bottom:1px solid var(--border);
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-
-      gap:10px;
-
-      font-weight:900;
-    }
-
-    .logo{
-      width:38px;
-      height:38px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:11px;
-
-      background:var(--blue);
-      color:white;
-
-      font-weight:900;
-    }
-
-    .user-area{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .user-name{
-      color:var(--muted);
-
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .logout{
-      border:1px solid var(--border);
-
-      padding:8px 12px;
-
-      border-radius:8px;
-
-      background:white;
-      color:var(--text);
-
-      font-size:11px;
-      font-weight:800;
-    }
-
-    .main{
-      width:min(1100px,100%);
-
-      margin:0 auto;
-
-      padding:42px 24px 70px;
-    }
-
-    .page-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-
-      gap:20px;
-
-      margin-bottom:28px;
-    }
-
-    .page-head h1{
-      margin:0 0 6px;
-
-      font-size:30px;
-    }
-
-    .page-head p{
-      margin:0;
-
-      color:var(--muted);
-
-      font-size:13px;
-    }
-
-    .head-actions{
-      display:flex;
-
-      gap:9px;
-
-      flex-wrap:wrap;
-    }
-
-    .primary,
-    .secondary{
-      border:0;
-
-      padding:10px 14px;
-
-      border-radius:9px;
-
-      font-size:12px;
-      font-weight:850;
-    }
-
-    .primary{
-      color:white;
-      background:var(--blue);
-    }
-
-    .primary:hover{
-      background:var(--blue-dark);
-    }
-
-    .secondary{
-      color:var(--text);
-      background:#edf0f5;
-    }
-
-    .club-grid{
-      display:grid;
-
-      grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
-      gap:16px;
-    }
-
-    .club-card{
-      min-height:260px;
-
-      display:flex;
-      flex-direction:column;
-
-      padding:20px;
-
-      border:1px solid var(--border);
-      border-radius:16px;
-
-      background:var(--card);
-
-      box-shadow:var(--shadow);
-    }
-
-    .club-top{
-      display:flex;
-      align-items:flex-start;
-
-      gap:13px;
-    }
-
-    .club-logo{
-      width:48px;
-      height:48px;
-
-      flex:none;
-
-      display:grid;
-      place-items:center;
-
-      overflow:hidden;
-
-      border-radius:13px;
-
-      background:var(--blue-soft);
-      color:var(--blue);
-
-      font-size:18px;
-      font-weight:900;
-    }
-
-    .club-logo img{
-      width:100%;
-      height:100%;
-
-      object-fit:cover;
-    }
-
-    .club-title{
-      min-width:0;
-      flex:1;
-    }
-
-    .club-title h2{
-      margin:1px 0 5px;
-
-      font-size:16px;
-
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .role{
-      display:inline-block;
-
-      padding:5px 8px;
-
-      border-radius:999px;
-
-      color:var(--blue);
-      background:var(--blue-soft);
-
-      font-size:9px;
-      font-weight:900;
-    }
-
-    .club-info{
-      display:grid;
-
-      gap:8px;
-
-      margin:20px 0;
-    }
-
-    .info-row{
-      display:flex;
-      justify-content:space-between;
-
-      gap:14px;
-
-      padding-bottom:8px;
-
-      border-bottom:1px solid #f0f2f6;
-
-      font-size:11px;
-    }
-
-    .info-row span{
-      color:var(--muted);
-    }
-
-    .info-row strong{
-      text-align:right;
-    }
-
-    .club-actions{
-      margin-top:auto;
-
-      display:flex;
-
-      gap:8px;
-    }
-
-    .club-actions button{
-      flex:1;
-    }
-
-    .open-btn{
-      border:0;
-
-      padding:10px;
-
-      border-radius:9px;
-
-      background:var(--blue);
-      color:white;
-
-      font-size:11px;
-      font-weight:900;
-    }
-
-    .copy-btn{
-      border:1px solid var(--border);
-
-      padding:10px;
-
-      border-radius:9px;
-
-      background:white;
-      color:var(--text);
-
-      font-size:11px;
-      font-weight:800;
-    }
-
-    .empty{
-      grid-column:1/-1;
-
-      padding:60px 25px;
-
-      border:1px dashed #cfd6df;
-      border-radius:16px;
-
-      text-align:center;
-
-      background:white;
-    }
-
-    .empty h2{
-      margin:0 0 8px;
-
-      font-size:18px;
-    }
-
-    .empty p{
-      margin:0 0 18px;
-
-      color:var(--muted);
-
-      font-size:12px;
-    }
-
-    .loading{
-      padding:50px;
-
-      color:var(--muted);
-
-      text-align:center;
-
-      font-size:12px;
-    }
-
-    .modal-backdrop{
-      position:fixed;
-
-      inset:0;
-
-      display:none;
-      align-items:center;
-      justify-content:center;
-
-      padding:20px;
-
-      background:rgba(5,10,18,.62);
-
-      z-index:100;
-    }
-
-    .modal-backdrop.show{
-      display:flex;
-    }
-
-    .modal{
-      width:min(480px,100%);
-
-      max-height:90vh;
-
-      overflow:auto;
-
-      padding:24px;
-
-      border-radius:17px;
-
-      background:white;
-
-      box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.25);
-    }
-
-    .modal-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:12px;
-
-      margin-bottom:20px;
-    }
-
-    .modal-head h2{
-      margin:0;
-
-      font-size:19px;
-    }
-
-    .close{
-      width:32px;
-      height:32px;
-
-      border:0;
-
-      border-radius:8px;
-
-      background:#f0f2f5;
-
-      font-size:18px;
-    }
-
-    .field{
-      margin-bottom:15px;
-    }
-
-    .field label{
-      display:block;
-
-      margin-bottom:7px;
-
-      font-size:11px;
-      font-weight:850;
-    }
-
-    .field input{
-      width:100%;
-
-      padding:11px 12px;
-
-      border:1px solid var(--border);
-      border-radius:9px;
-
-      outline:none;
-    }
-
-    .field input:focus{
-      border-color:var(--blue);
-
-      box-shadow:
-        0 0 0 3px
-        rgba(79,125,243,.08);
-    }
-
-    .field-help{
-      margin-top:5px;
-
-      color:var(--muted);
-
-      font-size:9px;
-      line-height:1.5;
-    }
-
-    .modal-actions{
-      display:flex;
-      justify-content:flex-end;
-
-      gap:8px;
-
-      margin-top:20px;
-    }
-
-    .message{
-      display:none;
-
-      margin-bottom:17px;
-      padding:11px 13px;
-
-      border-radius:9px;
-
-      font-size:11px;
-      line-height:1.5;
-    }
-
-    .message.show{
-      display:block;
-    }
-
-    .message.error{
-      color:#9b343b;
-      background:var(--red-soft);
-    }
-
-    .message.success{
-      color:#226246;
-      background:var(--green-soft);
-    }
-
-    .toast{
-      position:fixed;
-
-      right:20px;
-      bottom:20px;
-
-      opacity:0;
-
-      transform:translateY(10px);
-
-      pointer-events:none;
-
-      padding:11px 14px;
-
-      border-radius:10px;
-
-      background:#111827;
-      color:white;
-
-      font-size:11px;
-
-      transition:.2s;
-
-      z-index:200;
-    }
-
-    .toast.show{
-      opacity:1;
-
-      transform:translateY(0);
-    }
-
-    @media(max-width:900px){
-      .club-grid{
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-      }
-    }
-
-    @media(max-width:620px){
-      .topbar{
-        padding:0 16px;
-      }
-
-      .user-name{
-        display:none;
-      }
-
-      .main{
-        padding:28px 16px 60px;
-      }
-
-      .page-head{
-        flex-direction:column;
-      }
-
-      .head-actions{
-        width:100%;
-      }
-
-      .head-actions button{
-        flex:1;
-      }
-
-      .club-grid{
-        grid-template-columns:1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Treasurery | Your Clubs</title>
+
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --text:#162033;
+  --muted:#718096;
+  --border:#e4e9f0;
+  --blue:#4f7df3;
+  --blue-dark:#3e68d6;
+  --blue-soft:#edf3ff;
+  --green:#2fa36b;
+  --green-soft:#eaf8f0;
+  --red:#df5a63;
+  --red-soft:#fff0f1;
+  --shadow:0 10px 30px rgba(20,30,50,.07);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.topbar{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:0 28px;
+  background:white;
+  border-bottom:1px solid var(--border);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.logo{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:var(--blue);
+  color:white;
+  font-weight:900;
+}
+
+.user-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.user-name{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+
+.logout{
+  border:1px solid var(--border);
+  padding:8px 12px;
+  border-radius:8px;
+  background:white;
+  color:var(--text);
+  font-size:11px;
+  font-weight:800;
+}
+
+.main{
+  width:min(1100px,100%);
+  margin:0 auto;
+  padding:42px 24px 70px;
+}
+
+.page-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:28px;
+}
+
+.page-head h1{
+  margin:0 0 6px;
+  font-size:30px;
+}
+
+.page-head p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.head-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.primary,
+.secondary{
+  border:0;
+  padding:10px 14px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:850;
+}
+
+.primary{
+  color:white;
+  background:var(--blue);
+}
+
+.primary:hover{
+  background:var(--blue-dark);
+}
+
+.secondary{
+  color:var(--text);
+  background:#edf0f5;
+}
+
+.club-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+
+.club-card{
+  min-height:250px;
+  display:flex;
+  flex-direction:column;
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:var(--card);
+  box-shadow:var(--shadow);
+}
+
+.club-top{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+}
+
+.club-logo{
+  width:48px;
+  height:48px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border-radius:13px;
+  background:var(--blue-soft);
+  color:var(--blue);
+  font-size:18px;
+  font-weight:900;
+}
+
+.club-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.club-title{
+  min-width:0;
+  flex:1;
+}
+
+.club-title h2{
+  margin:1px 0 5px;
+  font-size:16px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.role{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:999px;
+  color:var(--blue);
+  background:var(--blue-soft);
+  font-size:9px;
+  font-weight:900;
+}
+
+.club-info{
+  display:grid;
+  gap:8px;
+  margin:20px 0;
+}
+
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding-bottom:8px;
+  border-bottom:1px solid #f0f2f6;
+  font-size:11px;
+}
+
+.info-row span{
+  color:var(--muted);
+}
+
+.info-row strong{
+  text-align:right;
+}
+
+.club-actions{
+  margin-top:auto;
+  display:flex;
+  gap:8px;
+}
+
+.club-actions button{
+  flex:1;
+}
+
+.open-btn{
+  border:0;
+  padding:10px;
+  border-radius:9px;
+  background:var(--blue);
+  color:white;
+  font-size:11px;
+  font-weight:900;
+}
+
+.copy-btn{
+  border:1px solid var(--border);
+  padding:10px;
+  border-radius:9px;
+  background:white;
+  color:var(--text);
+  font-size:11px;
+  font-weight:800;
+}
+
+.archived-section{
+  margin-top:42px;
+  padding-top:28px;
+  border-top:1px solid var(--border);
+}
+
+.archived-head{
+  margin-bottom:16px;
+}
+
+.archived-head h2{
+  margin:0 0 5px;
+  font-size:20px;
+}
+
+.archived-head p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.archived-card{
+  opacity:.88;
+}
+
+.archived-badge{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#eef1f5;
+  color:#677386;
+  font-size:9px;
+  font-weight:900;
+}
+
+.restore-btn{
+  width:100%;
+  margin-top:auto;
+  border:0;
+  padding:10px;
+  border-radius:9px;
+  background:var(--green-soft);
+  color:var(--green);
+  font-size:11px;
+  font-weight:900;
+}
+
+.empty{
+  grid-column:1/-1;
+  padding:60px 25px;
+  border:1px dashed #cfd6df;
+  border-radius:16px;
+  text-align:center;
+  background:white;
+}
+
+.empty h2{
+  margin:0 0 8px;
+  font-size:18px;
+}
+
+.empty p{
+  margin:0 0 18px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.loading{
+  grid-column:1/-1;
+  padding:50px;
+  color:var(--muted);
+  text-align:center;
+  font-size:12px;
+}
+
+.message{
+  display:none;
+  margin-bottom:17px;
+  padding:11px 13px;
+  border-radius:9px;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.message.show{
+  display:block;
+}
+
+.message.error{
+  color:#9b343b;
+  background:var(--red-soft);
+}
+
+.message.success{
+  color:#226246;
+  background:var(--green-soft);
+}
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(5,10,18,.62);
+  z-index:100;
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:min(480px,100%);
+  max-height:90vh;
+  overflow:auto;
+  padding:24px;
+  border-radius:17px;
+  background:white;
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.25);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.modal-head h2{
+  margin:0;
+  font-size:19px;
+}
+
+.close{
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:8px;
+  background:#f0f2f5;
+  font-size:18px;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:7px;
+  font-size:11px;
+  font-weight:850;
+}
+
+.field input{
+  width:100%;
+  padding:11px 12px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  outline:none;
+}
+
+.field input:focus{
+  border-color:var(--blue);
+  box-shadow:
+    0 0 0 3px
+    rgba(79,125,243,.08);
+}
+
+.field-help{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:20px;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  padding:11px 14px;
+  border-radius:10px;
+  background:#111827;
+  color:white;
+  font-size:11px;
+  transition:.2s;
+  z-index:200;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:900px){
+  .club-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:620px){
+
+  .topbar{
+    padding:0 16px;
+  }
+
+  .user-name{
+    display:none;
+  }
+
+  .main{
+    padding:28px 16px 60px;
+  }
+
+  .page-head{
+    flex-direction:column;
+  }
+
+  .head-actions{
+    width:100%;
+  }
+
+  .head-actions button{
+    flex:1;
+  }
+
+  .club-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -631,6 +558,7 @@
     <button
       class="logout"
       id="logoutButton"
+      type="button"
     >
       Log Out
     </button>
@@ -660,6 +588,7 @@
       <button
         class="secondary"
         id="joinClubButton"
+        type="button"
       >
         Join Club
       </button>
@@ -667,6 +596,7 @@
       <button
         class="primary"
         id="createClubButton"
+        type="button"
       >
         + Create Club
       </button>
@@ -690,6 +620,31 @@
     </div>
 
   </div>
+
+  <section
+    class="archived-section"
+    id="archivedSection"
+    style="display:none"
+  >
+
+    <div class="archived-head">
+
+      <h2>
+        Archived Clubs
+      </h2>
+
+      <p>
+        Restore a club when you need to use it again.
+      </p>
+
+    </div>
+
+    <div
+      class="club-grid"
+      id="archivedGrid"
+    ></div>
+
+  </section>
 
 </main>
 
@@ -730,21 +685,6 @@
           maxlength="80"
           placeholder="Example: Senior Class"
           required
-        >
-
-      </div>
-
-      <div class="field">
-
-        <label for="schoolName">
-          School / Organization
-        </label>
-
-        <input
-          id="schoolName"
-          type="text"
-          maxlength="100"
-          placeholder="Optional"
         >
 
       </div>
@@ -909,13 +849,17 @@ const roleNames = {
   president:"President",
   vice_president:"Vice President",
   secretary:"Secretary",
-  other_officer:"Other Officer"
+  historian:"Historian",
+  custom:"Custom Position",
+  unassigned:"Position Not Assigned",
+  other_officer:"Position Not Assigned"
 };
 
 function showMessage(
   text,
   type = "error"
 ){
+
   const box =
     document.getElementById(
       "pageMessage"
@@ -930,6 +874,7 @@ function showMessage(
 }
 
 function clearMessage(){
+
   const box =
     document.getElementById(
       "pageMessage"
@@ -943,6 +888,7 @@ function clearMessage(){
 }
 
 function showToast(text){
+
   const toast =
     document.getElementById(
       "toast"
@@ -962,15 +908,18 @@ function showToast(text){
   showToast.timer =
     setTimeout(
       () => {
+
         toast.classList.remove(
           "show"
         );
+
       },
       1700
     );
 }
 
 function escapeHtml(value){
+
   const div =
     document.createElement(
       "div"
@@ -983,7 +932,11 @@ function escapeHtml(value){
 }
 
 function initials(name){
-  return String(name || "T")
+
+  return String(
+    name ||
+    "T"
+  )
     .trim()
     .split(/\s+/)
     .slice(0,2)
@@ -995,12 +948,36 @@ function initials(name){
     .join("");
 }
 
+function memberPositionLabel(
+  membership
+){
+
+  if(
+    membership?.role ===
+    "custom"
+  ){
+
+    return (
+      membership.custom_role_name ||
+      "Custom Position"
+    );
+  }
+
+  return (
+    roleNames[
+      membership?.role
+    ] ||
+    "Position Not Assigned"
+  );
+}
+
 function setButtonLoading(
   button,
   loading,
   normalText,
   loadingText
 ){
+
   button.disabled =
     loading;
 
@@ -1044,8 +1021,12 @@ async function loadUserName(){
     data
   } =
     await supabaseClient
-      .from("profiles")
-      .select("full_name")
+      .from(
+        "profiles"
+      )
+      .select(
+        "full_name"
+      )
       .eq(
         "id",
         currentUser.id
@@ -1054,7 +1035,9 @@ async function loadUserName(){
 
   const name =
     data?.full_name ||
-    currentUser.user_metadata?.full_name ||
+    currentUser
+      .user_metadata
+      ?.full_name ||
     currentUser.email ||
     "Officer";
 
@@ -1066,6 +1049,252 @@ async function loadUserName(){
     name;
 }
 
+function activeClubCardHtml(
+  membership
+){
+
+  const club =
+    membership.clubs;
+
+  const role =
+    membership.is_owner
+      ? "Owner"
+      : memberPositionLabel(
+          membership
+        );
+
+  const logo =
+    club.logo_url
+      ? `
+        <img
+          src="${escapeHtml(club.logo_url)}"
+          alt=""
+        >
+      `
+      : initials(
+          club.name
+        );
+
+  return `
+    <article class="club-card">
+
+      <div class="club-top">
+
+        <div class="club-logo">
+          ${logo}
+        </div>
+
+        <div class="club-title">
+
+          <h2>
+            ${escapeHtml(club.name)}
+          </h2>
+
+          <span class="role">
+            ${escapeHtml(role)}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="club-info">
+
+        <div class="info-row">
+
+          <span>
+            Sponsor
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              club.sponsor_name ||
+              "Not set"
+            )}
+          </strong>
+
+        </div>
+
+        <div class="info-row">
+
+          <span>
+            Invite code
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              club.invite_code
+            )}
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="club-actions">
+
+        <button
+          class="copy-btn"
+          type="button"
+          onclick="copyInviteCode(
+            '${club.invite_code}'
+          )"
+        >
+          Copy Code
+        </button>
+
+        <button
+          class="open-btn"
+          type="button"
+          onclick="openWorkspace(
+            '${club.id}',
+            '${membership.role}',
+            ${membership.is_owner}
+          )"
+        >
+          Open Workspace
+        </button>
+
+      </div>
+
+    </article>
+  `;
+}
+
+function archivedClubCardHtml(
+  membership
+){
+
+  const club =
+    membership.clubs;
+
+  const role =
+    membership.is_owner
+      ? "Owner"
+      : memberPositionLabel(
+          membership
+        );
+
+  const logo =
+    club.logo_url
+      ? `
+        <img
+          src="${escapeHtml(club.logo_url)}"
+          alt=""
+        >
+      `
+      : initials(
+          club.name
+        );
+
+  const archivedDate =
+    club.archived_at
+      ? new Date(
+          club.archived_at
+        )
+          .toLocaleDateString(
+            "en-US",
+            {
+              month:"short",
+              day:"numeric",
+              year:"numeric"
+            }
+          )
+      : "";
+
+  return `
+    <article
+      class="club-card archived-card"
+    >
+
+      <div class="club-top">
+
+        <div class="club-logo">
+          ${logo}
+        </div>
+
+        <div class="club-title">
+
+          <h2>
+            ${escapeHtml(club.name)}
+          </h2>
+
+          <span class="role">
+            ${escapeHtml(role)}
+          </span>
+
+        </div>
+
+        <span class="archived-badge">
+          Archived
+        </span>
+
+      </div>
+
+      <div class="club-info">
+
+        <div class="info-row">
+
+          <span>
+            Sponsor
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              club.sponsor_name ||
+              "Not set"
+            )}
+          </strong>
+
+        </div>
+
+        <div class="info-row">
+
+          <span>
+            Archived
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              archivedDate ||
+              "Recently"
+            )}
+          </strong>
+
+        </div>
+
+      </div>
+
+      ${
+        membership.is_owner
+          ? `
+            <button
+              class="restore-btn"
+              type="button"
+              onclick="restoreClub(
+                '${club.id}'
+              )"
+            >
+              Restore Club
+            </button>
+          `
+          : `
+            <div
+              style="
+                font-size:10px;
+                color:var(--muted);
+                margin-top:auto
+              "
+            >
+              Only the club owner can restore this club.
+            </div>
+          `
+      }
+
+    </article>
+  `;
+}
+
 async function loadClubs(){
 
   clearMessage();
@@ -1075,21 +1304,41 @@ async function loadClubs(){
       "clubGrid"
     );
 
+  const archivedSection =
+    document.getElementById(
+      "archivedSection"
+    );
+
+  const archivedGrid =
+    document.getElementById(
+      "archivedGrid"
+    );
+
   grid.innerHTML = `
     <div class="loading">
       Loading your clubs...
     </div>
   `;
 
+  archivedSection.style.display =
+    "none";
+
+  archivedGrid.innerHTML =
+    "";
+
   const {
     data,
     error
   } =
     await supabaseClient
-      .from("club_members")
+      .from(
+        "club_members"
+      )
       .select(`
         club_id,
         role,
+        custom_role_name,
+        permission_level,
         is_owner,
         clubs (
           id,
@@ -1097,7 +1346,6 @@ async function loadClubs(){
           invite_code,
           logo_url,
           sponsor_name,
-          school_name,
           archived_at
         )
       `)
@@ -1108,9 +1356,12 @@ async function loadClubs(){
 
   if(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
-    grid.innerHTML = "";
+    grid.innerHTML =
+      "";
 
     showMessage(
       "Could not load your clubs: " +
@@ -1120,23 +1371,67 @@ async function loadClubs(){
     return;
   }
 
-  const memberships =
+  const allMemberships =
     (data || [])
       .filter(
         membership =>
-          membership.clubs &&
-          !membership.clubs.archived_at
+          membership.clubs
       );
 
+  const activeMemberships =
+    allMemberships
+      .filter(
+        membership =>
+          !membership
+            .clubs
+            .archived_at
+      );
+
+  const archivedMemberships =
+    allMemberships
+      .filter(
+        membership =>
+          Boolean(
+            membership
+              .clubs
+              .archived_at
+          )
+      );
+
+  activeMemberships.sort(
+    (a,b) =>
+      String(
+        a.clubs.name
+      )
+        .localeCompare(
+          String(
+            b.clubs.name
+          )
+        )
+  );
+
+  archivedMemberships.sort(
+    (a,b) =>
+      String(
+        a.clubs.name
+      )
+        .localeCompare(
+          String(
+            b.clubs.name
+          )
+        )
+  );
+
   if(
-    memberships.length === 0
+    activeMemberships.length ===
+    0
   ){
 
     grid.innerHTML = `
       <div class="empty">
 
         <h2>
-          No clubs yet
+          No active clubs
         </h2>
 
         <p>
@@ -1145,6 +1440,7 @@ async function loadClubs(){
 
         <button
           class="primary"
+          type="button"
           onclick="openCreateModal()"
         >
           + Create Your First Club
@@ -1153,175 +1449,42 @@ async function loadClubs(){
       </div>
     `;
 
-    return;
+  }
+  else{
+
+    grid.innerHTML =
+      activeMemberships
+        .map(
+          activeClubCardHtml
+        )
+        .join("");
   }
 
-  memberships.sort(
-    (a,b) =>
-      String(a.clubs.name)
-        .localeCompare(
-          String(b.clubs.name)
+  if(
+    archivedMemberships.length
+  ){
+
+    archivedSection.style.display =
+      "block";
+
+    archivedGrid.innerHTML =
+      archivedMemberships
+        .map(
+          archivedClubCardHtml
         )
-  );
-
-  grid.innerHTML =
-    memberships
-      .map(
-        membership => {
-
-          const club =
-            membership.clubs;
-
-          const role =
-            membership.is_owner
-              ? "Owner"
-              : (
-                  roleNames[
-                    membership.role
-                  ] ||
-                  "Officer"
-                );
-
-          const logo =
-            club.logo_url
-              ? `
-                <img
-                  src="${escapeHtml(club.logo_url)}"
-                  alt=""
-                >
-              `
-              : initials(
-                  club.name
-                );
-
-          return `
-            <article class="club-card">
-
-              <div class="club-top">
-
-                <div class="club-logo">
-                  ${logo}
-                </div>
-
-                <div class="club-title">
-
-                  <h2>
-                    ${escapeHtml(club.name)}
-                  </h2>
-
-                  <span class="role">
-                    ${escapeHtml(role)}
-                  </span>
-
-                </div>
-
-              </div>
-
-              <div class="club-info">
-
-                <div class="info-row">
-
-                  <span>
-                    Sponsor
-                  </span>
-
-                  <strong>
-                    ${escapeHtml(
-                      club.sponsor_name ||
-                      "Not set"
-                    )}
-                  </strong>
-
-                </div>
-
-                <div class="info-row">
-
-                  <span>
-                    School
-                  </span>
-
-                  <strong>
-                    ${escapeHtml(
-                      club.school_name ||
-                      "Not set"
-                    )}
-                  </strong>
-
-                </div>
-
-                <div class="info-row">
-
-                  <span>
-                    Invite code
-                  </span>
-
-                  <strong>
-                    ${escapeHtml(
-                      club.invite_code
-                    )}
-                  </strong>
-
-                </div>
-
-              </div>
-
-              <div class="club-actions">
-
-                <button
-                  class="copy-btn"
-                  onclick="copyInviteCode(
-                    '${escapeHtml(
-                      club.invite_code
-                    )}'
-                  )"
-                >
-                  Copy Code
-                </button>
-
-                <button
-                  class="open-btn"
-                  onclick="openWorkspace(
-                    '${club.id}',
-                    '${encodeURIComponent(
-                      club.name
-                    )}',
-                    '${membership.role}',
-                    ${membership.is_owner}
-                  )"
-                >
-                  Open Workspace
-                </button>
-
-              </div>
-
-            </article>
-          `;
-
-        }
-      )
-      .join("");
+        .join("");
+  }
 }
 
 function openWorkspace(
   clubId,
-  encodedName,
   role,
   isOwner
 ){
 
-  const clubName =
-    decodeURIComponent(
-      encodedName
-    );
-
   sessionStorage.setItem(
     "selectedClubId",
     clubId
-  );
-
-  sessionStorage.setItem(
-    "selectedClubName",
-    clubName
   );
 
   sessionStorage.setItem(
@@ -1346,7 +1509,9 @@ async function copyInviteCode(
 
     await navigator
       .clipboard
-      .writeText(code);
+      .writeText(
+        code
+      );
 
     showToast(
       "Invite code copied"
@@ -1359,8 +1524,55 @@ async function copyInviteCode(
       "Invite code: " +
       code
     );
-
   }
+}
+
+async function restoreClub(
+  clubId
+){
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .rpc(
+        "restore_club",
+        {
+          check_club_id:
+            clubId
+        }
+      );
+
+  if(error){
+
+    showMessage(
+      "Could not restore the club: " +
+      error.message
+    );
+
+    return;
+  }
+
+  await supabaseClient
+    .from(
+      "activity_log"
+    )
+    .insert({
+      club_id:
+        clubId,
+      actor_id:
+        currentUser.id,
+      action:
+        "club_restored",
+      details:{}
+    });
+
+  showMessage(
+    "Club restored successfully.",
+    "success"
+  );
+
+  await loadClubs();
 }
 
 function openCreateModal(){
@@ -1383,11 +1595,13 @@ function openCreateModal(){
 
   setTimeout(
     () => {
+
       document
         .getElementById(
           "clubName"
         )
         .focus();
+
     },
     0
   );
@@ -1424,11 +1638,13 @@ function openJoinModal(){
 
   setTimeout(
     () => {
+
       document
         .getElementById(
           "inviteCode"
         )
         .focus();
+
     },
     0
   );
@@ -1480,7 +1696,8 @@ async function uploadClubLogo(
         filePath,
         file,
         {
-          cacheControl:"3600",
+          cacheControl:
+            "3600",
           upsert:false
         }
       );
@@ -1545,14 +1762,6 @@ document
           .value
           .trim();
 
-      const schoolName =
-        document
-          .getElementById(
-            "schoolName"
-          )
-          .value
-          .trim();
-
       const sponsorName =
         document
           .getElementById(
@@ -1570,9 +1779,10 @@ document
         null;
 
       const button =
-        document.getElementById(
-          "saveClubButton"
-        );
+        document
+          .getElementById(
+            "saveClubButton"
+          );
 
       setButtonLoading(
         button,
@@ -1591,7 +1801,8 @@ document
             .rpc(
               "create_club",
               {
-                club_name:name
+                club_name:
+                  name
               }
             );
 
@@ -1609,22 +1820,18 @@ document
               clubId,
               logoFile
             );
-
         }
 
         const updates = {};
 
-        if(schoolName){
-          updates.school_name =
-            schoolName;
-        }
-
         if(sponsorName){
+
           updates.sponsor_name =
             sponsorName;
         }
 
         if(logoUrl){
+
           updates.logo_url =
             logoUrl;
         }
@@ -1639,8 +1846,12 @@ document
             error:updateError
           } =
             await supabaseClient
-              .from("clubs")
-              .update(updates)
+              .from(
+                "clubs"
+              )
+              .update(
+                updates
+              )
               .eq(
                 "id",
                 clubId
@@ -1649,7 +1860,6 @@ document
           if(updateError){
             throw updateError;
           }
-
         }
 
         closeCreateModal();
@@ -1664,7 +1874,9 @@ document
       }
       catch(error){
 
-        console.error(error);
+        console.error(
+          error
+        );
 
         showMessage(
           "Could not create the club: " +
@@ -1680,9 +1892,7 @@ document
           "Create Club",
           "Creating..."
         );
-
       }
-
     }
   );
 
@@ -1707,9 +1917,10 @@ document
           .trim();
 
       const button =
-        document.getElementById(
-          "joinButton"
-        );
+        document
+          .getElementById(
+            "joinButton"
+          );
 
       setButtonLoading(
         button,
@@ -1754,7 +1965,6 @@ document
       );
 
       await loadClubs();
-
     }
   );
 
@@ -1788,7 +1998,6 @@ document
       window.location.replace(
         "index.html"
       );
-
     }
   );
 
@@ -1804,9 +2013,9 @@ document
         event.target.id ===
         "createModal"
       ){
+
         closeCreateModal();
       }
-
     }
   );
 
@@ -1822,9 +2031,9 @@ document
         event.target.id ===
         "joinModal"
       ){
+
         closeJoinModal();
       }
-
     }
   );
 
@@ -1839,9 +2048,7 @@ document.addEventListener(
 
       closeCreateModal();
       closeJoinModal();
-
     }
-
   }
 );
 
@@ -1863,9 +2070,11 @@ window.openWorkspace =
 window.copyInviteCode =
   copyInviteCode;
 
+window.restoreClub =
+  restoreClub;
+
 initializePage();
 </script>
 
 </body>
-
 </html>
