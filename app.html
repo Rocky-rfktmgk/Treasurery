@@ -761,7 +761,7 @@ input:disabled{
 
 .month-bars{
   display:grid;
-  grid-template-columns:repeat(12,1fr);
+  grid-template-columns:repeat(10,1fr);
   gap:8px;
   height:200px;
   align-items:end;
@@ -890,6 +890,146 @@ input:disabled{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
+}
+
+.officer-list{
+  display:grid;
+  gap:12px;
+}
+
+.officer-row{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) 190px 165px 110px;
+  gap:12px;
+  align-items:start;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#f8fafc;
+}
+
+.officer-name{
+  font-size:12px;
+  font-weight:850;
+}
+
+.officer-meta{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.owner-badge{
+  display:inline-block;
+  margin-left:6px;
+  padding:3px 6px;
+  border-radius:999px;
+  background:var(--blue-soft);
+  color:var(--blue);
+  font-size:8px;
+  font-weight:900;
+}
+
+.officer-role-select,
+.officer-permission-select,
+.custom-role-input{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:white;
+  font-size:11px;
+}
+
+.custom-role-input{
+  margin-top:8px;
+}
+
+.officer-action-stack{
+  display:grid;
+  gap:7px;
+}
+
+.save-role-btn{
+  border:0;
+  padding:9px 10px;
+  border-radius:8px;
+  background:var(--blue);
+  color:white;
+  font-size:10px;
+  font-weight:850;
+}
+
+.remove-officer-btn{
+  border:0;
+  padding:8px 10px;
+  border-radius:8px;
+  background:var(--red-soft);
+  color:var(--red);
+  font-size:9px;
+  font-weight:850;
+}
+
+.permission-note{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.4;
+}
+
+.activity-list{
+  display:grid;
+  gap:0;
+}
+
+.activity-row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.activity-row:last-child{
+  border-bottom:0;
+}
+
+.activity-main{
+  min-width:0;
+  font-size:11px;
+  line-height:1.45;
+}
+
+.activity-main strong{
+  font-weight:850;
+}
+
+.activity-time{
+  flex:none;
+  color:var(--muted);
+  font-size:9px;
+  text-align:right;
+}
+
+@media(max-width:950px){
+  .officer-row{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:620px){
+  .officer-row{
+    grid-template-columns:1fr;
+  }
+
+  .activity-row{
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .activity-time{
+    text-align:left;
+  }
 }
 
 .modal-backdrop{
@@ -1131,7 +1271,7 @@ input:disabled{
 
   <button class="nav-btn" data-page="year">
     <span class="nav-icon">↗</span>
-    Year Progress
+    School Year Progress
   </button>
 
   <button class="nav-btn" data-page="reports">
@@ -1162,10 +1302,6 @@ input:disabled{
   <div class="top-left">
     <button class="menu-btn" id="menuBtn">☰</button>
     <div class="page-name" id="pageName">Dashboard</div>
-  </div>
-
-  <div class="cloud-pill">
-    ● Saved to Supabase
   </div>
 
 </header>
@@ -1583,8 +1719,8 @@ input:disabled{
   <div class="page-head">
 
     <div>
-      <h2>Year Progress</h2>
-      <p>See monthly progress and compare this club with previous years.</p>
+      <h2>School Year Progress</h2>
+      <p>Track August through May and compare this school year with previous years.</p>
     </div>
 
     <div class="year-toolbar">
@@ -1593,7 +1729,7 @@ input:disabled{
         for="yearSelect"
         style="font-size:11px;font-weight:800"
       >
-        Year
+        School Year
       </label>
 
       <select id="yearSelect"></select>
@@ -1610,7 +1746,7 @@ input:disabled{
     </div>
 
     <div class="card year-summary-box">
-      <span>Previous Year</span>
+      <span>Previous School Year</span>
       <strong id="previousRevenue">$0</strong>
     </div>
 
@@ -1629,7 +1765,7 @@ input:disabled{
   <div class="card full-card">
 
     <div class="card-head">
-      <h3>Cumulative Revenue by Month</h3>
+      <h3>Cumulative Revenue by School Month</h3>
     </div>
 
     <div class="card-body">
@@ -1649,7 +1785,7 @@ input:disabled{
             class="legend-line"
             style="background:#4f7df3"
           ></div>
-          Selected year
+          Selected school year
         </div>
 
         <div class="legend-item">
@@ -1657,7 +1793,7 @@ input:disabled{
             class="legend-line"
             style="background:#2fa36b"
           ></div>
-          Previous year
+          Previous school year
         </div>
 
         <div class="legend-item">
@@ -1677,7 +1813,7 @@ input:disabled{
   <div class="card">
 
     <div class="card-head">
-      <h3>Fundraisers Held Each Month</h3>
+      <h3>Fundraisers Held Each School Month</h3>
     </div>
 
     <div class="card-body">
@@ -1724,7 +1860,7 @@ input:disabled{
 
     <div>
       <h2>Settings</h2>
-      <p>Manage this club's profile and workspace.</p>
+      <p>Manage this club's profile, officers, and workspace.</p>
     </div>
 
   </div>
@@ -1736,7 +1872,7 @@ input:disabled{
       <h3>Club Profile</h3>
 
       <p>
-        Update the club name, sponsor, school, and logo.
+        Update the club name, sponsor, and logo.
       </p>
 
       <form id="clubProfileForm">
@@ -1794,25 +1930,11 @@ input:disabled{
 
               </div>
 
-              <div class="field" style="grid-column:1/-1">
-
-                <label for="schoolNameInput">
-                  School / Organization
-                </label>
-
-                <input
-                  id="schoolNameInput"
-                  type="text"
-                  class="owner-only"
-                >
-
-              </div>
-
             </div>
 
             <div class="role-box">
 
-              Your role:
+              Your access:
               <strong id="currentRoleText">
                 Loading...
               </strong>
@@ -1863,12 +1985,75 @@ input:disabled{
 
     </div>
 
+    <div
+      class="card settings-card"
+      id="officerManagementCard"
+    >
+
+      <h3>Officers & Roles</h3>
+
+      <p>
+        Ownership is separate from officer position. Default positions have preset access.
+        Custom positions can use View Only, Can Edit, or Finance Manager access.
+      </p>
+
+      <div
+        id="officerList"
+        class="officer-list"
+      >
+        <div style="font-size:11px;color:var(--muted)">
+          Loading officers...
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card settings-card">
+
+      <h3>Recent Activity</h3>
+
+      <p>
+        See who changed budgets, fundraisers, event goals, club settings, and officer roles.
+      </p>
+
+      <div
+        id="activityList"
+        class="activity-list"
+      >
+        <div style="font-size:11px;color:var(--muted)">
+          Loading activity...
+        </div>
+      </div>
+
+    </div>
+
+    <div
+      class="card settings-card danger-zone"
+      id="leaveClubCard"
+    >
+
+      <h3>Leave Club</h3>
+
+      <p>
+        Remove your own access to this club. Club owners cannot leave without deleting the club.
+      </p>
+
+      <button
+        class="danger"
+        id="leaveClubButton"
+      >
+        Leave Club
+      </button>
+
+    </div>
+
     <div class="card settings-card danger-zone owner-settings">
 
       <h3>Archive or Delete Club</h3>
 
       <p>
-        Archive keeps the club's information for later. Delete permanently removes the club and its financial data.
+        Archive hides the club while keeping its information. You can restore it later from Your Clubs.
+        Delete permanently removes the club and its financial data.
       </p>
 
       <div class="danger-actions">
@@ -2217,9 +2402,9 @@ let fundraisers = [];
 
 let eventGoals = [];
 
-const MONTHS = [
-  "Jan","Feb","Mar","Apr","May","Jun",
-  "Jul","Aug","Sep","Oct","Nov","Dec"
+const SCHOOL_MONTHS = [
+  "Aug","Sep","Oct","Nov","Dec",
+  "Jan","Feb","Mar","Apr","May"
 ];
 
 const roleLabels = {
@@ -2228,7 +2413,27 @@ const roleLabels = {
   president:"President",
   vice_president:"Vice President",
   secretary:"Secretary",
-  other_officer:"Other Officer"
+  historian:"Historian",
+  custom:"Custom Position",
+  unassigned:"Position Not Assigned",
+  other_officer:"Position Not Assigned"
+};
+
+const fixedRolePermissions = {
+  sponsor:"manage",
+  treasurer:"manage",
+  president:"edit",
+  vice_president:"edit",
+  secretary:"view",
+  historian:"view",
+  unassigned:"view",
+  other_officer:"view"
+};
+
+const permissionLabels = {
+  view:"View Only",
+  edit:"Can Edit",
+  manage:"Finance Manager"
 };
 
 function num(value){
@@ -2260,6 +2465,20 @@ function esc(value){
     value ?? "";
 
   return div.innerHTML;
+}
+
+function attr(value){
+  return esc(
+    value
+  )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#39;"
+    );
 }
 
 function initials(value){
@@ -2332,41 +2551,83 @@ function totals(){
   };
 }
 
-function canEditFinance(){
+function memberPermission(member){
   if(
-    membership?.is_owner
+    member?.is_owner
   ){
-    return true;
+    return "manage";
   }
 
+  if(
+    ["view","edit","manage"].includes(
+      member?.permission_level
+    )
+  ){
+    return member.permission_level;
+  }
+
+  return (
+    fixedRolePermissions[
+      member?.role
+    ] ||
+    "view"
+  );
+}
+
+function canEditFinance(){
   return [
-    "sponsor",
-    "treasurer",
-    "president",
-    "vice_president"
+    "edit",
+    "manage"
   ].includes(
-    membership?.role
+    memberPermission(
+      membership
+    )
   );
 }
 
 function canManageFinance(){
-  if(
-    membership?.is_owner
-  ){
-    return true;
-  }
-
-  return [
-    "sponsor",
-    "treasurer"
-  ].includes(
-    membership?.role
+  return (
+    memberPermission(
+      membership
+    ) ===
+    "manage"
   );
 }
 
 function isOwner(){
   return Boolean(
     membership?.is_owner
+  );
+}
+
+function positionLabel(member){
+
+  if(
+    member?.role ===
+    "custom"
+  ){
+    return (
+      member.custom_role_name ||
+      "Custom Position"
+    );
+  }
+
+  return (
+    roleLabels[
+      member?.role
+    ] ||
+    "Position Not Assigned"
+  );
+}
+
+function permissionLabel(member){
+  return (
+    permissionLabels[
+      memberPermission(
+        member
+      )
+    ] ||
+    "View Only"
   );
 }
 
@@ -2677,14 +2938,6 @@ function updateBrand(){
 
   document
     .getElementById(
-      "schoolNameInput"
-    )
-    .value =
-    club.school_name ||
-    "";
-
-  document
-    .getElementById(
       "settingsInviteCode"
     )
     .textContent =
@@ -2698,11 +2951,8 @@ function updateBrand(){
     .textContent =
     membership.is_owner
       ? "Owner"
-      : (
-          roleLabels[
-            membership.role
-          ] ||
-          "Officer"
+      : positionLabel(
+          membership
         );
 }
 
@@ -2758,6 +3008,17 @@ function applyPermissions(){
             "none";
         }
       );
+  }
+  else{
+    const leaveCard =
+      document.getElementById(
+        "leaveClubCard"
+      );
+
+    if(leaveCard){
+      leaveCard.style.display =
+        "none";
+    }
   }
 }
 
@@ -3481,9 +3742,9 @@ function renderEvents(){
           num(
             item.amount_raised
           ) >=
-          num(
-            item.amount_needed
-          );
+            num(
+              item.amount_needed
+            );
 
         return `
           <article class="card event-card">
@@ -3561,54 +3822,143 @@ function renderEvents(){
     ).join("");
 }
 
-function fundraiserYear(item){
-
-  const value =
-    fundraiserDate(item);
+function schoolYearStartFromDate(value){
 
   if(!value){
     return null;
   }
 
-  return Number(
-    value.slice(0,4)
+  const year =
+    Number(
+      value.slice(0,4)
+    );
+
+  const month =
+    Number(
+      value.slice(5,7)
+    );
+
+  if(
+    !year ||
+    !month
+  ){
+    return null;
+  }
+
+  if(
+    month >= 8
+  ){
+    return year;
+  }
+
+  if(
+    month <= 5
+  ){
+    return year - 1;
+  }
+
+  return null;
+}
+
+function schoolMonthIndexFromDate(value){
+
+  if(!value){
+    return null;
+  }
+
+  const month =
+    Number(
+      value.slice(5,7)
+    );
+
+  if(
+    month >= 8 &&
+    month <= 12
+  ){
+    return month - 8;
+  }
+
+  if(
+    month >= 1 &&
+    month <= 5
+  ){
+    return month + 4;
+  }
+
+  return null;
+}
+
+function fundraiserSchoolYear(item){
+  return schoolYearStartFromDate(
+    fundraiserDate(
+      item
+    )
   );
 }
 
-function fundraiserMonth(item){
+function fundraiserSchoolMonth(item){
+  return schoolMonthIndexFromDate(
+    fundraiserDate(
+      item
+    )
+  );
+}
 
-  const value =
-    fundraiserDate(item);
+function currentSchoolYearStart(){
 
-  if(!value){
-    return null;
-  }
+  const now =
+    new Date();
 
-  return Number(
-    value.slice(5,7)
-  ) - 1;
+  const year =
+    now.getFullYear();
+
+  const month =
+    now.getMonth() +
+    1;
+
+  return (
+    month >= 8
+      ? year
+      : year - 1
+  );
+}
+
+function schoolYearLabel(
+  startYear
+){
+
+  return (
+    startYear +
+    "–" +
+    String(
+      startYear + 1
+    ).slice(-2)
+  );
 }
 
 function populateYearSelector(){
 
-  const currentYear =
-    new Date()
-      .getFullYear();
+  const currentStart =
+    currentSchoolYearStart();
 
   const years =
     new Set([
-      currentYear,
-      currentYear - 1
+      currentStart,
+      currentStart - 1
     ]);
 
   fundraisers.forEach(
     item => {
 
-      const year =
-        fundraiserYear(item);
+      const startYear =
+        fundraiserSchoolYear(
+          item
+        );
 
-      if(year){
-        years.add(year);
+      if(startYear){
+        years.add(
+          startYear
+        );
       }
     }
   );
@@ -3632,8 +3982,11 @@ function populateYearSelector(){
 
   select.innerHTML =
     sorted.map(
-      year =>
-        `<option value="${year}">${year}</option>`
+      startYear => `
+        <option value="${startYear}">
+          ${schoolYearLabel(startYear)}
+        </option>
+      `
     ).join("");
 
   select.value =
@@ -3641,44 +3994,54 @@ function populateYearSelector(){
       previousValue
     )
       ? previousValue
-      : currentYear;
+      : currentStart;
 }
 
-function monthlyData(year){
+function monthlyData(
+  schoolYearStart
+){
 
   const revenue =
-    Array(12).fill(0);
+    Array(10).fill(0);
 
   const counts =
-    Array(12).fill(0);
+    Array(10).fill(0);
 
   fundraisers.forEach(
     item => {
 
       if(
-        fundraiserYear(item) !==
-        year
+        fundraiserSchoolYear(
+          item
+        ) !==
+        schoolYearStart
       ){
         return;
       }
 
-      const month =
-        fundraiserMonth(item);
+      const monthIndex =
+        fundraiserSchoolMonth(
+          item
+        );
 
       if(
-        month === null ||
-        month < 0 ||
-        month > 11
+        monthIndex === null ||
+        monthIndex < 0 ||
+        monthIndex > 9
       ){
         return;
       }
 
-      revenue[month] +=
+      revenue[
+        monthIndex
+      ] +=
         num(
           item.amount_raised
         );
 
-      counts[month] +=
+      counts[
+        monthIndex
+      ] +=
         1;
     }
   );
@@ -3707,9 +4070,54 @@ function monthlyData(year){
   };
 }
 
+function monthsCompletedInSchoolYear(
+  schoolYearStart
+){
+
+  const currentStart =
+    currentSchoolYearStart();
+
+  if(
+    schoolYearStart <
+    currentStart
+  ){
+    return 10;
+  }
+
+  if(
+    schoolYearStart >
+    currentStart
+  ){
+    return 0;
+  }
+
+  const now =
+    new Date();
+
+  const month =
+    now.getMonth() +
+    1;
+
+  if(
+    month >= 8 &&
+    month <= 12
+  ){
+    return month - 7;
+  }
+
+  if(
+    month >= 1 &&
+    month <= 5
+  ){
+    return month + 5;
+  }
+
+  return 10;
+}
+
 function renderYearProgress(){
 
-  const year =
+  const selectedStart =
     Number(
       document
         .getElementById(
@@ -3717,17 +4125,16 @@ function renderYearProgress(){
         )
         .value
     ) ||
-    new Date()
-      .getFullYear();
+    currentSchoolYearStart();
 
   const current =
     monthlyData(
-      year
+      selectedStart
     );
 
   const previous =
     monthlyData(
-      year - 1
+      selectedStart - 1
     );
 
   const yearRevenue =
@@ -3776,28 +4183,10 @@ function renderYearProgress(){
     .textContent =
     fundraiserCount;
 
-  const now =
-    new Date();
-
-  let monthsExpected =
-    12;
-
-  if(
-    year ===
-    now.getFullYear()
-  ){
-    monthsExpected =
-      now.getMonth() +
-      1;
-  }
-
-  if(
-    year >
-    now.getFullYear()
-  ){
-    monthsExpected =
-      0;
-  }
+  const monthsExpected =
+    monthsCompletedInSchoolYear(
+      selectedStart
+    );
 
   const expected =
     num(
@@ -3805,13 +4194,16 @@ function renderYearProgress(){
     ) *
     (
       monthsExpected /
-      12
+      10
     );
 
   const status =
     document.getElementById(
       "yearStatus"
     );
+
+  status.style.color =
+    "";
 
   if(
     num(
@@ -3822,23 +4214,31 @@ function renderYearProgress(){
       "No goal";
   }
   else if(
+    monthsExpected === 0
+  ){
+    status.textContent =
+      "Not started";
+  }
+  else if(
     yearRevenue >=
     expected
   ){
     status.textContent =
       "On Track";
+
     status.style.color =
       "var(--green)";
   }
   else{
     status.textContent =
       "Behind Pace";
+
     status.style.color =
       "var(--red)";
   }
 
   renderYearLineChart(
-    year,
+    selectedStart,
     current.cumulative,
     previous.cumulative
   );
@@ -3849,7 +4249,7 @@ function renderYearProgress(){
 }
 
 function renderYearLineChart(
-  year,
+  schoolYearStart,
   current,
   previous
 ){
@@ -3860,14 +4260,14 @@ function renderYearLineChart(
     );
 
   const goalPace =
-    MONTHS.map(
+    SCHOOL_MONTHS.map(
       (_,index) =>
         num(
           budget.revenue_goal
         ) *
         (
           (index + 1) /
-          12
+          10
         )
     );
 
@@ -3905,7 +4305,10 @@ function renderYearLineChart(
       (
         width *
         index /
-        11
+        (
+          SCHOOL_MONTHS.length -
+          1
+        )
       );
 
   const y =
@@ -3963,7 +4366,7 @@ function renderYearLineChart(
       .join("");
 
   const labels =
-    MONTHS.map(
+    SCHOOL_MONTHS.map(
       (month,index) => `
         <text
           x="${x(index)}"
@@ -4024,7 +4427,9 @@ function renderYearLineChart(
       font-weight="700"
       fill="#162033"
     >
-      ${year} vs ${year - 1}
+      ${schoolYearLabel(schoolYearStart)}
+      vs
+      ${schoolYearLabel(schoolYearStart - 1)}
     </text>
   `;
 }
@@ -4073,7 +4478,7 @@ function renderMonthBars(
             </div>
 
             <div class="month-name">
-              ${MONTHS[index]}
+              ${SCHOOL_MONTHS[index]}
             </div>
 
           </div>
@@ -4100,8 +4505,6 @@ function renderReports(){
       <p style="color:var(--muted);font-size:11px">
         Sponsor:
         ${esc(club.sponsor_name || "Not set")}
-        ·
-        ${esc(club.school_name || "School not set")}
       </p>
 
       <div class="report-grid">
@@ -4182,7 +4585,7 @@ function switchPage(page){
     budget:"Budget Plan",
     fundraisers:"Fundraisers",
     events:"Event Goals",
-    year:"Year Progress",
+    year:"School Year Progress",
     reports:"Reports",
     settings:"Settings"
   };
@@ -4207,6 +4610,13 @@ function switchPage(page){
     page === "year"
   ){
     renderYearProgress();
+  }
+
+  if(
+    page === "settings"
+  ){
+    loadClubOfficers();
+    loadActivityLog();
   }
 }
 
@@ -4652,6 +5062,872 @@ async function uploadClubLogo(file){
       );
 
   return data.publicUrl;
+}
+
+function roleOptionsHtml(
+  selectedRole
+){
+
+  const normalized =
+    selectedRole ===
+    "other_officer"
+      ? "unassigned"
+      : (
+          selectedRole ||
+          "unassigned"
+        );
+
+  const options = [
+    ["unassigned","Choose Position"],
+    ["sponsor","Sponsor"],
+    ["treasurer","Treasurer"],
+    ["president","President"],
+    ["vice_president","Vice President"],
+    ["secretary","Secretary"],
+    ["historian","Historian"],
+    ["custom","+ Custom Position"]
+  ];
+
+  return options.map(
+    ([value,label]) => `
+      <option
+        value="${value}"
+        ${
+          normalized === value
+            ? "selected"
+            : ""
+        }
+      >
+        ${label}
+      </option>
+    `
+  ).join("");
+}
+
+function permissionOptionsHtml(
+  selectedPermission
+){
+
+  return [
+    ["view","View Only"],
+    ["edit","Can Edit"],
+    ["manage","Finance Manager"]
+  ].map(
+    ([value,label]) => `
+      <option
+        value="${value}"
+        ${
+          selectedPermission === value
+            ? "selected"
+            : ""
+        }
+      >
+        ${label}
+      </option>
+    `
+  ).join("");
+}
+
+async function loadClubOfficers(){
+
+  const container =
+    document.getElementById(
+      "officerList"
+    );
+
+  if(
+    !container ||
+    !clubId ||
+    !currentUser
+  ){
+    return;
+  }
+
+  container.innerHTML = `
+    <div style="font-size:11px;color:var(--muted)">
+      Loading officers...
+    </div>
+  `;
+
+  const {
+    data:members,
+    error:memberError
+  } =
+    await supabaseClient
+      .from("club_members")
+      .select(
+        "user_id, role, custom_role_name, permission_level, is_owner, joined_at"
+      )
+      .eq(
+        "club_id",
+        clubId
+      )
+      .order(
+        "joined_at",
+        {
+          ascending:true
+        }
+      );
+
+  if(memberError){
+
+    container.innerHTML = `
+      <div style="font-size:11px;color:var(--red)">
+        Could not load officers:
+        ${esc(memberError.message)}
+      </div>
+    `;
+
+    return;
+  }
+
+  if(
+    !members ||
+    members.length === 0
+  ){
+
+    container.innerHTML = `
+      <div style="font-size:11px;color:var(--muted)">
+        No officers found.
+      </div>
+    `;
+
+    return;
+  }
+
+  const userIds =
+    members.map(
+      member =>
+        member.user_id
+    );
+
+  const {
+    data:profiles,
+    error:profileError
+  } =
+    await supabaseClient
+      .from("profiles")
+      .select(
+        "id, full_name"
+      )
+      .in(
+        "id",
+        userIds
+      );
+
+  if(profileError){
+    console.warn(
+      profileError
+    );
+  }
+
+  const profileMap = {};
+
+  (profiles || [])
+    .forEach(
+      profile => {
+        profileMap[
+          profile.id
+        ] =
+          profile;
+      }
+    );
+
+  container.innerHTML =
+    members.map(
+      member => {
+
+        const profile =
+          profileMap[
+            member.user_id
+          ];
+
+        const displayName =
+          profile?.full_name ||
+          (
+            member.user_id ===
+            currentUser.id
+              ? currentUser.email
+              : "Officer"
+          ) ||
+          "Officer";
+
+        const normalizedRole =
+          member.role ===
+          "other_officer"
+            ? "unassigned"
+            : (
+                member.role ||
+                "unassigned"
+              );
+
+        const permission =
+          normalizedRole ===
+          "custom"
+            ? (
+                [
+                  "view",
+                  "edit",
+                  "manage"
+                ].includes(
+                  member.permission_level
+                )
+                  ? member.permission_level
+                  : "view"
+              )
+            : (
+                fixedRolePermissions[
+                  normalizedRole
+                ] ||
+                "view"
+              );
+
+        const customDisplay =
+          normalizedRole ===
+          "custom"
+            ? "block"
+            : "none";
+
+        const canChange =
+          isOwner();
+
+        const permissionDisabled =
+          !canChange ||
+          normalizedRole !==
+          "custom";
+
+        const canRemove =
+          canChange &&
+          !member.is_owner;
+
+        return `
+          <div class="officer-row">
+
+            <div>
+
+              <div class="officer-name">
+
+                ${esc(displayName)}
+
+                ${
+                  member.is_owner
+                    ? `
+                      <span class="owner-badge">
+                        Owner
+                      </span>
+                    `
+                    : ""
+                }
+
+              </div>
+
+              <div class="officer-meta">
+                ${
+                  member.user_id ===
+                  currentUser.id
+                    ? "You"
+                    : "Club officer"
+                }
+                ·
+                ${
+                  member.is_owner
+                    ? "Owner access"
+                    : esc(permissionLabel(member))
+                }
+              </div>
+
+            </div>
+
+            <div>
+
+              <select
+                id="role-${member.user_id}"
+                class="officer-role-select"
+                onchange="handleRoleChoice('${member.user_id}')"
+                ${canChange ? "" : "disabled"}
+              >
+                ${roleOptionsHtml(normalizedRole)}
+              </select>
+
+              <input
+                id="custom-role-${member.user_id}"
+                class="custom-role-input"
+                type="text"
+                maxlength="60"
+                placeholder="Position title"
+                value="${attr(member.custom_role_name || "")}"
+                style="display:${customDisplay}"
+                ${canChange ? "" : "disabled"}
+              >
+
+            </div>
+
+            <div>
+
+              <select
+                id="permission-${member.user_id}"
+                class="officer-permission-select"
+                ${permissionDisabled ? "disabled" : ""}
+              >
+                ${permissionOptionsHtml(permission)}
+              </select>
+
+              <div class="permission-note">
+                Sponsor/Treasurer = Finance Manager · President/VP = Can Edit · Secretary/Historian = View Only
+              </div>
+
+            </div>
+
+            <div class="officer-action-stack">
+
+              ${
+                canChange
+                  ? `
+                    <button
+                      class="save-role-btn"
+                      onclick="saveOfficerRole('${member.user_id}')"
+                    >
+                      Save
+                    </button>
+                  `
+                  : `
+                    <div style="font-size:9px;color:var(--muted)">
+                      View only
+                    </div>
+                  `
+              }
+
+              ${
+                canRemove
+                  ? `
+                    <button
+                      class="remove-officer-btn"
+                      onclick="removeOfficer('${member.user_id}')"
+                    >
+                      Remove
+                    </button>
+                  `
+                  : ""
+              }
+
+            </div>
+
+          </div>
+        `;
+      }
+    )
+    .join("");
+}
+
+function handleRoleChoice(
+  userId
+){
+
+  const roleSelect =
+    document.getElementById(
+      "role-" +
+      userId
+    );
+
+  const permissionSelect =
+    document.getElementById(
+      "permission-" +
+      userId
+    );
+
+  const customInput =
+    document.getElementById(
+      "custom-role-" +
+      userId
+    );
+
+  if(
+    !roleSelect ||
+    !permissionSelect ||
+    !customInput
+  ){
+    return;
+  }
+
+  const role =
+    roleSelect.value;
+
+  const isCustom =
+    role ===
+    "custom";
+
+  customInput.style.display =
+    isCustom
+      ? "block"
+      : "none";
+
+  if(
+    !isCustom
+  ){
+    permissionSelect.value =
+      fixedRolePermissions[
+        role
+      ] ||
+      "view";
+  }
+
+  permissionSelect.disabled =
+    !isOwner() ||
+    !isCustom;
+
+  if(isCustom){
+    setTimeout(
+      () => {
+        customInput.focus();
+      },
+      0
+    );
+  }
+}
+
+async function saveOfficerRole(
+  userId
+){
+
+  if(
+    !isOwner()
+  ){
+    return;
+  }
+
+  const roleSelect =
+    document.getElementById(
+      "role-" +
+      userId
+    );
+
+  const permissionSelect =
+    document.getElementById(
+      "permission-" +
+      userId
+    );
+
+  const customInput =
+    document.getElementById(
+      "custom-role-" +
+      userId
+    );
+
+  if(
+    !roleSelect ||
+    !permissionSelect ||
+    !customInput
+  ){
+    return;
+  }
+
+  const role =
+    roleSelect.value;
+
+  const customRoleName =
+    role === "custom"
+      ? customInput
+          .value
+          .trim()
+      : null;
+
+  if(
+    role === "custom" &&
+    !customRoleName
+  ){
+    alert(
+      "Enter the custom position title first."
+    );
+    return;
+  }
+
+  const permission =
+    role === "custom"
+      ? permissionSelect.value
+      : (
+          fixedRolePermissions[
+            role
+          ] ||
+          "view"
+        );
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .rpc(
+        "update_club_member_role",
+        {
+          check_club_id:
+            clubId,
+
+          check_user_id:
+            userId,
+
+          new_role:
+            role,
+
+          new_custom_role_name:
+            customRoleName,
+
+          new_permission_level:
+            permission
+        }
+      );
+
+  if(error){
+
+    alert(
+      "Could not change the officer position: " +
+      error.message
+    );
+
+    return;
+  }
+
+  await logActivity(
+    "officer_role_updated",
+    {
+      user_id:
+        userId,
+
+      role:
+        role,
+
+      custom_role_name:
+        customRoleName,
+
+      permission_level:
+        permission
+    }
+  );
+
+  if(
+    userId ===
+    currentUser.id
+  ){
+
+    membership = {
+      ...membership,
+      role,
+      custom_role_name:
+        customRoleName,
+      permission_level:
+        permission
+    };
+
+    document
+      .getElementById(
+        "currentRoleText"
+      )
+      .textContent =
+      membership.is_owner
+        ? "Owner"
+        : positionLabel(
+            membership
+          );
+  }
+
+  showToast(
+    "Officer position updated"
+  );
+
+  await loadClubOfficers();
+  await loadActivityLog();
+}
+
+async function removeOfficer(
+  userId
+){
+
+  if(
+    !isOwner()
+  ){
+    return;
+  }
+
+  if(
+    !confirm(
+      "Remove this officer from the club?"
+    )
+  ){
+    return;
+  }
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .rpc(
+        "remove_club_member",
+        {
+          check_club_id:
+            clubId,
+
+          check_user_id:
+            userId
+        }
+      );
+
+  if(error){
+
+    alert(
+      "Could not remove the officer: " +
+      error.message
+    );
+
+    return;
+  }
+
+  await logActivity(
+    "officer_removed",
+    {
+      user_id:
+        userId,
+
+      officer_name:
+        "an officer"
+    }
+  );
+
+  showToast(
+    "Officer removed"
+  );
+
+  await loadClubOfficers();
+  await loadActivityLog();
+}
+
+function activityDescription(
+  item
+){
+
+  const details =
+    item.details ||
+    {};
+
+  const action =
+    item.action;
+
+  const map = {
+    budget_updated:
+      "updated the budget plan",
+
+    fundraiser_created:
+      `added fundraiser ${details.fundraiser_name || ""}`,
+
+    fundraiser_updated:
+      `updated fundraiser ${details.fundraiser_name || ""}`,
+
+    fundraiser_deleted:
+      `deleted fundraiser ${details.fundraiser_name || ""}`,
+
+    event_goal_created:
+      `added event goal ${details.event_name || ""}`,
+
+    event_goal_updated:
+      `updated event goal ${details.event_name || ""}`,
+
+    event_goal_deleted:
+      `deleted event goal ${details.event_name || ""}`,
+
+    club_profile_updated:
+      "updated the club profile",
+
+    officer_role_updated:
+      "updated an officer position",
+
+    officer_removed:
+      `removed ${details.officer_name || "an officer"} from the club`,
+
+    club_archived:
+      "archived the club",
+
+    club_restored:
+      "restored the club"
+  };
+
+  return (
+    map[
+      action
+    ] ||
+    action
+      .replaceAll(
+        "_",
+        " "
+      )
+  ).trim();
+}
+
+async function loadActivityLog(){
+
+  const container =
+    document.getElementById(
+      "activityList"
+    );
+
+  if(
+    !container ||
+    !clubId
+  ){
+    return;
+  }
+
+  container.innerHTML = `
+    <div style="font-size:11px;color:var(--muted)">
+      Loading activity...
+    </div>
+  `;
+
+  const {
+    data:items,
+    error
+  } =
+    await supabaseClient
+      .from("activity_log")
+      .select(
+        "id, actor_id, action, details, created_at"
+      )
+      .eq(
+        "club_id",
+        clubId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(40);
+
+  if(error){
+
+    container.innerHTML = `
+      <div style="font-size:11px;color:var(--red)">
+        Could not load activity:
+        ${esc(error.message)}
+      </div>
+    `;
+
+    return;
+  }
+
+  if(
+    !items ||
+    items.length === 0
+  ){
+
+    container.innerHTML = `
+      <div style="font-size:11px;color:var(--muted)">
+        No activity has been recorded yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  const actorIds =
+    [
+      ...new Set(
+        items
+          .map(
+            item =>
+              item.actor_id
+          )
+          .filter(
+            Boolean
+          )
+      )
+    ];
+
+  let profiles = [];
+
+  if(
+    actorIds.length
+  ){
+
+    const {
+      data
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "id, full_name"
+        )
+        .in(
+          "id",
+          actorIds
+        );
+
+    profiles =
+      data ||
+      [];
+  }
+
+  const profileMap = {};
+
+  profiles.forEach(
+    profile => {
+      profileMap[
+        profile.id
+      ] =
+        profile.full_name;
+    }
+  );
+
+  container.innerHTML =
+    items.map(
+      item => {
+
+        const actorName =
+          profileMap[
+            item.actor_id
+          ] ||
+          (
+            item.actor_id ===
+            currentUser.id
+              ? (
+                  currentUser
+                    .user_metadata
+                    ?.full_name ||
+                  currentUser.email ||
+                  "You"
+                )
+              : "Club officer"
+          );
+
+        const when =
+          new Date(
+            item.created_at
+          )
+            .toLocaleString(
+              "en-US",
+              {
+                month:"short",
+                day:"numeric",
+                year:"numeric",
+                hour:"numeric",
+                minute:"2-digit"
+              }
+            );
+
+        return `
+          <div class="activity-row">
+
+            <div class="activity-main">
+              <strong>${esc(actorName)}</strong>
+              ${esc(activityDescription(item))}
+            </div>
+
+            <div class="activity-time">
+              ${esc(when)}
+            </div>
+
+          </div>
+        `;
+      }
+    )
+    .join("");
 }
 
 document
@@ -5108,15 +6384,6 @@ document
               .trim() ||
             null,
 
-          school_name:
-            document
-              .getElementById(
-                "schoolNameInput"
-              )
-              .value
-              .trim() ||
-            null,
-
           logo_url:
             logoUrl ||
             null
@@ -5202,6 +6469,60 @@ document
 
 document
   .getElementById(
+    "leaveClubButton"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      if(
+        isOwner()
+      ){
+        return;
+      }
+
+      if(
+        !confirm(
+          `Leave "${club.name}"? You will need a new invite code to join again.`
+        )
+      ){
+        return;
+      }
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .rpc(
+            "leave_club",
+            {
+              check_club_id:
+                clubId
+            }
+          );
+
+      if(error){
+
+        alert(
+          "Could not leave the club: " +
+          error.message
+        );
+
+        return;
+      }
+
+      sessionStorage.removeItem(
+        "selectedClubId"
+      );
+
+      window.location.replace(
+        "clubs.html"
+      );
+    }
+  );
+
+document
+  .getElementById(
     "archiveClubButton"
   )
   .addEventListener(
@@ -5246,6 +6567,10 @@ document
         );
         return;
       }
+
+      await logActivity(
+        "club_archived"
+      );
 
       sessionStorage.removeItem(
         "selectedClubId"
@@ -5512,474 +6837,20 @@ window.editEvent =
 window.deleteEvent =
   deleteEvent;
 
+window.loadClubOfficers =
+  loadClubOfficers;
+
+window.handleRoleChoice =
+  handleRoleChoice;
+
+window.saveOfficerRole =
+  saveOfficerRole;
+
+window.removeOfficer =
+  removeOfficer;
+
 initialize();
 </script>
 
-<style>
-.officer-list{
-  display:grid;
-  gap:12px;
-  margin-top:16px;
-}
-
-.officer-row{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 190px 90px;
-  gap:12px;
-  align-items:center;
-  padding:14px;
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:#f8fafc;
-}
-
-.officer-name{
-  font-size:12px;
-  font-weight:850;
-}
-
-.officer-email{
-  margin-top:3px;
-  color:var(--muted);
-  font-size:10px;
-}
-
-.owner-badge{
-  display:inline-block;
-  margin-left:6px;
-  padding:3px 6px;
-  border-radius:999px;
-  background:var(--blue-soft);
-  color:var(--blue);
-  font-size:8px;
-  font-weight:900;
-}
-
-.officer-role-select{
-  width:100%;
-  padding:9px 10px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:white;
-  font-size:11px;
-}
-
-.save-role-btn{
-  border:0;
-  padding:9px 10px;
-  border-radius:8px;
-  background:var(--blue);
-  color:white;
-  font-size:10px;
-  font-weight:850;
-}
-
-@media(max-width:700px){
-  .officer-row{
-    grid-template-columns:1fr;
-  }
-}
-</style>
-
-<script>
-(() => {
-
-  const roleLabels = {
-    sponsor:"Sponsor",
-    treasurer:"Treasurer",
-    president:"President",
-    vice_president:"Vice President",
-    secretary:"Secretary",
-    other_officer:"Other Officer"
-  };
-
-  function installOfficerManagement(){
-
-    const settingsStack =
-      document.querySelector(
-        "#page-settings .settings-stack"
-      );
-
-    if(
-      !settingsStack ||
-      document.getElementById(
-        "officerManagementCard"
-      )
-    ){
-      return;
-    }
-
-    const card =
-      document.createElement(
-        "div"
-      );
-
-    card.className =
-      "card settings-card";
-
-    card.id =
-      "officerManagementCard";
-
-    card.innerHTML = `
-      <h3>
-        Officers & Roles
-      </h3>
-
-      <p>
-        Each officer can have a different role in each club.
-        Club ownership is separate from the officer role.
-      </p>
-
-      <div
-        id="officerList"
-        class="officer-list"
-      >
-        <div style="font-size:11px;color:var(--muted)">
-          Loading officers...
-        </div>
-      </div>
-    `;
-
-    const dangerZone =
-      settingsStack.querySelector(
-        ".danger-zone"
-      );
-
-    if(dangerZone){
-      settingsStack.insertBefore(
-        card,
-        dangerZone
-      );
-    }
-    else{
-      settingsStack.appendChild(
-        card
-      );
-    }
-
-    loadClubOfficers();
-  }
-
-  async function loadClubOfficers(){
-
-    const container =
-      document.getElementById(
-        "officerList"
-      );
-
-    if(
-      !container ||
-      !clubId
-    ){
-      return;
-    }
-
-    container.innerHTML = `
-      <div style="font-size:11px;color:var(--muted)">
-        Loading officers...
-      </div>
-    `;
-
-    const {
-      data:members,
-      error:memberError
-    } =
-      await supabaseClient
-        .from("club_members")
-        .select(
-          "user_id, role, is_owner, joined_at"
-        )
-        .eq(
-          "club_id",
-          clubId
-        )
-        .order(
-          "joined_at",
-          {
-            ascending:true
-          }
-        );
-
-    if(memberError){
-
-      container.innerHTML = `
-        <div style="font-size:11px;color:var(--red)">
-          Could not load officers:
-          ${esc(memberError.message)}
-        </div>
-      `;
-
-      return;
-    }
-
-    if(
-      !members ||
-      members.length === 0
-    ){
-
-      container.innerHTML = `
-        <div style="font-size:11px;color:var(--muted)">
-          No officers found.
-        </div>
-      `;
-
-      return;
-    }
-
-    const userIds =
-      members.map(
-        member =>
-          member.user_id
-      );
-
-    const {
-      data:profiles,
-      error:profileError
-    } =
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "id, full_name"
-        )
-        .in(
-          "id",
-          userIds
-        );
-
-    if(profileError){
-      console.warn(
-        profileError
-      );
-    }
-
-    const profileMap =
-      {};
-
-    (profiles || [])
-      .forEach(
-        profile => {
-          profileMap[
-            profile.id
-          ] =
-            profile;
-        }
-      );
-
-    container.innerHTML =
-      members.map(
-        member => {
-
-          const profile =
-            profileMap[
-              member.user_id
-            ];
-
-          const displayName =
-            profile?.full_name ||
-            "Officer";
-
-          const canChange =
-            isOwner();
-
-          return `
-            <div class="officer-row">
-
-              <div>
-
-                <div class="officer-name">
-
-                  ${esc(displayName)}
-
-                  ${
-                    member.is_owner
-                      ? `
-                        <span class="owner-badge">
-                          Owner
-                        </span>
-                      `
-                      : ""
-                  }
-
-                </div>
-
-                <div class="officer-email">
-                  ${
-                    member.user_id ===
-                    currentUser.id
-                      ? "You"
-                      : "Club officer"
-                  }
-                </div>
-
-              </div>
-
-              <select
-                id="role-${member.user_id}"
-                class="officer-role-select"
-                ${canChange ? "" : "disabled"}
-              >
-
-                ${
-                  Object.entries(
-                    roleLabels
-                  )
-                  .map(
-                    ([value,label]) => `
-                      <option
-                        value="${value}"
-                        ${
-                          member.role === value
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        ${label}
-                      </option>
-                    `
-                  )
-                  .join("")
-                }
-
-              </select>
-
-              ${
-                canChange
-                  ? `
-                    <button
-                      class="save-role-btn"
-                      onclick="saveOfficerRole(
-                        '${member.user_id}'
-                      )"
-                    >
-                      Save
-                    </button>
-                  `
-                  : `
-                    <div style="font-size:9px;color:var(--muted)">
-                      View only
-                    </div>
-                  `
-              }
-
-            </div>
-          `;
-        }
-      )
-      .join("");
-  }
-
-  async function saveOfficerRole(
-    userId
-  ){
-
-    if(
-      !isOwner()
-    ){
-      return;
-    }
-
-    const select =
-      document.getElementById(
-        "role-" +
-        userId
-      );
-
-    if(!select){
-      return;
-    }
-
-    const newRole =
-      select.value;
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("club_members")
-        .update({
-          role:newRole
-        })
-        .eq(
-          "club_id",
-          clubId
-        )
-        .eq(
-          "user_id",
-          userId
-        );
-
-    if(error){
-
-      alert(
-        "Could not change role: " +
-        error.message
-      );
-
-      return;
-    }
-
-    if(
-      userId ===
-      currentUser.id
-    ){
-
-      membership.role =
-        newRole;
-
-      document
-        .getElementById(
-          "currentRoleText"
-        )
-        .textContent =
-        membership.is_owner
-          ? "Owner · " +
-            roleLabels[newRole]
-          : roleLabels[newRole];
-
-    }
-
-    await logActivity(
-      "officer_role_updated",
-      {
-        user_id:userId,
-        role:newRole
-      }
-    );
-
-    showToast(
-      "Officer role updated"
-    );
-
-    await loadClubOfficers();
-  }
-
-  window.loadClubOfficers =
-    loadClubOfficers;
-
-  window.saveOfficerRole =
-    saveOfficerRole;
-
-  const originalSwitchPage =
-    window.switchPage;
-
-  window.switchPage =
-    function(page){
-
-      originalSwitchPage(
-        page
-      );
-
-      if(
-        page === "settings"
-      ){
-        loadClubOfficers();
-      }
-    };
-
-  installOfficerManagement();
-
-})();
-</script>
-  
 </body>
 </html>
