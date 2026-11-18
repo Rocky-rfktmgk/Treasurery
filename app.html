@@ -1051,15 +1051,6 @@ button{cursor:pointer}
     renderOverviewChart();
     renderDashboardFundraisers();
 
-    document.getElementById("dashboardBudget").innerHTML = `
-      <div class="summary-item"><span>Starting balance</span><strong>${money(b.startingBalance)}</strong></div>
-      <div class="summary-item"><span>Revenue goal</span><strong>${money(b.revenueGoal)}</strong></div>
-      <div class="summary-item"><span>Profit goal</span><strong>${money(b.profitGoal)}</strong></div>
-      <div class="summary-item"><span>Spending limit</span><strong>${money(b.costLimit)}</strong></div>
-      <div class="summary-item"><span>Current balance</span><strong>${money(t.currentBalance)}</strong></div>
-    `;
-  }
-
   function renderGoal(prefix,value,goal,type){
     const p = percent(value,goal);
     const status = goalStatus(value,goal,type);
