@@ -43,9 +43,6 @@
   --shadow:
     0 16px 45px rgba(0,0,0,.28),
     inset 0 1px 0 rgba(255,255,255,.025);
-
-  --gold-shadow:
-    0 0 30px rgba(215,177,92,.10);
 }
 
 *{
@@ -58,6 +55,7 @@ html{
 
 body{
   margin:0;
+
   font-family:
     Inter,
     ui-sans-serif,
@@ -70,55 +68,27 @@ body{
   color:var(--text);
 
   background:
-    radial-gradient(
-      circle at 15% 10%,
-      rgba(215,177,92,.08),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(69,91,150,.11),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 50% 90%,
-      rgba(215,177,92,.04),
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #070b13 0%,
-      #090e19 45%,
-      #060910 100%
-    );
+    radial-gradient(circle at 15% 10%,rgba(215,177,92,.08),transparent 28%),
+    radial-gradient(circle at 90% 20%,rgba(69,91,150,.11),transparent 30%),
+    radial-gradient(circle at 50% 90%,rgba(215,177,92,.04),transparent 35%),
+    linear-gradient(135deg,#070b13 0%,#090e19 45%,#060910 100%);
 
   min-height:100vh;
 }
 
-/* subtle star field */
 body::before{
   content:"";
+
   position:fixed;
   inset:0;
+
   pointer-events:none;
   z-index:0;
 
   background-image:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.58) 0 1px,
-      transparent 1.4px
-    ),
-    radial-gradient(
-      circle,
-      rgba(215,177,92,.40) 0 1px,
-      transparent 1.3px
-    ),
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.26) 0 1px,
-      transparent 1.2px
-    );
+    radial-gradient(circle,rgba(255,255,255,.58) 0 1px,transparent 1.4px),
+    radial-gradient(circle,rgba(215,177,92,.40) 0 1px,transparent 1.3px),
+    radial-gradient(circle,rgba(255,255,255,.26) 0 1px,transparent 1.2px);
 
   background-size:
     140px 140px,
@@ -133,19 +103,25 @@ body::before{
   opacity:.32;
 }
 
-/* faint orbital glow */
 body::after{
   content:"";
+
   position:fixed;
+
   width:700px;
   height:700px;
+
   top:-420px;
   right:-260px;
+
   border-radius:50%;
+
   border:1px solid rgba(215,177,92,.08);
+
   box-shadow:
     0 0 100px rgba(215,177,92,.04),
     inset 0 0 100px rgba(215,177,92,.025);
+
   pointer-events:none;
   z-index:0;
 }
@@ -170,7 +146,9 @@ select:disabled{
 .app{
   position:relative;
   z-index:1;
+
   min-height:100vh;
+
   display:flex;
 }
 
@@ -189,6 +167,7 @@ select:disabled{
   min-height:100vh;
 
   position:fixed;
+
   left:0;
   top:0;
   bottom:0;
@@ -199,11 +178,9 @@ select:disabled{
 
   z-index:30;
 
-  border-right:
-    1px solid rgba(215,177,92,.12);
+  border-right:1px solid rgba(215,177,92,.12);
 
-  box-shadow:
-    14px 0 45px rgba(0,0,0,.18);
+  box-shadow:14px 0 45px rgba(0,0,0,.18);
 
   backdrop-filter:blur(18px);
 }
@@ -213,8 +190,7 @@ select:disabled{
   gap:11px;
   align-items:center;
 
-  padding:
-    4px 8px 22px;
+  padding:4px 8px 22px;
 }
 
 .logo{
@@ -280,9 +256,7 @@ select:disabled{
 }
 
 .nav-label{
-  margin:
-    18px 10px
-    7px;
+  margin:18px 10px 7px;
 
   font-size:9px;
 
@@ -298,8 +272,7 @@ select:disabled{
 .nav-btn{
   width:100%;
 
-  border:
-    1px solid transparent;
+  border:1px solid transparent;
 
   border-radius:10px;
 
@@ -307,8 +280,7 @@ select:disabled{
 
   color:#9da8bb;
 
-  padding:
-    11px 12px;
+  padding:11px 12px;
 
   margin:3px 0;
 
@@ -324,24 +296,17 @@ select:disabled{
 
   font-weight:750;
 
-  transition:
-    background .18s ease,
-    border-color .18s ease,
-    color .18s ease,
-    transform .18s ease;
+  transition:.18s;
 }
 
 .nav-btn:hover{
-  background:
-    rgba(215,177,92,.07);
+  background:rgba(215,177,92,.07);
 
   color:#fff;
 
-  border-color:
-    rgba(215,177,92,.09);
+  border-color:rgba(215,177,92,.09);
 
-  transform:
-    translateX(2px);
+  transform:translateX(2px);
 }
 
 .nav-btn.active{
@@ -352,19 +317,18 @@ select:disabled{
       rgba(215,177,92,.045)
     );
 
-  color:
-    var(--gold2);
+  color:var(--gold2);
 
-  border-color:
-    rgba(215,177,92,.16);
+  border-color:rgba(215,177,92,.16);
 
-  box-shadow:
-    inset 3px 0 0 var(--gold);
+  box-shadow:inset 3px 0 0 var(--gold);
 }
 
 .nav-icon{
   width:20px;
+
   text-align:center;
+
   color:var(--gold);
 }
 
@@ -373,13 +337,11 @@ select:disabled{
 
   margin-top:20px;
 
-  border:
-    1px solid rgba(215,177,92,.14);
+  border:1px solid rgba(215,177,92,.14);
 
   border-radius:10px;
 
-  background:
-    rgba(255,255,255,.025);
+  background:rgba(255,255,255,.025);
 
   color:#aab4c5;
 
@@ -388,25 +350,18 @@ select:disabled{
   font-size:11px;
 
   font-weight:800;
-
-  transition:.18s;
 }
 
 .back-btn:hover{
-  background:
-    rgba(215,177,92,.08);
+  background:rgba(215,177,92,.08);
 
   color:var(--gold2);
-
-  border-color:
-    rgba(215,177,92,.25);
 }
 
 .main{
   margin-left:240px;
 
-  width:
-    calc(100% - 240px);
+  width:calc(100% - 240px);
 
   min-height:100vh;
 }
@@ -414,11 +369,9 @@ select:disabled{
 .topbar{
   height:68px;
 
-  background:
-    rgba(7,11,19,.75);
+  background:rgba(7,11,19,.75);
 
-  border-bottom:
-    1px solid rgba(255,255,255,.065);
+  border-bottom:1px solid rgba(255,255,255,.065);
 
   display:flex;
 
@@ -426,8 +379,7 @@ select:disabled{
 
   justify-content:space-between;
 
-  padding:
-    0 28px;
+  padding:0 28px;
 
   position:sticky;
 
@@ -435,55 +387,45 @@ select:disabled{
 
   z-index:20;
 
-  backdrop-filter:
-    blur(18px);
-
-  box-shadow:
-    0 8px 30px rgba(0,0,0,.10);
+  backdrop-filter:blur(18px);
 }
 
 .top-left{
   display:flex;
+
   align-items:center;
+
   gap:10px;
 }
 
 .menu-btn{
   display:none;
 
-  border:
-    1px solid var(--border-gold);
+  border:1px solid var(--border-gold);
 
-  background:
-    var(--gold-soft);
+  background:var(--gold-soft);
 
-  color:
-    var(--gold2);
+  color:var(--gold2);
 
   border-radius:9px;
 
-  padding:
-    8px 10px;
+  padding:8px 10px;
 }
 
 .page-name{
   font-size:12px;
 
-  color:
-    #8994a8;
+  color:#8994a8;
 
   letter-spacing:.3px;
 }
 
 .content{
-  max-width:
-    1440px;
+  max-width:1440px;
 
-  margin:
-    0 auto;
+  margin:0 auto;
 
-  padding:
-    30px;
+  padding:30px;
 }
 
 .page{
@@ -492,32 +434,28 @@ select:disabled{
 
 .page.active{
   display:block;
-  animation:
-    pageFade .24s ease;
+
+  animation:pageFade .24s ease;
 }
 
 @keyframes pageFade{
   from{
     opacity:.35;
-    transform:
-      translateY(5px);
+    transform:translateY(5px);
   }
 
   to{
     opacity:1;
-    transform:
-      translateY(0);
+    transform:translateY(0);
   }
 }
 
 .page-head{
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
-  align-items:
-    flex-start;
+  align-items:flex-start;
 
   gap:16px;
 
@@ -525,8 +463,7 @@ select:disabled{
 }
 
 .page-head h2{
-  margin:
-    0 0 6px;
+  margin:0 0 6px;
 
   font-size:27px;
 
@@ -538,8 +475,7 @@ select:disabled{
 .page-head p{
   margin:0;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   font-size:13px;
 }
@@ -554,16 +490,13 @@ select:disabled{
       rgba(12,19,32,.78)
     );
 
-  border:
-    1px solid var(--border);
+  border:1px solid var(--border);
 
   border-radius:16px;
 
-  box-shadow:
-    var(--shadow);
+  box-shadow:var(--shadow);
 
-  backdrop-filter:
-    blur(14px);
+  backdrop-filter:blur(14px);
 
   overflow:hidden;
 }
@@ -590,11 +523,6 @@ select:disabled{
   pointer-events:none;
 }
 
-.card:hover{
-  border-color:
-    rgba(215,177,92,.13);
-}
-
 .primary,
 .secondary,
 .danger,
@@ -604,18 +532,11 @@ select:disabled{
 
   border-radius:9px;
 
-  padding:
-    10px 14px;
+  padding:10px 14px;
 
   font-size:12px;
 
   font-weight:850;
-
-  transition:
-    transform .16s ease,
-    box-shadow .16s ease,
-    background .16s ease,
-    border-color .16s ease;
 }
 
 .primary{
@@ -632,74 +553,42 @@ select:disabled{
     0 8px 24px rgba(215,177,92,.12);
 }
 
-.primary:hover{
-  transform:
-    translateY(-1px);
-
-  box-shadow:
-    0 10px 30px rgba(215,177,92,.20);
-}
-
 .secondary{
-  background:
-    rgba(255,255,255,.065);
+  background:rgba(255,255,255,.065);
 
   color:#e9edf5;
 
-  border:
-    1px solid rgba(255,255,255,.07);
-}
-
-.secondary:hover{
-  background:
-    rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.07);
 }
 
 .danger{
-  background:
-    var(--red-soft);
+  background:var(--red-soft);
 
-  color:
-    #ff8c94;
+  color:#ff8c94;
 
-  border:
-    1px solid rgba(239,108,118,.16);
+  border:1px solid rgba(239,108,118,.16);
 }
 
 .warning{
-  background:
-    var(--yellow-soft);
+  background:var(--yellow-soft);
 
-  color:
-    #efbc69;
+  color:#efbc69;
 
-  border:
-    1px solid rgba(230,170,76,.16);
+  border:1px solid rgba(230,170,76,.16);
 }
 
 .ghost{
-  background:
-    rgba(255,255,255,.025);
+  background:rgba(255,255,255,.025);
 
-  border:
-    1px solid var(--border);
+  border:1px solid var(--border);
 
   color:#dce2ec;
-}
-
-.ghost:hover{
-  border-color:
-    rgba(215,177,92,.22);
-
-  color:
-    var(--gold2);
 }
 
 .metrics{
   display:grid;
 
-  grid-template-columns:
-    repeat(4,1fr);
+  grid-template-columns:repeat(4,1fr);
 
   gap:16px;
 
@@ -710,34 +599,10 @@ select:disabled{
   padding:19px;
 }
 
-.metric::after{
-  content:"";
-
-  position:absolute;
-
-  width:100px;
-  height:100px;
-
-  right:-35px;
-  top:-35px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(215,177,92,.08),
-      transparent 70%
-    );
-
-  pointer-events:none;
-}
-
 .metric-top{
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:10px;
 }
@@ -747,13 +612,11 @@ select:disabled{
 
   font-weight:900;
 
-  color:
-    #7e899d;
+  color:#7e899d;
 
   letter-spacing:.9px;
 
-  text-transform:
-    uppercase;
+  text-transform:uppercase;
 }
 
 .metric-value{
@@ -761,8 +624,7 @@ select:disabled{
 
   font-weight:950;
 
-  margin:
-    10px 0 3px;
+  margin:10px 0 3px;
 
   letter-spacing:-.7px;
 
@@ -771,6 +633,7 @@ select:disabled{
 
 .metric-sub{
   font-size:10px;
+
   color:var(--muted);
 }
 
@@ -781,50 +644,33 @@ select:disabled{
   border-radius:11px;
 
   display:grid;
-
   place-items:center;
 
   font-weight:950;
-
-  border:
-    1px solid transparent;
 }
 
 .icon.blue{
-  background:
-    var(--gold-soft);
+  background:var(--gold-soft);
 
-  color:
-    var(--gold2);
-
-  border-color:
-    rgba(215,177,92,.12);
-
-  box-shadow:
-    0 0 22px rgba(215,177,92,.08);
+  color:var(--gold2);
 }
 
 .icon.green{
-  background:
-    var(--green-soft);
+  background:var(--green-soft);
 
-  color:
-    var(--green);
+  color:var(--green);
 }
 
 .icon.red{
-  background:
-    var(--red-soft);
+  background:var(--red-soft);
 
-  color:
-    var(--red);
+  color:var(--red);
 }
 
 .grid-2{
   display:grid;
 
-  grid-template-columns:
-    1.7fr 1fr;
+  grid-template-columns:1.7fr 1fr;
 
   gap:16px;
 
@@ -836,13 +682,11 @@ select:disabled{
 }
 
 .card-head{
-  padding:
-    18px 19px 0;
+  padding:18px 19px 0;
 
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   align-items:center;
 
@@ -872,8 +716,7 @@ select:disabled{
 .goal-row{
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:12px;
 
@@ -891,8 +734,7 @@ select:disabled{
 .goal-small{
   font-size:10px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   margin-top:4px;
 }
@@ -904,8 +746,7 @@ select:disabled{
 
   overflow:hidden;
 
-  background:
-    rgba(255,255,255,.055);
+  background:rgba(255,255,255,.055);
 
   margin-top:9px;
 }
@@ -914,9 +755,6 @@ select:disabled{
   height:100%;
 
   border-radius:inherit;
-
-  box-shadow:
-    0 0 14px currentColor;
 }
 
 .fill-blue{
@@ -953,77 +791,55 @@ select:disabled{
 
   border-radius:999px;
 
-  padding:
-    5px 8px;
+  padding:5px 8px;
 
   font-size:9px;
 
   font-weight:850;
-
-  border:
-    1px solid transparent;
 }
 
 .status.good{
-  background:
-    var(--green-soft);
+  background:var(--green-soft);
 
-  color:
-    var(--green);
-
-  border-color:
-    rgba(80,200,140,.13);
-}
-
-.status.warn{
-  background:
-    var(--yellow-soft);
-
-  color:#eab85e;
+  color:var(--green);
 }
 
 .status.bad{
-  background:
-    var(--red-soft);
+  background:var(--red-soft);
 
-  color:
-    #ff858e;
+  color:#ff858e;
 }
 
 .status.neutral{
-  background:
-    rgba(255,255,255,.055);
+  background:rgba(255,255,255,.055);
 
-  color:
-    #9ca8bb;
-
-  border-color:
-    rgba(255,255,255,.055);
+  color:#9ca8bb;
 }
 
 .mini-list{
   display:flex;
+
   flex-direction:column;
+
   gap:12px;
 }
 
 .mini-row{
-  border-bottom:
-    1px solid rgba(255,255,255,.055);
+  border-bottom:1px solid rgba(255,255,255,.055);
 
   padding-bottom:12px;
 }
 
 .mini-row:last-child{
   border-bottom:0;
+
   padding-bottom:0;
 }
 
 .mini-top{
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:12px;
 }
@@ -1041,25 +857,31 @@ select:disabled{
 
   font-weight:900;
 
-  color:
-    var(--gold2);
+  color:var(--gold2);
 }
 
 .mini-meta{
   font-size:10px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   margin-top:4px;
+}
+
+.partner-line{
+  margin-top:5px;
+
+  color:var(--gold2);
+
+  font-size:10px;
+
+  font-weight:750;
 }
 
 .budget-layout{
   display:grid;
 
-  grid-template-columns:
-    minmax(0,1fr)
-    360px;
+  grid-template-columns:minmax(0,1fr) 360px;
 
   gap:16px;
 }
@@ -1071,8 +893,7 @@ select:disabled{
 .form-grid{
   display:grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
 
   gap:16px;
 }
@@ -1093,53 +914,31 @@ select:disabled{
 .field select{
   width:100%;
 
-  border:
-    1px solid rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.09);
 
   border-radius:9px;
 
-  background:
-    rgba(5,9,16,.55);
+  background:rgba(5,9,16,.55);
 
-  padding:
-    11px 12px;
+  padding:11px 12px;
 
   outline:none;
 
   color:#edf0f6;
-
-  transition:
-    border-color .16s ease,
-    box-shadow .16s ease,
-    background .16s ease;
 }
 
 .field input:focus,
 .field select:focus{
-  border-color:
-    rgba(215,177,92,.55);
+  border-color:rgba(215,177,92,.55);
 
   box-shadow:
     0 0 0 3px rgba(215,177,92,.08);
-
-  background:
-    rgba(9,14,24,.72);
-}
-
-.field input::placeholder{
-  color:#59657a;
-}
-
-select option{
-  background:#101827;
-  color:#f0f2f7;
 }
 
 .field-help{
   font-size:10px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   margin-top:6px;
 }
@@ -1147,8 +946,7 @@ select option{
 .form-actions{
   display:flex;
 
-  justify-content:
-    flex-end;
+  justify-content:flex-end;
 
   gap:8px;
 
@@ -1158,8 +956,7 @@ select option{
 .toolbar{
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:12px;
 
@@ -1180,36 +977,24 @@ select option{
 
 .toolbar input,
 .toolbar select{
-  border:
-    1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
 
-  background:
-    rgba(8,13,23,.74);
+  background:rgba(8,13,23,.74);
 
   color:#e9edf5;
 
   border-radius:9px;
 
-  padding:
-    9px 11px;
+  padding:9px 11px;
 
   font-size:12px;
-
-  outline:none;
-}
-
-.toolbar input:focus,
-.toolbar select:focus{
-  border-color:
-    rgba(215,177,92,.4);
 }
 
 .fundraiser-grid,
 .event-grid{
   display:grid;
 
-  grid-template-columns:
-    repeat(3,1fr);
+  grid-template-columns:repeat(3,1fr);
 
   gap:16px;
 }
@@ -1217,37 +1002,21 @@ select option{
 .fund-card,
 .event-card{
   padding:18px;
-
-  transition:
-    transform .18s ease,
-    border-color .18s ease;
-}
-
-.fund-card:hover,
-.event-card:hover{
-  transform:
-    translateY(-2px);
-
-  border-color:
-    rgba(215,177,92,.18);
 }
 
 .fund-top{
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:10px;
 
-  align-items:
-    flex-start;
+  align-items:flex-start;
 }
 
 .fund-card h3,
 .event-card h3{
-  margin:
-    0 0 4px;
+  margin:0 0 4px;
 
   font-size:14px;
 
@@ -1257,35 +1026,29 @@ select option{
 .fund-date{
   font-size:10px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 }
 
 .fund-stats,
 .event-stats{
   display:grid;
 
-  grid-template-columns:
-    repeat(3,1fr);
+  grid-template-columns:repeat(3,1fr);
 
   gap:8px;
 
-  margin:
-    16px 0 13px;
+  margin:16px 0 13px;
 }
 
 .event-stats{
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
 }
 
 .fund-stat,
 .event-stat{
-  background:
-    rgba(255,255,255,.035);
+  background:rgba(255,255,255,.035);
 
-  border:
-    1px solid rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.045);
 
   border-radius:9px;
 
@@ -1298,8 +1061,7 @@ select option{
 
   font-size:9px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   margin-bottom:4px;
 }
@@ -1320,16 +1082,13 @@ select option{
 .empty{
   text-align:center;
 
-  padding:
-    40px 18px;
+  padding:40px 18px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 }
 
 .empty h3{
-  margin:
-    0 0 6px;
+  margin:0 0 6px;
 
   color:#f0ede5;
 
@@ -1337,8 +1096,7 @@ select option{
 }
 
 .empty p{
-  margin:
-    0 0 14px;
+  margin:0 0 14px;
 
   font-size:12px;
 }
@@ -1352,16 +1110,13 @@ select option{
 .summary-item{
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:12px;
 
-  padding:
-    13px 0;
+  padding:13px 0;
 
-  border-bottom:
-    1px solid rgba(255,255,255,.055);
+  border-bottom:1px solid rgba(255,255,255,.055);
 
   font-size:12px;
 }
@@ -1371,12 +1126,7 @@ select option{
 }
 
 .summary-item span{
-  color:
-    var(--muted);
-}
-
-.summary-item strong{
-  color:#f2efe8;
+  color:var(--muted);
 }
 
 .report-card{
@@ -1386,18 +1136,15 @@ select option{
 .report-grid{
   display:grid;
 
-  grid-template-columns:
-    repeat(4,1fr);
+  grid-template-columns:repeat(4,1fr);
 
   gap:12px;
 }
 
 .report-box{
-  background:
-    rgba(255,255,255,.035);
+  background:rgba(255,255,255,.035);
 
-  border:
-    1px solid rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.045);
 
   border-radius:10px;
 
@@ -1409,8 +1156,7 @@ select option{
 
   font-size:9px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   text-transform:uppercase;
 
@@ -1427,6 +1173,132 @@ select option{
   color:#f2efe8;
 }
 
+.analytics-section{
+  margin-top:24px;
+}
+
+.analytics-title{
+  margin:0 0 5px;
+
+  color:#fff6df;
+
+  font-size:16px;
+}
+
+.analytics-subtitle{
+  margin:0 0 14px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.analytics-table-wrap{
+  overflow:auto;
+
+  border:1px solid rgba(255,255,255,.06);
+
+  border-radius:11px;
+}
+
+.analytics-table{
+  width:100%;
+
+  min-width:700px;
+
+  border-collapse:collapse;
+
+  font-size:11px;
+}
+
+.analytics-table th{
+  padding:11px;
+
+  text-align:left;
+
+  color:#8f9bb0;
+
+  background:rgba(255,255,255,.035);
+
+  text-transform:uppercase;
+
+  letter-spacing:.5px;
+
+  font-size:8px;
+}
+
+.analytics-table td{
+  padding:12px 11px;
+
+  border-top:1px solid rgba(255,255,255,.05);
+
+  color:#dce2ec;
+}
+
+.analytics-table td strong{
+  color:#fff5dc;
+}
+
+.month-report{
+  display:grid;
+
+  gap:9px;
+
+  margin-top:14px;
+}
+
+.month-report-row{
+  display:grid;
+
+  grid-template-columns:
+    48px
+    minmax(120px,1fr)
+    95px
+    95px
+    80px;
+
+  gap:10px;
+
+  align-items:center;
+
+  font-size:10px;
+}
+
+.month-report-name{
+  font-weight:850;
+
+  color:#dce2ec;
+}
+
+.month-track{
+  height:8px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.055);
+}
+
+.month-track div{
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--gold3),
+      var(--gold2)
+    );
+
+  border-radius:999px;
+}
+
+.month-value{
+  text-align:right;
+
+  color:#c7cfdb;
+}
+
 .year-toolbar{
   display:flex;
 
@@ -1437,30 +1309,22 @@ select option{
   flex-wrap:wrap;
 }
 
-.year-toolbar label{
-  color:#c5ccd8;
-}
-
 .year-toolbar select{
-  border:
-    1px solid rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.09);
 
-  background:
-    rgba(7,11,19,.7);
+  background:rgba(7,11,19,.7);
 
   color:#f0f2f7;
 
   border-radius:9px;
 
-  padding:
-    9px 12px;
+  padding:9px 12px;
 }
 
 .year-summary{
   display:grid;
 
-  grid-template-columns:
-    repeat(4,1fr);
+  grid-template-columns:repeat(4,1fr);
 
   gap:12px;
 
@@ -1474,15 +1338,13 @@ select option{
 .year-summary-box span{
   display:block;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   font-size:9px;
 
   font-weight:850;
 
-  text-transform:
-    uppercase;
+  text-transform:uppercase;
 }
 
 .year-summary-box strong{
@@ -1497,15 +1359,6 @@ select option{
 
 .chart-wrap{
   overflow-x:auto;
-
-  border-radius:12px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.018),
-      transparent
-    );
 }
 
 .year-chart{
@@ -1519,8 +1372,7 @@ select option{
 .month-bars{
   display:grid;
 
-  grid-template-columns:
-    repeat(10,1fr);
+  grid-template-columns:repeat(10,1fr);
 
   gap:8px;
 
@@ -1549,8 +1401,6 @@ select option{
   font-weight:850;
 
   margin-bottom:5px;
-
-  color:#ddd5c3;
 }
 
 .month-bar-track{
@@ -1575,11 +1425,7 @@ select option{
       var(--gold3)
     );
 
-  border-radius:
-    6px 6px 2px 2px;
-
-  box-shadow:
-    0 0 15px rgba(215,177,92,.08);
+  border-radius:6px 6px 2px 2px;
 }
 
 .month-name{
@@ -1587,8 +1433,7 @@ select option{
 
   font-size:9px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 }
 
 .legend{
@@ -1610,13 +1455,11 @@ select option{
 
   font-size:10px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 }
 
 .legend-line{
   width:18px;
-
   height:3px;
 
   border-radius:999px;
@@ -1633,8 +1476,7 @@ select option{
 }
 
 .settings-card h3{
-  margin:
-    0 0 6px;
+  margin:0 0 6px;
 
   font-size:15px;
 
@@ -1642,11 +1484,9 @@ select option{
 }
 
 .settings-card p{
-  margin:
-    0 0 16px;
+  margin:0 0 16px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   font-size:11px;
 
@@ -1656,8 +1496,7 @@ select option{
 .profile-grid{
   display:grid;
 
-  grid-template-columns:
-    130px minmax(0,1fr);
+  grid-template-columns:130px minmax(0,1fr);
 
   gap:22px;
 }
@@ -1670,15 +1509,13 @@ select option{
   width:110px;
   height:110px;
 
-  margin:
-    0 auto 10px;
+  margin:0 auto 10px;
 
   border-radius:22px;
 
   overflow:hidden;
 
   display:grid;
-
   place-items:center;
 
   background:
@@ -1694,12 +1531,6 @@ select option{
   font-size:30px;
 
   font-weight:1000;
-
-  border:
-    1px solid rgba(255,255,255,.14);
-
-  box-shadow:
-    0 0 35px rgba(215,177,92,.13);
 }
 
 .logo-preview img{
@@ -1713,27 +1544,17 @@ select option{
 
   padding:12px;
 
-  background:
-    var(--gold-soft);
+  background:var(--gold-soft);
 
-  border:
-    1px solid rgba(215,177,92,.12);
+  border:1px solid rgba(215,177,92,.12);
 
   border-radius:10px;
 
   font-size:11px;
-
-  color:#c9cfda;
-}
-
-.role-box strong{
-  color:
-    var(--gold2);
 }
 
 .danger-zone{
-  border-color:
-    rgba(239,108,118,.18);
+  border-color:rgba(239,108,118,.18);
 }
 
 .danger-actions{
@@ -1765,28 +1586,23 @@ select option{
 
   padding:14px;
 
-  border:
-    1px solid rgba(255,255,255,.065);
+  border:1px solid rgba(255,255,255,.065);
 
   border-radius:11px;
 
-  background:
-    rgba(255,255,255,.025);
+  background:rgba(255,255,255,.025);
 }
 
 .officer-name{
   font-size:12px;
 
   font-weight:850;
-
-  color:#f0edf0;
 }
 
 .officer-meta{
   margin-top:4px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   font-size:10px;
 }
@@ -1796,19 +1612,13 @@ select option{
 
   margin-left:6px;
 
-  padding:
-    3px 6px;
+  padding:3px 6px;
 
   border-radius:999px;
 
-  background:
-    var(--gold-soft);
+  background:var(--gold-soft);
 
-  color:
-    var(--gold2);
-
-  border:
-    1px solid rgba(215,177,92,.12);
+  color:var(--gold2);
 
   font-size:8px;
 
@@ -1820,16 +1630,13 @@ select option{
 .custom-role-input{
   width:100%;
 
-  padding:
-    9px 10px;
+  padding:9px 10px;
 
-  border:
-    1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
 
   border-radius:8px;
 
-  background:
-    rgba(7,11,19,.70);
+  background:rgba(7,11,19,.70);
 
   color:#edf0f6;
 
@@ -1838,15 +1645,6 @@ select option{
 
 .custom-role-input{
   margin-top:8px;
-}
-
-.officer-role-select:focus,
-.officer-permission-select:focus,
-.custom-role-input:focus{
-  outline:none;
-
-  border-color:
-    rgba(215,177,92,.45);
 }
 
 .officer-action-stack{
@@ -1858,8 +1656,7 @@ select option{
 .save-role-btn{
   border:0;
 
-  padding:
-    9px 10px;
+  padding:9px 10px;
 
   border-radius:8px;
 
@@ -1878,16 +1675,13 @@ select option{
 }
 
 .remove-officer-btn{
-  border:
-    1px solid rgba(239,108,118,.15);
+  border:1px solid rgba(239,108,118,.15);
 
-  padding:
-    8px 10px;
+  padding:8px 10px;
 
   border-radius:8px;
 
-  background:
-    var(--red-soft);
+  background:var(--red-soft);
 
   color:#ff858e;
 
@@ -1899,8 +1693,7 @@ select option{
 .permission-note{
   margin-top:5px;
 
-  color:
-    var(--muted2);
+  color:var(--muted2);
 
   font-size:9px;
 
@@ -1909,22 +1702,18 @@ select option{
 
 .activity-list{
   display:grid;
-  gap:0;
 }
 
 .activity-row{
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:16px;
 
-  padding:
-    12px 0;
+  padding:12px 0;
 
-  border-bottom:
-    1px solid rgba(255,255,255,.055);
+  border-bottom:1px solid rgba(255,255,255,.055);
 }
 
 .activity-row:last-child{
@@ -1937,21 +1726,12 @@ select option{
   font-size:11px;
 
   line-height:1.45;
-
-  color:#cbd2df;
-}
-
-.activity-main strong{
-  font-weight:850;
-
-  color:#f1eee7;
 }
 
 .activity-time{
   flex:none;
 
-  color:
-    var(--muted2);
+  color:var(--muted);
 
   font-size:9px;
 
@@ -1966,16 +1746,13 @@ select option{
   display:none;
 
   align-items:center;
-
   justify-content:center;
 
   padding:18px;
 
-  background:
-    rgba(2,4,8,.78);
+  background:rgba(2,4,8,.78);
 
-  backdrop-filter:
-    blur(9px);
+  backdrop-filter:blur(9px);
 
   z-index:100;
 }
@@ -1985,8 +1762,7 @@ select option{
 }
 
 .modal{
-  width:
-    min(590px,100%);
+  width:min(590px,100%);
 
   max-height:92vh;
 
@@ -1999,25 +1775,21 @@ select option{
       #0a101c
     );
 
-  border:
-    1px solid rgba(215,177,92,.16);
+  border:1px solid rgba(215,177,92,.16);
 
   border-radius:17px;
 
   padding:22px;
 
   box-shadow:
-    0 30px 90px rgba(0,0,0,.55),
-    0 0 50px rgba(215,177,92,.06);
+    0 30px 90px rgba(0,0,0,.55);
 }
 
 .modal-head{
   display:flex;
 
   align-items:center;
-
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:12px;
 
@@ -2033,11 +1805,9 @@ select option{
 }
 
 .close-btn{
-  border:
-    1px solid rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.07);
 
-  background:
-    rgba(255,255,255,.045);
+  background:rgba(255,255,255,.045);
 
   color:#d7deeb;
 
@@ -2066,8 +1836,7 @@ select option{
 
   border-radius:10px;
 
-  padding:
-    11px 14px;
+  padding:11px 14px;
 
   font-size:12px;
 
@@ -2077,22 +1846,17 @@ select option{
 
   opacity:0;
 
-  transform:
-    translateY(10px);
+  transform:translateY(10px);
 
   pointer-events:none;
 
   transition:.2s;
-
-  box-shadow:
-    0 15px 40px rgba(215,177,92,.16);
 }
 
 .toast.show{
   opacity:1;
 
-  transform:
-    translateY(0);
+  transform:translateY(0);
 }
 
 .loading-screen{
@@ -2116,60 +1880,16 @@ select option{
   text-align:center;
 }
 
-.loading-screen::before{
-  content:"";
-
-  position:absolute;
-
-  width:110px;
-  height:110px;
-
-  border-radius:50%;
-
-  border:
-    1px solid rgba(215,177,92,.18);
-
-  box-shadow:
-    0 0 70px rgba(215,177,92,.10);
-
-  animation:
-    pulseOrbit 1.8s ease-in-out infinite;
-}
-
-@keyframes pulseOrbit{
-  0%,100%{
-    transform:
-      scale(.92);
-
-    opacity:.45;
-  }
-
-  50%{
-    transform:
-      scale(1.08);
-
-    opacity:.85;
-  }
-}
-
-.loading-screen div{
-  position:relative;
-  z-index:2;
-}
-
 .loading-screen h2{
-  margin:
-    0 0 5px;
+  margin:0 0 5px;
 
-  color:
-    var(--gold2);
+  color:var(--gold2);
 }
 
 .loading-screen p{
   margin:0;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   font-size:12px;
 }
@@ -2178,73 +1898,49 @@ select option{
   display:none!important;
 }
 
-::-webkit-scrollbar{
-  width:9px;
-  height:9px;
-}
-
-::-webkit-scrollbar-track{
-  background:#070b13;
-}
-
-::-webkit-scrollbar-thumb{
-  background:#263044;
-  border-radius:999px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-  background:#3a4253;
-}
-
 @media(max-width:1100px){
 
   .metrics,
   .year-summary{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
   .fundraiser-grid,
   .event-grid{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
   .budget-layout{
-    grid-template-columns:
-      1fr;
+    grid-template-columns:1fr;
   }
 
   .report-grid{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
 @media(max-width:950px){
 
   .officer-row{
-    grid-template-columns:
-      1fr 1fr;
+    grid-template-columns:1fr 1fr;
   }
 }
 
 @media(max-width:780px){
 
   .sidebar{
-    transform:
-      translateX(-100%);
+    transform:translateX(-100%);
 
     transition:.2s;
   }
 
   .sidebar.open{
-    transform:
-      translateX(0);
+    transform:translateX(0);
   }
 
   .main{
     margin-left:0;
+
     width:100%;
   }
 
@@ -2257,42 +1953,40 @@ select option{
   }
 
   .grid-2{
-    grid-template-columns:
-      1fr;
+    grid-template-columns:1fr;
   }
 
   .fundraiser-grid,
   .event-grid{
-    grid-template-columns:
-      1fr;
+    grid-template-columns:1fr;
   }
 
   .form-grid,
   .profile-grid{
+    grid-template-columns:1fr;
+  }
+
+  .month-report-row{
     grid-template-columns:
-      1fr;
+      38px
+      1fr
+      80px;
   }
 
-  .logo-editor{
-    text-align:left;
-  }
-
-  .logo-preview{
-    margin:
-      0 0 10px;
+  .month-report-row .month-cost,
+  .month-report-row .month-count-report{
+    display:none;
   }
 }
 
 @media(max-width:620px){
 
   .officer-row{
-    grid-template-columns:
-      1fr;
+    grid-template-columns:1fr;
   }
 
   .activity-row{
-    flex-direction:
-      column;
+    flex-direction:column;
 
     gap:4px;
   }
@@ -2306,27 +2000,19 @@ select option{
 
   .metrics,
   .year-summary{
-    grid-template-columns:
-      1fr;
+    grid-template-columns:1fr;
   }
 
   .page-head{
-    flex-direction:
-      column;
-  }
-
-  .page-head .primary{
-    width:100%;
+    flex-direction:column;
   }
 
   .report-grid{
-    grid-template-columns:
-      1fr 1fr;
+    grid-template-columns:1fr 1fr;
   }
 
   .fund-stats{
-    grid-template-columns:
-      1fr;
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -2334,7 +2020,10 @@ select option{
 
 <body>
 
-<div id="loadingScreen" class="loading-screen">
+<div
+  id="loadingScreen"
+  class="loading-screen"
+>
   <div>
     <h2>Treasurery</h2>
     <p>Opening your financial command center...</p>
@@ -2343,11 +2032,17 @@ select option{
 
 <div class="app">
 
-<aside class="sidebar" id="sidebar">
+<aside
+  class="sidebar"
+  id="sidebar"
+>
 
   <div class="brand">
 
-    <div class="logo" id="sidebarLogo">
+    <div
+      class="logo"
+      id="sidebarLogo"
+    >
       T
     </div>
 
@@ -2358,43 +2053,70 @@ select option{
 
   </div>
 
-  <div class="nav-label">Overview</div>
+  <div class="nav-label">
+    Overview
+  </div>
 
-  <button class="nav-btn active" data-page="dashboard">
+  <button
+    class="nav-btn active"
+    data-page="dashboard"
+  >
     <span class="nav-icon">✦</span>
     Dashboard
   </button>
 
-  <button class="nav-btn" data-page="budget">
+  <button
+    class="nav-btn"
+    data-page="budget"
+  >
     <span class="nav-icon">▤</span>
     Budget Plan
   </button>
 
-  <button class="nav-btn" data-page="fundraisers">
+  <button
+    class="nav-btn"
+    data-page="fundraisers"
+  >
     <span class="nav-icon">◈</span>
     Fundraisers
   </button>
 
-  <button class="nav-btn" data-page="events">
+  <button
+    class="nav-btn"
+    data-page="events"
+  >
     <span class="nav-icon">◎</span>
     Event Goals
   </button>
 
-  <div class="nav-label">Insights</div>
+  <div class="nav-label">
+    Insights
+  </div>
 
-  <button class="nav-btn" data-page="year">
+  <button
+    class="nav-btn"
+    data-page="year"
+  >
     <span class="nav-icon">↗</span>
     School Year Progress
   </button>
 
-  <button class="nav-btn" data-page="reports">
+  <button
+    class="nav-btn"
+    data-page="reports"
+  >
     <span class="nav-icon">▧</span>
     Reports
   </button>
 
-  <div class="nav-label">App</div>
+  <div class="nav-label">
+    App
+  </div>
 
-  <button class="nav-btn" data-page="settings">
+  <button
+    class="nav-btn"
+    data-page="settings"
+  >
     <span class="nav-icon">⚙</span>
     Settings
   </button>
@@ -2414,11 +2136,17 @@ select option{
 
   <div class="top-left">
 
-    <button class="menu-btn" id="menuBtn">
+    <button
+      class="menu-btn"
+      id="menuBtn"
+    >
       ☰
     </button>
 
-    <div class="page-name" id="pageName">
+    <div
+      class="page-name"
+      id="pageName"
+    >
       Dashboard
     </div>
 
@@ -2428,7 +2156,10 @@ select option{
 
 <div class="content">
 
-<section class="page active" id="page-dashboard">
+<section
+  class="page active"
+  id="page-dashboard"
+>
 
   <div class="page-head">
 
@@ -2465,7 +2196,10 @@ select option{
             Current Balance
           </div>
 
-          <div class="metric-value" id="dashBalance">
+          <div
+            class="metric-value"
+            id="dashBalance"
+          >
             $0
           </div>
 
@@ -2493,11 +2227,17 @@ select option{
             Revenue Raised
           </div>
 
-          <div class="metric-value" id="dashRevenue">
+          <div
+            class="metric-value"
+            id="dashRevenue"
+          >
             $0
           </div>
 
-          <div class="metric-sub" id="dashRevenueSub">
+          <div
+            class="metric-sub"
+            id="dashRevenueSub"
+          >
             0% of goal
           </div>
 
@@ -2521,11 +2261,17 @@ select option{
             Total Costs
           </div>
 
-          <div class="metric-value" id="dashCosts">
+          <div
+            class="metric-value"
+            id="dashCosts"
+          >
             $0
           </div>
 
-          <div class="metric-sub" id="dashCostsSub">
+          <div
+            class="metric-sub"
+            id="dashCostsSub"
+          >
             0% of limit
           </div>
 
@@ -2549,11 +2295,17 @@ select option{
             Net Profit
           </div>
 
-          <div class="metric-value" id="dashProfit">
+          <div
+            class="metric-value"
+            id="dashProfit"
+          >
             $0
           </div>
 
-          <div class="metric-sub" id="dashProfitSub">
+          <div
+            class="metric-sub"
+            id="dashProfitSub"
+          >
             0% of goal
           </div>
 
@@ -2577,7 +2329,10 @@ select option{
         <h3>Fundraiser Performance</h3>
       </div>
 
-      <div class="card-body" id="performanceList"></div>
+      <div
+        class="card-body"
+        id="performanceList"
+      ></div>
 
     </div>
 
@@ -2599,23 +2354,27 @@ select option{
                 Revenue goal
               </div>
 
-              <div class="goal-small" id="revenueGoalText"></div>
+              <div
+                class="goal-small"
+                id="revenueGoalText"
+              ></div>
 
             </div>
 
-            <span class="status neutral" id="revenueGoalStatus">
+            <span
+              class="status neutral"
+              id="revenueGoalStatus"
+            >
               Not set
             </span>
 
           </div>
 
           <div class="progress">
-
             <div
               class="fill-blue"
               id="revenueGoalBar"
             ></div>
-
           </div>
 
         </div>
@@ -2630,23 +2389,27 @@ select option{
                 Profit goal
               </div>
 
-              <div class="goal-small" id="profitGoalText"></div>
+              <div
+                class="goal-small"
+                id="profitGoalText"
+              ></div>
 
             </div>
 
-            <span class="status neutral" id="profitGoalStatus">
+            <span
+              class="status neutral"
+              id="profitGoalStatus"
+            >
               Not set
             </span>
 
           </div>
 
           <div class="progress">
-
             <div
               class="fill-green"
               id="profitGoalBar"
             ></div>
-
           </div>
 
         </div>
@@ -2661,23 +2424,27 @@ select option{
                 Spending limit
               </div>
 
-              <div class="goal-small" id="costGoalText"></div>
+              <div
+                class="goal-small"
+                id="costGoalText"
+              ></div>
 
             </div>
 
-            <span class="status neutral" id="costGoalStatus">
+            <span
+              class="status neutral"
+              id="costGoalStatus"
+            >
               Not set
             </span>
 
           </div>
 
           <div class="progress">
-
             <div
               class="fill-red"
               id="costGoalBar"
             ></div>
-
           </div>
 
         </div>
@@ -2703,7 +2470,10 @@ select option{
 
     </div>
 
-    <div class="card-body" id="dashboardFundraisers"></div>
+    <div
+      class="card-body"
+      id="dashboardFundraisers"
+    ></div>
 
   </div>
 
@@ -2722,13 +2492,19 @@ select option{
 
     </div>
 
-    <div class="card-body" id="dashboardEvents"></div>
+    <div
+      class="card-body"
+      id="dashboardEvents"
+    ></div>
 
   </div>
 
 </section>
 
-<section class="page" id="page-budget">
+<section
+  class="page"
+  id="page-budget"
+>
 
   <div class="page-head">
 
@@ -2746,7 +2522,10 @@ select option{
 
   <div class="budget-layout">
 
-    <form class="card form-card" id="budgetForm">
+    <form
+      class="card form-card"
+      id="budgetForm"
+    >
 
       <div class="form-grid">
 
@@ -2846,7 +2625,10 @@ select option{
 
 </section>
 
-<section class="page" id="page-fundraisers">
+<section
+  class="page"
+  id="page-fundraisers"
+>
 
   <div class="page-head">
 
@@ -2855,7 +2637,7 @@ select option{
       <h2>Fundraisers</h2>
 
       <p>
-        Track every fundraiser and when it happened.
+        Track every fundraiser, partner, location, and result.
       </p>
 
     </div>
@@ -2917,7 +2699,10 @@ select option{
 
 </section>
 
-<section class="page" id="page-events">
+<section
+  class="page"
+  id="page-events"
+>
 
   <div class="page-head">
 
@@ -2947,7 +2732,10 @@ select option{
 
 </section>
 
-<section class="page" id="page-year">
+<section
+  class="page"
+  id="page-year"
+>
 
   <div class="page-head">
 
@@ -2963,10 +2751,7 @@ select option{
 
     <div class="year-toolbar">
 
-      <label
-        for="yearSelect"
-        style="font-size:11px;font-weight:800"
-      >
+      <label for="yearSelect">
         School Year
       </label>
 
@@ -3023,11 +2808,7 @@ select option{
   <div class="card full-card">
 
     <div class="card-head">
-
-      <h3>
-        Cumulative Revenue by School Month
-      </h3>
-
+      <h3>Cumulative Revenue by School Month</h3>
     </div>
 
     <div class="card-body">
@@ -3086,11 +2867,7 @@ select option{
   <div class="card">
 
     <div class="card-head">
-
-      <h3>
-        Fundraisers Held Each School Month
-      </h3>
-
+      <h3>Fundraisers Held Each School Month</h3>
     </div>
 
     <div class="card-body">
@@ -3106,16 +2883,19 @@ select option{
 
 </section>
 
-<section class="page" id="page-reports">
+<section
+  class="page"
+  id="page-reports"
+>
 
   <div class="page-head">
 
     <div>
 
-      <h2>Reports</h2>
+      <h2>Reports & Analytics</h2>
 
       <p>
-        A clean financial summary for officers and sponsors.
+        Understand where the club earns money and which fundraisers perform best.
       </p>
 
     </div>
@@ -3136,7 +2916,10 @@ select option{
 
 </section>
 
-<section class="page" id="page-settings">
+<section
+  class="page"
+  id="page-settings"
+>
 
   <div class="page-head">
 
@@ -3222,6 +3005,7 @@ select option{
             <div class="role-box">
 
               Your access:
+
               <strong id="currentRoleText">
                 Loading...
               </strong>
@@ -3282,9 +3066,7 @@ select option{
       id="officerManagementCard"
     >
 
-      <h3>
-        Officers & Roles
-      </h3>
+      <h3>Officers & Roles</h3>
 
       <p>
         Owners and sponsors can manage all officer positions. Presidents can manage normal officer positions, but cannot assign Sponsor, Treasurer, or Finance Manager access.
@@ -3294,20 +3076,14 @@ select option{
         id="officerList"
         class="officer-list"
       >
-
-        <div style="font-size:11px;color:var(--muted)">
-          Loading officers...
-        </div>
-
+        Loading officers...
       </div>
 
     </div>
 
     <div class="card settings-card">
 
-      <h3>
-        Recent Activity
-      </h3>
+      <h3>Recent Activity</h3>
 
       <p>
         See who changed budgets, fundraisers, event goals, club settings, and officer roles.
@@ -3317,11 +3093,7 @@ select option{
         id="activityList"
         class="activity-list"
       >
-
-        <div style="font-size:11px;color:var(--muted)">
-          Loading activity...
-        </div>
-
+        Loading activity...
       </div>
 
     </div>
@@ -3334,7 +3106,7 @@ select option{
       <h3>Leave Club</h3>
 
       <p>
-        Remove your own access to this club. Club owners cannot leave without deleting the club.
+        Remove your own access to this club.
       </p>
 
       <button
@@ -3350,12 +3122,10 @@ select option{
       class="card settings-card danger-zone owner-settings"
     >
 
-      <h3>
-        Archive or Delete Club
-      </h3>
+      <h3>Archive or Delete Club</h3>
 
       <p>
-        Archive hides the club while keeping its information. You can restore it later from Your Clubs. Delete permanently removes the club and its financial data.
+        Archive keeps the club's information. Delete permanently removes it.
       </p>
 
       <div class="danger-actions">
@@ -3429,8 +3199,45 @@ select option{
         <input
           id="fundraiserName"
           type="text"
+          placeholder="Example: Spirit Night"
           required
         >
+
+      </div>
+
+      <div class="field">
+
+        <label for="fundraiserBusiness">
+          Business / Partner
+        </label>
+
+        <input
+          id="fundraiserBusiness"
+          type="text"
+          placeholder="Example: Chick-fil-A"
+        >
+
+        <div class="field-help">
+          Optional. Used for partner performance analytics.
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label for="fundraiserLocation">
+          Location
+        </label>
+
+        <input
+          id="fundraiserLocation"
+          type="text"
+          placeholder="Example: Landstar"
+        >
+
+        <div class="field-help">
+          Optional. Useful when the same business has multiple locations.
+        </div>
 
       </div>
 
@@ -3493,10 +3300,6 @@ select option{
           type="date"
           required
         >
-
-        <div class="field-help">
-          This date is used for monthly and school-year comparisons.
-        </div>
 
       </div>
 
@@ -3669,7 +3472,10 @@ select option{
 </div>
 </div>
 
-<div class="toast" id="toast">
+<div
+  class="toast"
+  id="toast"
+>
   Saved
 </div>
 
@@ -3708,16 +3514,8 @@ let fundraisers = [];
 let eventGoals = [];
 
 const SCHOOL_MONTHS = [
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May"
+  "Aug","Sep","Oct","Nov","Dec",
+  "Jan","Feb","Mar","Apr","May"
 ];
 
 const roleLabels = {
@@ -3775,7 +3573,9 @@ function money(value){
 function esc(value){
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   div.textContent =
     value ?? "";
@@ -3798,12 +3598,16 @@ function attr(value){
 
 function initials(value){
 
-  return String(value || "T")
+  return String(
+    value ||
+    "T"
+  )
     .split(/\s+/)
     .slice(0,2)
     .map(
       word =>
-        word.charAt(0)
+        word
+          .charAt(0)
           .toUpperCase()
     )
     .join("");
@@ -4004,7 +3808,9 @@ function permissionLabel(member){
 
   return (
     permissionLabels[
-      memberPermission(member)
+      memberPermission(
+        member
+      )
     ] ||
     "View Only"
   );
@@ -4018,6 +3824,28 @@ function fundraiserDate(item){
     item.created_at?.slice(0,10) ||
     null
   );
+}
+
+function partnerText(item){
+
+  if(
+    !item.business_partner
+  ){
+    return "";
+  }
+
+  if(
+    item.business_location
+  ){
+
+    return (
+      item.business_partner +
+      " · " +
+      item.business_location
+    );
+  }
+
+  return item.business_partner;
 }
 
 function dateText(value){
@@ -4654,15 +4482,8 @@ function renderPerformanceList(){
 
     container.innerHTML = `
       <div class="empty">
-
-        <h3>
-          No fundraiser data yet
-        </h3>
-
-        <p>
-          Add your first fundraiser to start tracking performance.
-        </p>
-
+        <h3>No fundraiser data yet</h3>
+        <p>Add your first fundraiser to start tracking performance.</p>
       </div>
     `;
 
@@ -4673,8 +4494,14 @@ function renderPerformanceList(){
     [...fundraisers]
       .sort(
         (a,b) =>
-          num(b.amount_raised) -
-          num(a.amount_raised)
+          (
+            num(b.amount_raised) -
+            num(b.costs)
+          ) -
+          (
+            num(a.amount_raised) -
+            num(a.costs)
+          )
       )
       .slice(0,5);
 
@@ -4701,14 +4528,24 @@ function renderPerformanceList(){
               </div>
 
               <div class="mini-money">
-                ${money(item.amount_raised)}
+                ${money(profit)}
               </div>
 
             </div>
 
+            ${
+              partnerText(item)
+                ? `
+                  <div class="partner-line">
+                    ${esc(partnerText(item))}
+                  </div>
+                `
+                : ""
+            }
+
             <div class="mini-meta">
-              Cost ${money(item.costs)}
-              · Profit ${money(profit)}
+              Revenue ${money(item.amount_raised)}
+              · Cost ${money(item.costs)}
             </div>
 
           </div>
@@ -4731,15 +4568,8 @@ function renderDashboardFundraisers(){
 
     container.innerHTML = `
       <div class="empty">
-
-        <h3>
-          No fundraisers yet
-        </h3>
-
-        <p>
-          Your fundraiser activity will appear here.
-        </p>
-
+        <h3>No fundraisers yet</h3>
+        <p>Your fundraiser activity will appear here.</p>
       </div>
     `;
 
@@ -4776,6 +4606,16 @@ function renderDashboardFundraisers(){
 
               </div>
 
+              ${
+                partnerText(item)
+                  ? `
+                    <div class="partner-line">
+                      ${esc(partnerText(item))}
+                    </div>
+                  `
+                  : ""
+              }
+
               <div class="mini-meta">
                 ${dateText(fundraiserDate(item))}
                 · ${Math.round(progress)}% of goal
@@ -4811,15 +4651,8 @@ function renderDashboardEvents(){
 
     container.innerHTML = `
       <div class="empty">
-
-        <h3>
-          No event goals yet
-        </h3>
-
-        <p>
-          Graduation, field day, trips, and other event goals will appear here.
-        </p>
-
+        <h3>No event goals yet</h3>
+        <p>Your event goals will appear here.</p>
       </div>
     `;
 
@@ -4858,10 +4691,7 @@ function renderDashboardEvents(){
                   ${esc(item.name)}
                 </div>
 
-                <div
-                  class="mini-money"
-                  style="${reached ? "color:var(--green)" : ""}"
-                >
+                <div class="mini-money">
                   ${money(item.amount_raised)}
                   /
                   ${money(item.amount_needed)}
@@ -4876,14 +4706,6 @@ function renderDashboardEvents(){
                   style="width:${progress}%"
                 ></div>
 
-              </div>
-
-              <div class="mini-meta">
-                ${
-                  reached
-                    ? "Goal reached"
-                    : Math.round(progress) + "% funded"
-                }
               </div>
 
             </div>
@@ -4942,51 +4764,23 @@ function renderBudget(){
     .innerHTML = `
 
       <div class="summary-item">
-
-        <span>
-          Revenue raised
-        </span>
-
-        <strong>
-          ${money(total.revenue)}
-        </strong>
-
+        <span>Revenue raised</span>
+        <strong>${money(total.revenue)}</strong>
       </div>
 
       <div class="summary-item">
-
-        <span>
-          Total costs
-        </span>
-
-        <strong>
-          ${money(total.costs)}
-        </strong>
-
+        <span>Total costs</span>
+        <strong>${money(total.costs)}</strong>
       </div>
 
       <div class="summary-item">
-
-        <span>
-          Net profit
-        </span>
-
-        <strong>
-          ${money(total.profit)}
-        </strong>
-
+        <span>Net profit</span>
+        <strong>${money(total.profit)}</strong>
       </div>
 
       <div class="summary-item">
-
-        <span>
-          Current balance
-        </span>
-
-        <strong>
-          ${money(total.currentBalance)}
-        </strong>
-
+        <span>Current balance</span>
+        <strong>${money(total.currentBalance)}</strong>
       </div>
     `;
 }
@@ -5018,11 +4812,21 @@ function renderFundraisers(){
     fundraisers.filter(
       item => {
 
+        const searchable =
+          [
+            item.name,
+            item.business_partner,
+            item.business_location
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
         const searchMatch =
           !search ||
-          item.name
-            .toLowerCase()
-            .includes(search);
+          searchable.includes(
+            search
+          );
 
         const filterMatch =
           filter === "all" ||
@@ -5051,15 +4855,8 @@ function renderFundraisers(){
         class="card empty"
         style="grid-column:1/-1"
       >
-
-        <h3>
-          No fundraisers found
-        </h3>
-
-        <p>
-          Add a fundraiser when you're ready.
-        </p>
-
+        <h3>No fundraisers found</h3>
+        <p>Add a fundraiser when you're ready.</p>
       </div>
     `;
 
@@ -5101,6 +4898,16 @@ function renderFundraisers(){
                   ${dateText(fundraiserDate(item))}
                 </div>
 
+                ${
+                  partnerText(item)
+                    ? `
+                      <div class="partner-line">
+                        ${esc(partnerText(item))}
+                      </div>
+                    `
+                    : ""
+                }
+
               </div>
 
               <span class="status neutral">
@@ -5112,52 +4919,25 @@ function renderFundraisers(){
             <div class="fund-stats">
 
               <div class="fund-stat">
-
-                <span>
-                  Raised
-                </span>
-
+                <span>Raised</span>
                 <strong style="color:var(--gold2)">
                   ${money(item.amount_raised)}
                 </strong>
-
               </div>
 
               <div class="fund-stat">
-
-                <span>
-                  Costs
-                </span>
-
+                <span>Costs</span>
                 <strong style="color:var(--red)">
                   ${money(item.costs)}
                 </strong>
-
               </div>
 
               <div class="fund-stat">
-
-                <span>
-                  Profit
-                </span>
-
+                <span>Profit</span>
                 <strong style="color:var(--green)">
                   ${money(profit)}
                 </strong>
-
               </div>
-
-            </div>
-
-            <div class="mini-top">
-
-              <span class="goal-small">
-                Goal progress
-              </span>
-
-              <span class="goal-small">
-                ${Math.round(progress)}%
-              </span>
 
             </div>
 
@@ -5222,15 +5002,8 @@ function renderEvents(){
         class="card empty"
         style="grid-column:1/-1"
       >
-
-        <h3>
-          No event goals yet
-        </h3>
-
-        <p>
-          Add an event goal when you're ready.
-        </p>
-
+        <h3>No event goals yet</h3>
+        <p>Add an event goal when you're ready.</p>
       </div>
     `;
 
@@ -5281,27 +5054,13 @@ function renderEvents(){
             <div class="event-stats">
 
               <div class="event-stat">
-
-                <span>
-                  Raised
-                </span>
-
-                <strong>
-                  ${money(item.amount_raised)}
-                </strong>
-
+                <span>Raised</span>
+                <strong>${money(item.amount_raised)}</strong>
               </div>
 
               <div class="event-stat">
-
-                <span>
-                  Needed
-                </span>
-
-                <strong>
-                  ${money(item.amount_needed)}
-                </strong>
-
+                <span>Needed</span>
+                <strong>${money(item.amount_needed)}</strong>
               </div>
 
             </div>
@@ -5420,14 +5179,18 @@ function schoolMonthIndexFromDate(value){
 function fundraiserSchoolYear(item){
 
   return schoolYearStartFromDate(
-    fundraiserDate(item)
+    fundraiserDate(
+      item
+    )
   );
 }
 
 function fundraiserSchoolMonth(item){
 
   return schoolMonthIndexFromDate(
-    fundraiserDate(item)
+    fundraiserDate(
+      item
+    )
   );
 }
 
@@ -5523,7 +5286,9 @@ function populateYearSelector(){
       : currentStart;
 }
 
-function monthlyData(schoolYearStart){
+function monthlyData(
+  schoolYearStart
+){
 
   const revenue =
     Array(10).fill(0);
@@ -5549,9 +5314,7 @@ function monthlyData(schoolYearStart){
         );
 
       if(
-        monthIndex === null ||
-        monthIndex < 0 ||
-        monthIndex > 9
+        monthIndex === null
       ){
         return;
       }
@@ -5740,16 +5503,7 @@ function renderYearProgress(){
 
   }
   else if(
-    monthsExpected === 0
-  ){
-
-    status.textContent =
-      "Not started";
-
-  }
-  else if(
-    yearRevenue >=
-    expected
+    yearRevenue >= expected
   ){
 
     status.textContent =
@@ -5810,25 +5564,16 @@ function renderYearLineChart(
       ...goalPace
     );
 
-  const left =
-    55;
-
-  const right =
-    865;
-
-  const top =
-    25;
-
-  const bottom =
-    270;
+  const left = 55;
+  const right = 865;
+  const top = 25;
+  const bottom = 270;
 
   const width =
-    right -
-    left;
+    right - left;
 
   const height =
-    bottom -
-    top;
+    bottom - top;
 
   const x =
     index =>
@@ -5836,10 +5581,7 @@ function renderYearLineChart(
       (
         width *
         index /
-        (
-          SCHOOL_MONTHS.length -
-          1
-        )
+        9
       );
 
   const y =
@@ -5853,54 +5595,13 @@ function renderYearLineChart(
 
   function points(values){
 
-    return values.map(
-      (value,index) =>
-        `${x(index)},${y(value)}`
-    ).join(" ");
-  }
-
-  const gridLines =
-    [
-      0,
-      .25,
-      .5,
-      .75,
-      1
-    ]
+    return values
       .map(
-        ratio => {
-
-          const yy =
-            bottom -
-            height *
-            ratio;
-
-          const amount =
-            maxValue *
-            ratio;
-
-          return `
-            <line
-              x1="${left}"
-              y1="${yy}"
-              x2="${right}"
-              y2="${yy}"
-              stroke="rgba(255,255,255,.07)"
-              stroke-width="1"
-            />
-
-            <text
-              x="5"
-              y="${yy + 4}"
-              font-size="10"
-              fill="#7f899c"
-            >
-              ${money(amount)}
-            </text>
-          `;
-        }
+        (value,index) =>
+          `${x(index)},${y(value)}`
       )
-      .join("");
+      .join(" ");
+  }
 
   const labels =
     SCHOOL_MONTHS.map(
@@ -5918,8 +5619,6 @@ function renderYearLineChart(
     ).join("");
 
   svg.innerHTML = `
-
-    ${gridLines}
 
     ${labels}
 
@@ -5946,19 +5645,6 @@ function renderYearLineChart(
       points="${points(goalPace)}"
     />
 
-    ${
-      current.map(
-        (value,index) => `
-          <circle
-            cx="${x(index)}"
-            cy="${y(value)}"
-            r="4"
-            fill="#f3d791"
-          />
-        `
-      ).join("")
-    }
-
     <text
       x="${left}"
       y="15"
@@ -5973,7 +5659,9 @@ function renderYearLineChart(
   `;
 }
 
-function renderMonthBars(counts){
+function renderMonthBars(
+  counts
+){
 
   const maxCount =
     Math.max(
@@ -6024,10 +5712,291 @@ function renderMonthBars(counts){
     ).join("");
 }
 
+function partnerAnalytics(
+  schoolYearStart
+){
+
+  const grouped =
+    {};
+
+  fundraisers.forEach(
+    item => {
+
+      if(
+        fundraiserSchoolYear(
+          item
+        ) !==
+        schoolYearStart
+      ){
+        return;
+      }
+
+      const partner =
+        String(
+          item.business_partner ||
+          ""
+        ).trim();
+
+      if(!partner){
+        return;
+      }
+
+      const key =
+        partner.toLowerCase();
+
+      if(
+        !grouped[key]
+      ){
+
+        grouped[key] = {
+          name:partner,
+          count:0,
+          revenue:0,
+          costs:0,
+          profit:0
+        };
+      }
+
+      grouped[key].count +=
+        1;
+
+      grouped[key].revenue +=
+        num(
+          item.amount_raised
+        );
+
+      grouped[key].costs +=
+        num(
+          item.costs
+        );
+
+      grouped[key].profit =
+        grouped[key].revenue -
+        grouped[key].costs;
+    }
+  );
+
+  return Object
+    .values(
+      grouped
+    )
+    .sort(
+      (a,b) =>
+        b.profit -
+        a.profit
+    );
+}
+
+function monthlyReportData(
+  schoolYearStart
+){
+
+  const rows =
+    SCHOOL_MONTHS.map(
+      month => ({
+        month,
+        count:0,
+        revenue:0,
+        costs:0,
+        profit:0
+      })
+    );
+
+  fundraisers.forEach(
+    item => {
+
+      if(
+        fundraiserSchoolYear(
+          item
+        ) !==
+        schoolYearStart
+      ){
+        return;
+      }
+
+      const index =
+        fundraiserSchoolMonth(
+          item
+        );
+
+      if(
+        index === null
+      ){
+        return;
+      }
+
+      rows[index].count +=
+        1;
+
+      rows[index].revenue +=
+        num(
+          item.amount_raised
+        );
+
+      rows[index].costs +=
+        num(
+          item.costs
+        );
+
+      rows[index].profit =
+        rows[index].revenue -
+        rows[index].costs;
+    }
+  );
+
+  return rows;
+}
+
 function renderReports(){
 
   const total =
     totals();
+
+  const currentYear =
+    currentSchoolYearStart();
+
+  const partners =
+    partnerAnalytics(
+      currentYear
+    );
+
+  const monthly =
+    monthlyReportData(
+      currentYear
+    );
+
+  const bestPartner =
+    partners[0] ||
+    null;
+
+  const currentYearFunds =
+    fundraisers.filter(
+      item =>
+        fundraiserSchoolYear(
+          item
+        ) ===
+        currentYear
+    );
+
+  const yearProfit =
+    currentYearFunds.reduce(
+      (sum,item) =>
+        sum +
+        (
+          num(
+            item.amount_raised
+          ) -
+          num(
+            item.costs
+          )
+        ),
+      0
+    );
+
+  const averageProfit =
+    currentYearFunds.length
+      ? yearProfit /
+        currentYearFunds.length
+      : 0;
+
+  const maxMonthlyRevenue =
+    Math.max(
+      1,
+      ...monthly.map(
+        row =>
+          row.revenue
+      )
+    );
+
+  const partnerRows =
+    partners.length
+      ? partners.map(
+          partner => `
+            <tr>
+
+              <td>
+                <strong>
+                  ${esc(partner.name)}
+                </strong>
+              </td>
+
+              <td>
+                ${partner.count}
+              </td>
+
+              <td>
+                ${money(partner.revenue)}
+              </td>
+
+              <td>
+                ${money(partner.costs)}
+              </td>
+
+              <td style="color:var(--green)">
+                ${money(partner.profit)}
+              </td>
+
+              <td>
+                ${
+                  money(
+                    partner.profit /
+                    partner.count
+                  )
+                }
+              </td>
+
+            </tr>
+          `
+        ).join("")
+      : `
+        <tr>
+          <td colspan="6">
+            Add a Business / Partner to your fundraisers to begin comparing partners.
+          </td>
+        </tr>
+      `;
+
+  const monthlyRows =
+    monthly.map(
+      row => {
+
+        const barWidth =
+          row.revenue /
+          maxMonthlyRevenue *
+          100;
+
+        return `
+          <div class="month-report-row">
+
+            <div class="month-report-name">
+              ${row.month}
+            </div>
+
+            <div class="month-track">
+
+              <div
+                style="width:${barWidth}%"
+              ></div>
+
+            </div>
+
+            <div class="month-value">
+              ${money(row.revenue)}
+            </div>
+
+            <div class="month-value month-cost">
+              ${money(row.profit)}
+            </div>
+
+            <div class="month-value month-count-report">
+              ${row.count}
+              fundraiser${row.count === 1 ? "" : "s"}
+            </div>
+
+          </div>
+        `;
+      }
+    ).join("");
 
   document
     .getElementById(
@@ -6035,18 +6004,14 @@ function renderReports(){
     )
     .innerHTML = `
 
-      <h3
-        style="margin-top:0;color:#fff6df"
-      >
+      <h3 style="margin-top:0;color:#fff6df">
         ${esc(club.name)}
         Financial Summary
       </h3>
 
-      <p
-        style="color:var(--muted);font-size:11px"
-      >
-        Sponsor:
-        ${esc(club.sponsor_name || "Not set")}
+      <p style="color:var(--muted);font-size:11px">
+        Current school year:
+        ${schoolYearLabel(currentYear)}
       </p>
 
       <div class="report-grid">
@@ -6066,11 +6031,11 @@ function renderReports(){
         <div class="report-box">
 
           <span>
-            Total Revenue
+            School-Year Fundraisers
           </span>
 
-          <strong style="color:var(--gold2)">
-            ${money(total.revenue)}
+          <strong>
+            ${currentYearFunds.length}
           </strong>
 
         </div>
@@ -6078,24 +6043,83 @@ function renderReports(){
         <div class="report-box">
 
           <span>
-            Total Costs
-          </span>
-
-          <strong style="color:var(--red)">
-            ${money(total.costs)}
-          </strong>
-
-        </div>
-
-        <div class="report-box">
-
-          <span>
-            Net Profit
+            Average Profit / Fundraiser
           </span>
 
           <strong style="color:var(--green)">
-            ${money(total.profit)}
+            ${money(averageProfit)}
           </strong>
+
+        </div>
+
+        <div class="report-box">
+
+          <span>
+            Best Partner
+          </span>
+
+          <strong style="color:var(--gold2)">
+            ${
+              bestPartner
+                ? esc(bestPartner.name)
+                : "Not enough data"
+            }
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="analytics-section">
+
+        <h3 class="analytics-title">
+          Business / Partner Performance
+        </h3>
+
+        <p class="analytics-subtitle">
+          Compare how often each partner is used and how much money those fundraisers produce.
+        </p>
+
+        <div class="analytics-table-wrap">
+
+          <table class="analytics-table">
+
+            <thead>
+
+              <tr>
+                <th>Partner</th>
+                <th>Fundraisers</th>
+                <th>Revenue</th>
+                <th>Costs</th>
+                <th>Profit</th>
+                <th>Avg. Profit</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+              ${partnerRows}
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+      <div class="analytics-section">
+
+        <h3 class="analytics-title">
+          Monthly Performance
+        </h3>
+
+        <p class="analytics-subtitle">
+          Revenue and profit across the ${schoolYearLabel(currentYear)} school year.
+        </p>
+
+        <div class="month-report">
+
+          ${monthlyRows}
 
         </div>
 
@@ -6150,7 +6174,7 @@ function switchPage(page){
     fundraisers:"Fundraisers",
     events:"Event Goals",
     year:"School Year Progress",
-    reports:"Reports",
+    reports:"Reports & Analytics",
     settings:"Settings"
   };
 
@@ -6175,6 +6199,13 @@ function switchPage(page){
   ){
 
     renderYearProgress();
+  }
+
+  if(
+    page === "reports"
+  ){
+
+    renderReports();
   }
 
   if(
@@ -6226,6 +6257,22 @@ function openFundraiserModal(
     )
     .value =
     item?.name ||
+    "";
+
+  document
+    .getElementById(
+      "fundraiserBusiness"
+    )
+    .value =
+    item?.business_partner ||
+    "";
+
+  document
+    .getElementById(
+      "fundraiserLocation"
+    )
+    .value =
+    item?.business_location ||
     "";
 
   document
@@ -6654,38 +6701,14 @@ function roleOptionsHtml(
         );
 
   const options = [
-    [
-      "unassigned",
-      "Choose Position"
-    ],
-    [
-      "sponsor",
-      "Sponsor"
-    ],
-    [
-      "treasurer",
-      "Treasurer"
-    ],
-    [
-      "president",
-      "President"
-    ],
-    [
-      "vice_president",
-      "Vice President"
-    ],
-    [
-      "secretary",
-      "Secretary"
-    ],
-    [
-      "historian",
-      "Historian"
-    ],
-    [
-      "custom",
-      "+ Custom Position"
-    ]
+    ["unassigned","Choose Position"],
+    ["sponsor","Sponsor"],
+    ["treasurer","Treasurer"],
+    ["president","President"],
+    ["vice_president","Vice President"],
+    ["secretary","Secretary"],
+    ["historian","Historian"],
+    ["custom","+ Custom Position"]
   ];
 
   return options.map(
@@ -6727,18 +6750,9 @@ function permissionOptionsHtml(
 ){
 
   return [
-    [
-      "view",
-      "View Only"
-    ],
-    [
-      "edit",
-      "Can Edit"
-    ],
-    [
-      "manage",
-      "Finance Manager"
-    ]
+    ["view","View Only"],
+    ["edit","Can Edit"],
+    ["manage","Finance Manager"]
   ].map(
     ([value,label]) => {
 
@@ -6774,20 +6788,6 @@ async function loadClubOfficers(){
       "officerList"
     );
 
-  if(
-    !container ||
-    !clubId ||
-    !currentUser
-  ){
-    return;
-  }
-
-  container.innerHTML = `
-    <div style="font-size:11px;color:var(--muted)">
-      Loading officers...
-    </div>
-  `;
-
   const {
     data:members,
     error:memberError
@@ -6810,26 +6810,10 @@ async function loadClubOfficers(){
 
   if(memberError){
 
-    container.innerHTML = `
-      <div style="font-size:11px;color:var(--red)">
-        Could not load officers:
-        ${esc(memberError.message)}
-      </div>
-    `;
-
-    return;
-  }
-
-  if(
-    !members ||
-    members.length === 0
-  ){
-
-    container.innerHTML = `
-      <div style="font-size:11px;color:var(--muted)">
-        No officers found.
-      </div>
-    `;
+    container.innerHTML =
+      esc(
+        memberError.message
+      );
 
     return;
   }
@@ -6841,8 +6825,7 @@ async function loadClubOfficers(){
     );
 
   const {
-    data:profiles,
-    error:profileError
+    data:profiles
   } =
     await supabaseClient
       .from("profiles")
@@ -6853,13 +6836,6 @@ async function loadClubOfficers(){
         "id",
         userIds
       );
-
-  if(profileError){
-
-    console.warn(
-      profileError
-    );
-  }
 
   const profileMap = {};
 
@@ -6885,36 +6861,18 @@ async function loadClubOfficers(){
 
         const displayName =
           profile?.full_name ||
-          (
-            member.user_id ===
-            currentUser.id
-              ? currentUser.email
-              : "Officer"
-          ) ||
           "Officer";
 
         const normalizedRole =
-          member.role ===
-          "other_officer"
-            ? "unassigned"
-            : (
-                member.role ||
-                "unassigned"
-              );
+          member.role ||
+          "unassigned";
 
         const permission =
           normalizedRole ===
           "custom"
             ? (
-                [
-                  "view",
-                  "edit",
-                  "manage"
-                ].includes(
-                  member.permission_level
-                )
-                  ? member.permission_level
-                  : "view"
+                member.permission_level ||
+                "view"
               )
             : (
                 fixedRolePermissions[
@@ -6923,12 +6881,6 @@ async function loadClubOfficers(){
                 "view"
               );
 
-        const customDisplay =
-          normalizedRole ===
-          "custom"
-            ? "block"
-            : "none";
-
         const canChange =
           canManageOfficerRoleFor(
             member
@@ -6936,11 +6888,6 @@ async function loadClubOfficers(){
 
         const presidentLimited =
           isPresidentRoleManager();
-
-        const permissionDisabled =
-          !canChange ||
-          normalizedRole !==
-          "custom";
 
         const canRemove =
           isOwner() &&
@@ -6968,26 +6915,7 @@ async function loadClubOfficers(){
               </div>
 
               <div class="officer-meta">
-
-                ${
-                  member.user_id ===
-                  currentUser.id
-                    ? "You"
-                    : "Club officer"
-                }
-
-                ·
-
-                ${
-                  member.is_owner
-                    ? "Owner access"
-                    : esc(
-                        permissionLabel(
-                          member
-                        )
-                      )
-                }
-
+                ${esc(permissionLabel(member))}
               </div>
 
             </div>
@@ -7000,14 +6928,12 @@ async function loadClubOfficers(){
                 onchange="handleRoleChoice('${member.user_id}')"
                 ${canChange ? "" : "disabled"}
               >
-
                 ${
                   roleOptionsHtml(
                     normalizedRole,
                     presidentLimited
                   )
                 }
-
               </select>
 
               <input
@@ -7017,7 +6943,7 @@ async function loadClubOfficers(){
                 maxlength="60"
                 placeholder="Position title"
                 value="${attr(member.custom_role_name || "")}"
-                style="display:${customDisplay}"
+                style="display:${normalizedRole === "custom" ? "block" : "none"}"
                 ${canChange ? "" : "disabled"}
               >
 
@@ -7028,21 +6954,21 @@ async function loadClubOfficers(){
               <select
                 id="permission-${member.user_id}"
                 class="officer-permission-select"
-                ${permissionDisabled ? "disabled" : ""}
+                ${
+                  !canChange ||
+                  normalizedRole !==
+                  "custom"
+                    ? "disabled"
+                    : ""
+                }
               >
-
                 ${
                   permissionOptionsHtml(
                     permission,
                     presidentLimited
                   )
                 }
-
               </select>
-
-              <div class="permission-note">
-                Sponsor/Treasurer = Finance Manager · President/VP = Can Edit · Secretary/Historian = View Only
-              </div>
 
             </div>
 
@@ -7058,11 +6984,7 @@ async function loadClubOfficers(){
                       Save
                     </button>
                   `
-                  : `
-                    <div style="font-size:9px;color:var(--muted)">
-                      View only
-                    </div>
-                  `
+                  : ""
               }
 
               ${
@@ -7109,14 +7031,6 @@ function handleRoleChoice(
       userId
     );
 
-  if(
-    !roleSelect ||
-    !permissionSelect ||
-    !customInput
-  ){
-    return;
-  }
-
   const role =
     roleSelect.value;
 
@@ -7153,18 +7067,6 @@ function handleRoleChoice(
     permissionSelect.value =
       "edit";
   }
-
-  if(isCustom){
-
-    setTimeout(
-      () => {
-
-        customInput.focus();
-
-      },
-      0
-    );
-  }
 }
 
 async function saveOfficerRole(
@@ -7177,93 +7079,39 @@ async function saveOfficerRole(
     return;
   }
 
-  const roleSelect =
-    document.getElementById(
-      "role-" +
-      userId
-    );
-
-  const permissionSelect =
-    document.getElementById(
-      "permission-" +
-      userId
-    );
-
-  const customInput =
-    document.getElementById(
-      "custom-role-" +
-      userId
-    );
-
-  if(
-    !roleSelect ||
-    !permissionSelect ||
-    !customInput
-  ){
-    return;
-  }
-
   const role =
-    roleSelect.value;
+    document
+      .getElementById(
+        "role-" +
+        userId
+      )
+      .value;
 
   const customRoleName =
     role === "custom"
-      ? customInput
+      ? document
+          .getElementById(
+            "custom-role-" +
+            userId
+          )
           .value
           .trim()
       : null;
 
-  if(
-    role === "custom" &&
-    !customRoleName
-  ){
-
-    alert(
-      "Enter the custom position title first."
-    );
-
-    return;
-  }
-
   const permission =
     role === "custom"
-      ? permissionSelect.value
+      ? document
+          .getElementById(
+            "permission-" +
+            userId
+          )
+          .value
       : (
           fixedRolePermissions[
             role
           ] ||
           "view"
         );
-
-  if(
-    isPresidentRoleManager() &&
-    [
-      "sponsor",
-      "treasurer"
-    ].includes(
-      role
-    )
-  ){
-
-    alert(
-      "Presidents cannot assign Sponsor or Treasurer."
-    );
-
-    return;
-  }
-
-  if(
-    isPresidentRoleManager() &&
-    permission ===
-    "manage"
-  ){
-
-    alert(
-      "Presidents cannot grant Finance Manager access."
-    );
-
-    return;
-  }
 
   const {
     error
@@ -7292,7 +7140,6 @@ async function saveOfficerRole(
   if(error){
 
     alert(
-      "Could not change the officer position: " +
       error.message
     );
 
@@ -7302,53 +7149,22 @@ async function saveOfficerRole(
   await logActivity(
     "officer_role_updated",
     {
-      user_id:
-        userId,
-
-      role:
-        role,
-
-      custom_role_name:
-        customRoleName,
-
-      permission_level:
-        permission
-    }
-  );
-
-  if(
-    userId ===
-    currentUser.id
-  ){
-
-    membership = {
-      ...membership,
+      user_id:userId,
       role,
       custom_role_name:
         customRoleName,
       permission_level:
         permission
-    };
-
-    document
-      .getElementById(
-        "currentRoleText"
-      )
-      .textContent =
-      membership.is_owner
-        ? "Owner"
-        : positionLabel(
-            membership
-          );
-  }
-
-  showToast(
-    "Officer position updated"
+    }
   );
 
   await loadClubOfficers();
 
   await loadActivityLog();
+
+  showToast(
+    "Officer position updated"
+  );
 }
 
 async function removeOfficer(
@@ -7378,7 +7194,6 @@ async function removeOfficer(
         {
           check_club_id:
             clubId,
-
           check_user_id:
             userId
         }
@@ -7387,7 +7202,6 @@ async function removeOfficer(
   if(error){
 
     alert(
-      "Could not remove the officer: " +
       error.message
     );
 
@@ -7397,16 +7211,8 @@ async function removeOfficer(
   await logActivity(
     "officer_removed",
     {
-      user_id:
-        userId,
-
-      officer_name:
-        "an officer"
+      user_id:userId
     }
-  );
-
-  showToast(
-    "Officer removed"
   );
 
   await loadClubOfficers();
@@ -7419,9 +7225,6 @@ function activityDescription(item){
   const details =
     item.details ||
     {};
-
-  const action =
-    item.action;
 
   const map = {
 
@@ -7453,25 +7256,25 @@ function activityDescription(item){
       "updated an officer position",
 
     officer_removed:
-      `removed ${details.officer_name || "an officer"} from the club`,
+      "removed an officer",
 
     club_archived:
       "archived the club",
 
     club_restored:
       "restored the club"
+
   };
 
   return (
     map[
-      action
+      item.action
     ] ||
-    action
-      .replaceAll(
-        "_",
-        " "
-      )
-  ).trim();
+    item.action.replaceAll(
+      "_",
+      " "
+    )
+  );
 }
 
 async function loadActivityLog(){
@@ -7480,19 +7283,6 @@ async function loadActivityLog(){
     document.getElementById(
       "activityList"
     );
-
-  if(
-    !container ||
-    !clubId
-  ){
-    return;
-  }
-
-  container.innerHTML = `
-    <div style="font-size:11px;color:var(--muted)">
-      Loading activity...
-    </div>
-  `;
 
   const {
     data:items,
@@ -7517,26 +7307,8 @@ async function loadActivityLog(){
 
   if(error){
 
-    container.innerHTML = `
-      <div style="font-size:11px;color:var(--red)">
-        Could not load activity:
-        ${esc(error.message)}
-      </div>
-    `;
-
-    return;
-  }
-
-  if(
-    !items ||
-    items.length === 0
-  ){
-
-    container.innerHTML = `
-      <div style="font-size:11px;color:var(--muted)">
-        No activity has been recorded yet.
-      </div>
-    `;
+    container.textContent =
+      error.message;
 
     return;
   }
@@ -7549,9 +7321,7 @@ async function loadActivityLog(){
             item =>
               item.actor_id
           )
-          .filter(
-            Boolean
-          )
+          .filter(Boolean)
       )
     ];
 
@@ -7579,12 +7349,12 @@ async function loadActivityLog(){
       [];
   }
 
-  const profileMap = {};
+  const map = {};
 
   profiles.forEach(
     profile => {
 
-      profileMap[
+      map[
         profile.id
       ] =
         profile.full_name;
@@ -7595,22 +7365,11 @@ async function loadActivityLog(){
     items.map(
       item => {
 
-        const actorName =
-          profileMap[
+        const name =
+          map[
             item.actor_id
           ] ||
-          (
-            item.actor_id ===
-            currentUser.id
-              ? (
-                  currentUser
-                    .user_metadata
-                    ?.full_name ||
-                  currentUser.email ||
-                  "You"
-                )
-              : "Club officer"
-          );
+          "Club officer";
 
         const when =
           new Date(
@@ -7631,13 +7390,8 @@ async function loadActivityLog(){
           <div class="activity-row">
 
             <div class="activity-main">
-
-              <strong>
-                ${esc(actorName)}
-              </strong>
-
+              <strong>${esc(name)}</strong>
               ${esc(activityDescription(item))}
-
             </div>
 
             <div class="activity-time">
@@ -7647,8 +7401,7 @@ async function loadActivityLog(){
           </div>
         `;
       }
-    )
-    .join("");
+    ).join("");
 }
 
 document
@@ -7706,8 +7459,7 @@ document
 
       const values = {
 
-        club_id:
-          clubId,
+        club_id:clubId,
 
         starting_balance:
           num(
@@ -7822,6 +7574,24 @@ document
             .value
             .trim(),
 
+        business_partner:
+          document
+            .getElementById(
+              "fundraiserBusiness"
+            )
+            .value
+            .trim() ||
+          null,
+
+        business_location:
+          document
+            .getElementById(
+              "fundraiserLocation"
+            )
+            .value
+            .trim() ||
+          null,
+
         goal:
           num(
             document
@@ -7925,7 +7695,10 @@ document
           : "fundraiser_created",
         {
           fundraiser_name:
-            values.name
+            values.name,
+
+          business_partner:
+            values.business_partner
         }
       );
 
@@ -8058,9 +7831,7 @@ document
       await refreshFinance();
 
       showToast(
-        id
-          ? "Event goal updated"
-          : "Event goal added"
+        "Event goal saved"
       );
     }
   );
@@ -8142,11 +7913,6 @@ document
           ...updates
         };
 
-        sessionStorage.setItem(
-          "selectedClubName",
-          club.name
-        );
-
         await logActivity(
           "club_profile_updated"
         );
@@ -8175,26 +7941,15 @@ document
     "click",
     async () => {
 
-      try{
-
-        await navigator
-          .clipboard
-          .writeText(
-            club.invite_code
-          );
-
-        showToast(
-          "Invite code copied"
-        );
-
-      }
-      catch{
-
-        alert(
-          "Invite code: " +
+      await navigator
+        .clipboard
+        .writeText(
           club.invite_code
         );
-      }
+
+      showToast(
+        "Invite code copied"
+      );
     }
   );
 
@@ -8214,7 +7969,7 @@ document
 
       if(
         !confirm(
-          `Leave "${club.name}"? You will need a new invite code to join again.`
+          `Leave "${club.name}"?`
         )
       ){
         return;
@@ -8235,7 +7990,6 @@ document
       if(error){
 
         alert(
-          "Could not leave the club: " +
           error.message
         );
 
@@ -8266,13 +8020,10 @@ document
         return;
       }
 
-      const confirmed =
-        confirm(
-          `Archive "${club.name}"? You can keep its financial history instead of permanently deleting it.`
-        );
-
       if(
-        !confirmed
+        !confirm(
+          `Archive "${club.name}"?`
+        )
       ){
         return;
       }
@@ -8301,14 +8052,6 @@ document
         return;
       }
 
-      await logActivity(
-        "club_archived"
-      );
-
-      sessionStorage.removeItem(
-        "selectedClubId"
-      );
-
       window.location.replace(
         "clubs.html"
       );
@@ -8331,7 +8074,7 @@ document
 
       const typed =
         prompt(
-          `This permanently deletes the club and its financial data.\n\nType "${club.name}" to continue.`
+          `Type "${club.name}" to permanently delete the club.`
         );
 
       if(
@@ -8409,6 +8152,8 @@ document
 
         [
           "Fundraiser",
+          "Business / Partner",
+          "Location",
           "Fundraiser Date",
           "Goal",
           "Amount Raised",
@@ -8421,6 +8166,12 @@ document
           item => [
 
             item.name,
+
+            item.business_partner ||
+            "",
+
+            item.business_location ||
+            "",
 
             fundraiserDate(
               item
@@ -8533,22 +8284,6 @@ document
     }
   );
 
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key ===
-      "Escape"
-    ){
-
-      closeFundraiserModal();
-
-      closeEventModal();
-    }
-  }
-);
-
 window.switchPage =
   switchPage;
 
@@ -8575,9 +8310,6 @@ window.editEvent =
 
 window.deleteEvent =
   deleteEvent;
-
-window.loadClubOfficers =
-  loadClubOfficers;
 
 window.handleRoleChoice =
   handleRoleChoice;
